@@ -29,9 +29,16 @@ It lives in the bottom-right corner, chimes at each block change (warm-up → ne
 grammar → out loud → test), logs the session when the 20 minutes are up, and tracks your
 total study minutes. Tap it to expand and see which block you're in.
 
-**On your phone:** tap *Put this on my phone* on the Today tab for the install steps.
-Once installed it opens full-screen like a real app and works with no signal.
-Progress is per-device — use Export/Import in the Progress tab to move it across.
+**On your phone:** open https://olimuc02.github.io/language-learning/ in Safari,
+tap **Share → Add to Home Screen**. It then opens full-screen like a real app and works
+with no signal. The layout switches to a bottom tab bar on phones.
+
+**Sync:** the Mac and the iPhone stay identical automatically — lessons, scores, homework,
+words, study time. Each device shares a **sync code** (shown in *Progress → Sync across
+devices*); enter the Mac's code on the phone once and they're linked. Merging is additive,
+so a lesson done on the phone and homework ticked on the Mac both survive. Voice and speed
+stay per-device on purpose. Storage is the existing `tasks-oj` Firebase project, collection
+`french_progress`.
 
 Progress saves in your browser. **Export a backup from the Progress tab now and then** —
 clearing your browser data would otherwise wipe it.
@@ -58,6 +65,7 @@ Other things you can say:
 | `PLAN-90-DAYS.md` | The full 13-week roadmap, week-by-week goals, how progress is measured |
 | `PROGRESS.md` | Running log — what day you're on, quiz scores, mistakes to drill, checkpoint results |
 | `lessons.js` | All lesson content — body, homework, and test questions. This is the file that grows. |
+| `sync.js` | Cross-device sync — the sync code, and the additive merge |
 | `manifest.webmanifest`, `sw.js`, `icon-*.png` | Make it installable on a phone and usable offline |
 
 ## The rules of this course

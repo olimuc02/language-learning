@@ -20,9 +20,10 @@
   --shadow:0 1px 2px rgba(29,36,51,.05), 0 8px 24px rgba(29,36,51,.06);
   --radius:14px;
 }
-*{box-sizing:border-box}
-html,body{margin:0;padding:0}
-body{background:var(--bg);color:var(--ink);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,sans-serif;-webkit-font-smoothing:antialiased;overscroll-behavior-y:none}
+.ni{display:none}
 h1,h2,h3,h4{font-family:Georgia,"Iowan Old Style","Times New Roman",serif;font-weight:600;line-height:1.25;margin:0}
 a{color:var(--blue)}
 button{font:inherit;cursor:pointer}
@@ -187,6 +188,12 @@ tr:last-child td{border-bottom:0}
 .timer .tx{position:absolute;top:8px;right:11px;background:none;border:0;color:var(--muted);font-size:19px;line-height:1;padding:3px 6px}
 .timer .mini-note{font-size:12px;color:var(--muted);text-align:center;margin:9px 0 0}
 
+/* ---------- sync ---------- */
+#syncpill{cursor:pointer;font-family:inherit}
+.synccode{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:26px;font-weight:700;
+  letter-spacing:.09em;text-align:center;color:var(--blue);background:var(--blue-soft);
+  border-radius:12px;padding:16px 10px;margin:0 0 8px;user-select:all}
+
 /* ---------- toast ---------- */
 .toast{position:fixed;left:50%;transform:translateX(-50%) translateY(20px);bottom:24px;
   bottom:calc(24px + env(safe-area-inset-bottom));z-index:120;background:var(--blue);color:#fff;
@@ -210,31 +217,89 @@ tr:last-child td{border-bottom:0}
   .modal{box-shadow:none;max-width:100%;padding:0}
   .x{display:none}
 }
-@media(max-width:640px){
-  .top-in{padding:11px 14px;gap:9px}
-  .brand h1{font-size:17px}
-  .pill{padding:5px 10px;font-size:12px}
-  nav{padding:0 6px}
-  nav button{padding:12px 12px;font-size:14px}
-  main{padding:18px 14px 110px}
-  .card{padding:16px 17px}
-  .hero{padding:20px}
-  .hero h2{font-size:22px}
-  .hero .row .btn{flex:1;text-align:center}
-  .modal{padding:20px 16px;border-radius:16px}
-  .overlay{padding:0;align-items:stretch}
-  .modal{border-radius:0;min-height:100vh}
-  .lesson table{font-size:13.5px}
-  .lesson th,.lesson td{padding:7px 6px}
-  .vlist{grid-template-columns:1fr}
-  .g-list{grid-template-columns:1fr}
-  .q-opt{padding:15px 16px}
-  .btn{padding:12px 16px}
-  .days{grid-template-columns:repeat(auto-fill,minmax(40px,1fr))}
-  table{display:block;overflow-x:auto;white-space:normal}
+/* ============================================================
+   PHONE — bottom tab bar, full-screen sheets, thumb-sized targets
+   ============================================================ */
+@media(max-width:700px){
+  /* --- header shrinks to a single scrollable strip --- */
+  .top{border-bottom:1px solid var(--line)}
+  .top-in{padding:10px 14px;gap:8px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
+  .top-in::-webkit-scrollbar{display:none}
+  .brand{margin-right:6px;flex:0 0 auto}
+  .brand h1{font-size:16px}
+  .brand small{font-size:10px}
+  .flag{width:22px;height:15px}
+  .pill{padding:5px 10px;font-size:11.5px;flex:0 0 auto;white-space:nowrap}
+
+  /* --- nav becomes a bottom tab bar --- */
+  nav{position:fixed;left:0;right:0;bottom:0;z-index:90;display:flex;padding:0;
+      background:rgba(250,247,242,.97);backdrop-filter:saturate(180%) blur(14px);
+      border-top:1px solid var(--line);border-bottom:0;overflow:visible;
+      padding-bottom:env(safe-area-inset-bottom)}
+  nav button{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;gap:2px;
+             padding:8px 2px 7px;border-bottom:0;border-top:2.5px solid transparent;font-size:9.5px;
+             letter-spacing:-.01em}
+  nav button.on{border-top-color:var(--blue);border-bottom-color:transparent;background:var(--blue-soft)}
+  nav button:active{background:var(--blue-soft)}
+  .ni{display:block;font-size:19px;line-height:1}
+  .nl{font-size:9.5px;font-weight:700;text-transform:uppercase}
+
+  main{padding:16px 14px calc(96px + env(safe-area-inset-bottom))}
+
+  /* --- content --- */
+  .card{padding:15px 16px;border-radius:13px}
+  .hero{padding:19px;border-radius:15px}
+  .hero h2{font-size:21px}
+  .hero .row{flex-direction:column}
+  .hero .row .btn{width:100%;text-align:center}
+  .mini{grid-template-columns:repeat(2,1fr);gap:9px}
+  .stat{padding:12px 13px}
+  .stat b{font-size:22px}
+  .vlist,.g-list{grid-template-columns:1fr}
+  .days{grid-template-columns:repeat(auto-fill,minmax(38px,1fr));gap:6px}
+  .chips{gap:6px}
+  .chip{padding:8px 13px;font-size:12.5px}
+
+  /* --- everything tappable gets a real target --- */
+  .btn{padding:13px 18px;font-size:15px}
+  .btn.sm{padding:10px 14px;font-size:13.5px}
+  .q-opt{padding:16px 16px;font-size:15.5px;border-radius:13px}
+  .vbtns button{font-size:19px;padding:6px 8px}
+  .spk{font-size:16px;padding:4px 6px}
+  .check input,.hw input{width:22px;height:22px}
+  .fr{padding:1px 0}
+
+  /* --- inputs: 16px stops iOS zooming the page on focus --- */
+  input[type=text],input[type=search],select,textarea{font-size:16px;padding:12px 13px}
+
+  /* --- modals become full-screen sheets --- */
+  .overlay{padding:0;align-items:stretch;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+  .modal{border-radius:0;min-height:100dvh;padding:56px 16px calc(40px + env(safe-area-inset-bottom));max-width:100%}
+  .modal h2{font-size:22px}
+  .x{position:fixed;top:calc(8px + env(safe-area-inset-top));right:12px;z-index:5;
+     background:var(--card);border:1px solid var(--line);border-radius:50%;
+     width:38px;height:38px;display:flex;align-items:center;justify-content:center;
+     font-size:22px;box-shadow:0 2px 10px rgba(0,0,0,.12);padding:0}
+
+  /* --- wide tables scroll instead of breaking the page --- */
+  .lesson table,.card table{display:block;overflow-x:auto;white-space:nowrap;font-size:13.5px}
+  .lesson td,.lesson th,.card td,.card th{padding:8px 9px;white-space:normal;min-width:88px}
+  .lesson h3{font-size:17.5px}
+  .box{font-size:14px;padding:11px 13px}
+
+  /* --- timer clears the tab bar --- */
+  .timer{bottom:calc(74px + env(safe-area-inset-bottom));right:13px;width:56px;height:56px}
+  .timer.open{width:calc(100vw - 26px)}
+  .toast{bottom:calc(84px + env(safe-area-inset-bottom))}
+  .synccode{font-size:22px;letter-spacing:.06em}
 }
-@supports(padding:env(safe-area-inset-bottom)){
-  main{padding-bottom:calc(110px + env(safe-area-inset-bottom))}
+
+/* hover styles do nothing on a touchscreen — use press states instead */
+@media(hover:none){
+  .btn:hover,.chip:hover,.q-opt:hover,.g:hover,.day:hover{filter:none}
+  .fr:hover{text-decoration:none}
+  .btn:active{transform:scale(.97)}
+  .q-opt:active,.g:active,.v:active{background:var(--blue-soft)}
 }
 </style>
 </head>
@@ -249,6 +314,7 @@ tr:last-child td{border-bottom:0}
     <div class="pill">Day <b id="p-day">1</b> / 90</div>
     <div class="pill">🔥 <b id="p-streak">0</b> day streak</div>
     <div class="pill">📚 <b id="p-words">0</b> words</div>
+    <button class="pill" id="syncpill" onclick="go('progress')"><span id="syncdot">🔄</span> <b id="syncstate">…</b></button>
   </div>
   <nav id="nav"></nav>
 </header>
@@ -270,6 +336,7 @@ tr:last-child td{border-bottom:0}
 <div class="overlay" id="overlay"><div class="modal"><button class="x" onclick="closeModal()">&times;</button><div id="modal-body"></div></div></div>
 
 <script src="lessons.js"></script>
+<script src="sync.js"></script>
 <script>
 /* ============================================================
    DATA — the 90 day plan
@@ -1044,13 +1111,19 @@ let S = load();
 function blank(){
   return {startDate:new Date().toISOString().slice(0,10), currentDay:1, completed:{}, quiz:{}, checkpoints:{},
           known:{}, starred:{}, canDo:{}, lastStudy:null, streak:0, notes:"",
-          voice:"", rate:0.85, autoplay:true, sessions:[], hw:{}};
+          voice:"", rate:0.85, autoplay:true, sessions:[], hw:{}, syncCode:"", updatedAt:""};
 }
 function load(){
   try{ const r=JSON.parse(localStorage.getItem(KEY)); return r?Object.assign(blank(),r):blank(); }
   catch(e){ return blank(); }
 }
-function save(){ localStorage.setItem(KEY, JSON.stringify(S)); paintHeader(); }
+function save(){
+  S.updatedAt = new Date().toISOString();
+  localStorage.setItem(KEY, JSON.stringify(S));
+  paintHeader();
+  queuePush();
+}
+function saveLocalOnly(){ localStorage.setItem(KEY, JSON.stringify(S)); paintHeader(); }
 
 function todayStr(){ return new Date().toISOString().slice(0,10); }
 function bumpStreak(){
@@ -1161,11 +1234,13 @@ function audioHint(){
 /* ============================================================
    NAV
    ============================================================ */
-const TABS=[["today","Today"],["plan","The Plan"],["lessons","Lessons"],["guides","Study Guides"],["vocab","Vocabulary"],["practice","Practice"],["progress","Progress"]];
+let CURRENT="today";
+const TABS=[["today","Today","📅"],["plan","Plan","🗺️"],["lessons","Lessons","📖"],["guides","Guides","📋"],["vocab","Words","🔤"],["practice","Practice","🎯"],["progress","Progress","📊"]];
 const nav=document.getElementById("nav");
-nav.innerHTML=TABS.map(([id,l])=>`<button data-t="${id}">${l}</button>`).join("");
+nav.innerHTML=TABS.map(([id,l,ic])=>`<button data-t="${id}"><span class="ni">${ic}</span><span class="nl">${l}</span></button>`).join("");
 nav.onclick=e=>{ const b=e.target.closest("button"); if(b) go(b.dataset.t) };
 function go(t){
+  CURRENT=t;
   TABS.forEach(([id])=>{
     document.getElementById("v-"+id).classList.toggle("on",id===t);
     nav.querySelector(`[data-t="${id}"]`).classList.toggle("on",id===t);
@@ -1823,6 +1898,26 @@ function paintProgress(){
   :`<p class="muted" style="margin:0">This browser doesn't support speech. Safari or Chrome will work.</p>`}
   </div>
 
+  <div class="card"><h3>Sync across devices</h3>
+  <p class="muted" style="margin:2px 0 12px;font-size:14px">Your Mac and your iPhone stay identical automatically — lessons, scores, homework, words and study time.
+  It syncs whenever you open the app, switch back to it, or finish anything.</p>
+  <div class="synccode">${S.syncCode||"—"}</div>
+  <p class="muted" style="text-align:center;font-size:13px;margin:0 0 14px">your sync code · status: <b>${{idle:"not set up",syncing:"syncing",saving:"saving",ok:"synced",off:"offline"}[SY.state]||SY.state}</b> · last synced ${lastSyncLabel()}</p>
+  <div class="row">
+    <button class="btn sm" onclick="pullSync().then(paintProgress)">Sync now</button>
+    <button class="btn ghost sm" onclick="navigator.clipboard&&navigator.clipboard.writeText(S.syncCode);alert('Copied: '+S.syncCode)">Copy code</button>
+  </div>
+  <div class="box blue" style="margin-top:14px"><b>To add your iPhone</b>
+  Open <b>olimuc02.github.io/language-learning</b> in Safari on your phone, go to <b>Progress → Sync</b>,
+  and enter this code below the "connect" box. Both devices then share everything.</div>
+  <div class="row" style="margin-top:4px">
+    <input type="text" id="joincode" placeholder="Enter a code from another device" style="flex:1;min-width:200px;text-transform:uppercase">
+    <button class="btn ghost sm" onclick="connectCode(document.getElementById('joincode').value)">Connect</button>
+  </div>
+  <p class="muted" style="font-size:13px;margin:10px 0 0">Nothing is lost when you connect — the two devices are merged, not overwritten.
+  Voice and speed settings stay per-device on purpose.</p>
+  </div>
+
   <div class="card"><h3>Backup</h3>
   <p class="muted" style="margin:2px 0 10px;font-size:14px">Progress lives in this browser only. Export a file occasionally so you don't lose 90 days of work.</p>
   <div class="row">
@@ -1937,7 +2032,7 @@ function finishTimer(){
 }
 function logSession(mins){
   S.sessions=S.sessions||[];
-  S.sessions.push({d:todayStr(), m:mins});
+  S.sessions.push({d:todayStr(), m:mins, i:Math.random().toString(36).slice(2,8)});
   bumpStreak(); save();
 }
 function studyMinutes(){ return (S.sessions||[]).reduce((a,b)=>a+b.m,0); }
@@ -2001,7 +2096,7 @@ function installApp(){
 }
 
 /* boot */
-paintHeader(); paintTimer(); go("today");
+paintHeader(); paintTimer(); go("today"); startSync();
 </script>
 </body>
 </html>
