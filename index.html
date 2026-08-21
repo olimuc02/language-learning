@@ -160,6 +160,8 @@ tr:last-child td{border-bottom:0}
 .overlay.on{display:flex}
 .modal{background:var(--card);border-radius:18px;max-width:760px;width:100%;padding:28px 30px;box-shadow:0 24px 60px rgba(0,0,0,.25);position:relative}
 .x{position:absolute;top:14px;right:16px;background:none;border:0;font-size:24px;color:var(--muted);line-height:1;padding:4px 8px}
+.sheet-head{display:none}
+.sheet-body{min-width:0}
 .x:hover{color:var(--ink)}
 
 .check{display:flex;gap:11px;align-items:flex-start;padding:11px 0;border-bottom:1px solid var(--line)}
@@ -230,6 +232,8 @@ tr:last-child td{border-bottom:0}
   .brand small{font-size:10px}
   .flag{width:22px;height:15px}
   .pill{padding:5px 10px;font-size:11.5px;flex:0 0 auto;white-space:nowrap}
+  .pill.hide-phone{display:none}
+  #syncpill b{display:none}
 
   /* --- nav becomes a bottom tab bar --- */
   nav{position:fixed;left:0;right:0;bottom:0;z-index:90;display:flex;padding:0;
@@ -272,20 +276,45 @@ tr:last-child td{border-bottom:0}
   /* --- inputs: 16px stops iOS zooming the page on focus --- */
   input[type=text],input[type=search],select,textarea{font-size:16px;padding:12px 13px}
 
-  /* --- modals become full-screen sheets --- */
-  .overlay{padding:0;align-items:stretch;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
-  .modal{border-radius:0;min-height:100dvh;padding:56px 16px calc(40px + env(safe-area-inset-bottom));max-width:100%}
-  .modal h2{font-size:22px}
-  .x{position:fixed;top:calc(8px + env(safe-area-inset-top));right:12px;z-index:5;
-     background:var(--card);border:1px solid var(--line);border-radius:50%;
-     width:38px;height:38px;display:flex;align-items:center;justify-content:center;
-     font-size:22px;box-shadow:0 2px 10px rgba(0,0,0,.12);padding:0}
+  /* --- modals become full-screen sheets with an iOS-style header --- */
+  .overlay{padding:0;align-items:stretch;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;
+           background:var(--bg);backdrop-filter:none}
+  .modal{border-radius:0;min-height:100dvh;padding:0;max-width:100%;box-shadow:none;background:var(--bg)}
+  .x{display:none}
+  .sheet-head{display:flex;position:sticky;top:0;z-index:8;align-items:center;gap:12px;
+    padding:calc(9px + env(safe-area-inset-top)) 15px 10px;
+    background:rgba(250,247,242,.93);backdrop-filter:saturate(180%) blur(14px);
+    border-bottom:1px solid var(--line)}
+  .sheet-head b{flex:1;min-width:0;font-size:15px;font-weight:700;
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .sheet-done{border:0;background:var(--blue);color:#fff;border-radius:999px;
+    padding:8px 17px;font-size:14.5px;font-weight:700;flex:0 0 auto}
+  .sheet-done:active{opacity:.75}
+  .sheet-body{padding:18px 15px calc(48px + env(safe-area-inset-bottom))}
+  .modal h2{font-size:23px;line-height:1.2}
 
-  /* --- wide tables scroll instead of breaking the page --- */
-  .lesson table,.card table{display:block;overflow-x:auto;white-space:nowrap;font-size:13.5px}
-  .lesson td,.lesson th,.card td,.card th{padding:8px 9px;white-space:normal;min-width:88px}
-  .lesson h3{font-size:17.5px}
-  .box{font-size:14px;padding:11px 13px}
+  /* --- every table row becomes its own card --- */
+  .stack{display:block;width:100%;border-collapse:separate}
+  .stack thead,.stack tr.hrow{display:none}
+  .stack tbody{display:block}
+  .stack tr{display:block;background:var(--card);border:1px solid var(--line);
+    border-radius:13px;padding:12px 14px;margin:0 0 9px}
+  .stack tr:last-child{margin-bottom:0}
+  .stack td,.stack th{display:block;border:0;padding:3px 0;text-align:left;
+    white-space:normal;min-width:0;font-size:15px}
+  .stack td:empty{display:none}
+  .stack td[data-l]:before{content:attr(data-l);display:block;font-size:10px;font-weight:700;
+    letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:1px}
+  .stack th.rowlab{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--blue);margin-bottom:3px}
+  .stack .fr{font-size:18px;display:inline-block}
+  .stack .say{display:inline-block;margin-left:6px}
+  .stack td.fr{font-size:19px}
+
+  .lesson h3{font-size:18px;margin:26px 0 9px}
+  .lesson p,.lesson li{font-size:15.5px}
+  .box{font-size:14.5px;padding:13px 15px;border-radius:0 12px 12px 0}
+  .lesson ul,.lesson ol{padding-left:19px}
 
   /* --- timer clears the tab bar --- */
   .timer{bottom:calc(74px + env(safe-area-inset-bottom));right:13px;width:56px;height:56px}
@@ -313,7 +342,7 @@ tr:last-child td{border-bottom:0}
     </div>
     <div class="pill">Day <b id="p-day">1</b> / 90</div>
     <div class="pill">🔥 <b id="p-streak">0</b> day streak</div>
-    <div class="pill">📚 <b id="p-words">0</b> words</div>
+    <div class="pill hide-phone">📚 <b id="p-words">0</b> words</div>
     <button class="pill" id="syncpill" onclick="go('progress')"><span id="syncdot">🔄</span> <b id="syncstate">…</b></button>
   </div>
   <nav id="nav"></nav>
@@ -333,7 +362,16 @@ tr:last-child td{border-bottom:0}
 
 <div class="timer" id="timer" onclick="if(!T.open)openTimer()"><span id="tmini">20:00</span></div>
 
-<div class="overlay" id="overlay"><div class="modal"><button class="x" onclick="closeModal()">&times;</button><div id="modal-body"></div></div></div>
+<div class="overlay" id="overlay">
+  <div class="modal">
+    <div class="sheet-head">
+      <b id="sheet-title">&nbsp;</b>
+      <button class="sheet-done" onclick="closeModal()">Done</button>
+    </div>
+    <button class="x" onclick="closeModal()">&times;</button>
+    <div class="sheet-body"><div id="modal-body"></div></div>
+  </div>
+</div>
 
 <script src="lessons.js"></script>
 <script src="sync.js"></script>
@@ -1234,6 +1272,7 @@ function audioHint(){
 /* ============================================================
    NAV
    ============================================================ */
+const VERSION="1.4 · phone-first";
 let CURRENT="today";
 const TABS=[["today","Today","📅"],["plan","Plan","🗺️"],["lessons","Lessons","📖"],["guides","Guides","📋"],["vocab","Words","🔤"],["practice","Practice","🎯"],["progress","Progress","📊"]];
 const nav=document.getElementById("nav");
@@ -1246,6 +1285,7 @@ function go(t){
     nav.querySelector(`[data-t="${id}"]`).classList.toggle("on",id===t);
   });
   ({today:paintToday,plan:paintPlan,lessons:paintLessons,guides:paintGuides,vocab:paintVocab,practice:paintPractice,progress:paintProgress})[t]();
+  enhanceTables(document.getElementById("v-"+t));
   window.scrollTo(0,0);
 }
 
@@ -1275,6 +1315,8 @@ function paintToday(){
     <div class="stat"><b>${knownCount()}</b><span>Words learned</span></div>
     <div class="stat"><b>${S.streak||0}</b><span>Day streak</span></div>
   </div>
+
+  ${iosBanner()}
 
   <div class="card" style="margin-top:14px">
     <div class="eyebrow">Today's session</div>
@@ -1318,6 +1360,20 @@ function paintToday(){
     </table>
   </div>`;
 }
+/* This app is built phone-first, so nudge iPhone users to install it once. */
+function isIOS(){ return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream; }
+function isStandalone(){ return window.navigator.standalone===true || window.matchMedia("(display-mode: standalone)").matches; }
+function iosBanner(){
+  if(!isIOS() || isStandalone() || localStorage.getItem("hide-install")) return "";
+  return `<div class="card" style="margin-top:14px;border-color:var(--blue);background:var(--blue-soft)">
+    <div class="row" style="justify-content:space-between;flex-wrap:nowrap;gap:12px">
+      <div><b style="font-size:15px">Add this to your Home Screen</b>
+      <p class="muted" style="margin:4px 0 0;font-size:13.5px">Tap the <b>Share</b> button below, then <b>Add to Home Screen</b>.
+      It opens full-screen, loses the browser bars, and works with no signal.</p></div>
+      <button class="btn ghost sm" style="flex:0 0 auto" onclick="localStorage.setItem('hide-install','1');paintToday()">Hide</button>
+    </div></div>`;
+}
+
 function askClaude(){
   modal(`<h2>This lesson isn't written yet</h2>
   <p class="muted">Lessons get written as you reach them, so each one is tailored to how you're actually doing.</p>
@@ -1447,7 +1503,7 @@ function openLesson(d){
       <div><h4>${h.t}</h4><p>${h.d}</p></div></div>`;
   }).join("")}`:""}
   `);
-  autoStartTimer();
+  autoStartTimer(d);
 }
 
 /* ============================================================
@@ -1916,6 +1972,7 @@ function paintProgress(){
   </div>
   <p class="muted" style="font-size:13px;margin:10px 0 0">Nothing is lost when you connect — the two devices are merged, not overwritten.
   Voice and speed settings stay per-device on purpose.</p>
+  <p class="muted" style="font-size:12px;margin:10px 0 0;text-align:center">app version ${VERSION}${isStandalone()?" · installed":""}</p>
   </div>
 
   <div class="card"><h3>Backup</h3>
@@ -1956,8 +2013,47 @@ function importData(el){
 /* ============================================================
    MODAL
    ============================================================ */
-function modal(html){ document.getElementById("modal-body").innerHTML=html; document.getElementById("overlay").classList.add("on"); document.body.style.overflow="hidden"; }
-function closeModal(){ document.getElementById("overlay").classList.remove("on"); document.body.style.overflow=""; }
+/* Wide tables are unreadable on a phone, so each row becomes a small
+   card and every cell gets its column heading as a label. */
+function enhanceTables(root){
+  if(!root) return;
+  root.querySelectorAll("table").forEach(t=>{
+    if(t.dataset.enh) return;
+    t.dataset.enh="1";
+    t.classList.add("stack");
+    const rows=[...t.rows];
+    if(!rows.length) return;
+    let labels=null;
+    if(rows[0].querySelector("th") && !rows[0].querySelector("td")){
+      labels=[...rows[0].cells].map(c=>c.textContent.trim());
+      rows[0].classList.add("hrow");
+      rows.shift();
+    }
+    rows.forEach(tr=>{
+      [...tr.cells].forEach((cell,i)=>{
+        if(cell.tagName==="TH"){ cell.classList.add("rowlab"); return; }
+        const l=labels && labels[i];
+        if(l && l.length && l.length<26) cell.setAttribute("data-l",l);
+      });
+    });
+  });
+}
+
+function modal(html){
+  const body=document.getElementById("modal-body");
+  body.innerHTML=html;
+  enhanceTables(body);
+  const h=body.querySelector("h2,h3");
+  document.getElementById("sheet-title").textContent = h ? h.textContent.trim() : "";
+  const ov=document.getElementById("overlay");
+  ov.classList.add("on");
+  ov.scrollTop=0;
+  document.body.style.overflow="hidden";
+}
+function closeModal(){
+  document.getElementById("overlay").classList.remove("on");
+  document.body.style.overflow="";
+}
 document.getElementById("overlay").onclick=e=>{ if(e.target.id==="overlay") closeModal() };
 document.onkeydown=e=>{ if(e.key==="Escape") closeModal() };
 
@@ -1973,7 +2069,7 @@ const BLOCKS=[
  [17,20,"The test",  "Take the quiz. 80% to unlock tomorrow."]
 ];
 const TOTAL=20*60;
-let T={running:false, sec:0, iv:null, open:false, block:-1};
+let T={running:false, sec:0, iv:null, open:false, block:-1, day:null};
 
 function fmt(x){ const m=Math.floor(x/60), ss=x%60; return m+":"+String(ss).padStart(2,"0"); }
 function blockAt(sec){ const m=sec/60; return BLOCKS.findIndex(b=>m>=b[0]&&m<b[1]); }
@@ -2000,12 +2096,16 @@ function toast(msg){
   clearTimeout(toastT);
   toastT=setTimeout(()=>el.classList.remove("on"), 3200);
 }
-/* The clock starts the moment you open a lesson — you never set it yourself. */
-function autoStartTimer(){
-  if(T.running) return;
-  if(T.sec>=TOTAL) resetTimer();          // a finished session: begin a fresh one
+/* The clock starts on its own when you begin a NEW lesson.
+   Re-reading a lesson you've already finished doesn't start it. */
+function autoStartTimer(day){
+  if(S.completed[day]) return;               // reviewing old material — no timer
+  if(T.running) return;                      // already counting, leave it alone
+  if(T.day===day && T.sec>=TOTAL) return;    // already did a full session on this lesson
+  if(T.sec>=TOTAL || (T.day!=null && T.day!==day)) resetTimer();
+  T.day=day;
   startTimer();
-  toast("⏱ 20-minute session started — warm-up");
+  toast("⏱ 20 minutes started — warm-up");
 }
 function openTimer(){ T.open=true; paintTimer(); }
 function closeTimer(){ T.open=false; paintTimer(); }

@@ -4,6 +4,10 @@ Everything for the 90-day French course lives here.
 
 ## The app
 
+**Built phone-first.** The iPhone is the primary device: bottom tab bar, full-screen sheets
+with a Done button, and every table reflowed into readable cards. The Mac gets the wider
+desktop layout automatically.
+
 Open **`index.html`** in your browser. That's the whole thing — no server, nothing to install.
 
 Seven tabs:
