@@ -1,6 +1,14 @@
-# French Tutor — Oliver
+# Language Learning — Oliver
 
-Everything for the 90-day French course lives here.
+Three language tracks in one app, each with its own progress, words and streak.
+Tap the flag in the top-left to switch.
+
+| Track | Mode | What it is |
+|---|---|---|
+| 🇫🇷 **French** | 90-day course | From zero. Structured plan, phases, checkpoints. |
+| 🇵🇱 **Polish** | training sets | You already speak it — precision, idiom, register, and the grammar fluent speakers fumble. |
+| 🇬🇧 **English** | training sets | Precision vocabulary, rhetoric, confusables, Latin and French borrowings. |
+| 🇧🇷🇪🇸🇩🇪 | queued | Portuguese, Spanish, German — start once French hits Day 90. |
 
 ## The app
 
@@ -68,7 +76,10 @@ Other things you can say:
 |---|---|
 | `PLAN-90-DAYS.md` | The full 13-week roadmap, week-by-week goals, how progress is measured |
 | `PROGRESS.md` | Running log — what day you're on, quiz scores, mistakes to drill, checkpoint results |
-| `lessons.js` | All lesson content — body, homework, and test questions. This is the file that grows. |
+| `french.js` | French plan, vocabulary and study guides |
+| `lessons.js` | French lessons — body, homework, test questions |
+| `polish.js` | Polish words, guides and training sets |
+| `english.js` | English words, guides and training sets |
 | `sync.js` | Cross-device sync — the sync code, and the additive merge |
 | `manifest.webmanifest`, `sw.js`, `icon-*.png` | Make it installable on a phone and usable offline |
 
@@ -84,6 +95,6 @@ Other things you can say:
 
 ## After French
 
-Same structure, in this order: Brazilian Portuguese → Spanish → German.
+Portuguese, Spanish and German are already in the language picker, greyed out. They unlock at French Day 90.
 (Portuguese and Spanish get much faster because French does the heavy lifting —
 the three are cousins. German is a fresh start and gets a full 90 days.)

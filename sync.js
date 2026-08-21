@@ -35,11 +35,15 @@ function setSync(st){
   if(dot) dot.textContent = st==="ok" ? "☁️" : st==="off" ? "⚠️" : "🔄";
 }
 
-/* voice and speed are per-device and never travel */
-function shareable(x){
-  const o = Object.assign({}, x);
-  delete o.voice; delete o.rate; delete o.autoplay; delete o.syncCode;
-  return o;
+/* every language travels together; voice and speed stay on the device */
+function bundle(){
+  const all = allStates(), out = {};
+  Object.keys(all).forEach(c=>{
+    const o = Object.assign({}, all[c]);
+    delete o.voice; delete o.rate; delete o.autoplay; delete o.syncCode;
+    out[c] = o;
+  });
+  return {v:2, langs: out};
 }
 
 function unionFlags(a,b){
@@ -87,24 +91,24 @@ function mergeState(local, remote){
                    : (local.startDate || remote.startDate);
   m.notes = (local.notes||"").length >= (remote.notes||"").length ? local.notes : remote.notes;
 
-  m.voice = local.voice; m.rate = local.rate; m.autoplay = local.autoplay; m.syncCode = local.syncCode;
+  delete m.voice; delete m.rate; delete m.autoplay; delete m.syncCode;
   return m;
 }
 
 function queuePush(){
-  if(!S.syncCode) return;
+  if(!P.syncCode) return;
   clearTimeout(SY.timer);
   SY.timer = setTimeout(pushSync, 1500);
 }
 
 function pushSync(){
-  if(!S.syncCode || SY.busy) return Promise.resolve();
+  if(!P.syncCode || SY.busy) return Promise.resolve();
   SY.busy = true; setSync("saving");
   const body = { fields: {
-    blob:      { stringValue: JSON.stringify(shareable(S)) },
+    blob:      { stringValue: JSON.stringify(bundle()) },
     updatedAt: { stringValue: new Date().toISOString() }
   }};
-  return fetch(fbUrl(S.syncCode), {
+  return fetch(fbUrl(P.syncCode), {
       method:"PATCH",
       headers:{"Content-Type":"application/json"},
       body: JSON.stringify(body)
@@ -115,9 +119,9 @@ function pushSync(){
 }
 
 function pullSync(silent){
-  if(!S.syncCode) return Promise.resolve();
+  if(!P.syncCode) return Promise.resolve();
   if(!silent) setSync("syncing");
-  return fetch(fbUrl(S.syncCode) + "&_=" + Date.now())
+  return fetch(fbUrl(P.syncCode) + "&_=" + Date.now())
     .then(r=>{
       if(r.status === 404) return null;            // first device up — nothing stored yet
       if(!r.ok) throw new Error(r.status);
@@ -125,8 +129,14 @@ function pullSync(silent){
     })
     .then(j=>{
       if(!j) return pushSync();
-      const remote = JSON.parse(j.fields.blob.stringValue);
-      S = mergeState(S, remote);
+      const raw = JSON.parse(j.fields.blob.stringValue);
+      // v1 blobs held French only; v2 holds every language
+      const remoteLangs = raw && raw.v === 2 ? raw.langs : {fr: raw};
+      const mine = allStates();
+      Object.keys(remoteLangs).forEach(c=>{
+        const merged = mergeState(mine[c] || blank(), remoteLangs[c] || blank());
+        writeState(c, merged);
+      });
       saveLocalOnly();
       SY.last = new Date(); setSync("ok");
       repaint();
@@ -140,7 +150,7 @@ function repaint(){ if(typeof CURRENT !== "undefined" && CURRENT) go(CURRENT); }
 function connectCode(raw){
   const code = String(raw||"").trim().toUpperCase().replace(/[^A-Z0-9-]/g,"");
   if(code.length < 4){ alert("That code doesn't look right — it should look like ABCD-1234."); return; }
-  S.syncCode = code;
+  P.syncCode = code;
   saveLocalOnly();
   pullSync().then(()=>{
     paintProgress();
@@ -149,7 +159,7 @@ function connectCode(raw){
 }
 
 function startSync(){
-  if(!S.syncCode){ S.syncCode = newCode(); saveLocalOnly(); }
+  if(!P.syncCode){ P.syncCode = newCode(); savePrefs(); }
   pullSync(true);
 }
 

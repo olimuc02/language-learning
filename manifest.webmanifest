@@ -1,7 +1,7 @@
 {
   "name": "Language Learning",
-  "short_name": "Français",
-  "description": "90-day French course with lessons, study guides, vocabulary and a 20-minute study timer",
+  "short_name": "Languages",
+  "description": "French course, Polish and English training sets, study guides, vocabulary and a 20-minute study timer",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",

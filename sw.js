@@ -1,6 +1,7 @@
 /* Offline cache so the course works on a plane, on the metro, anywhere. */
-const CACHE = "french-v7";
-const FILES = ["./", "./index.html", "./lessons.js", "./sync.js", "./manifest.webmanifest", "./icon.svg", "./icon-192.png", "./icon-512.png"];
+const CACHE = "lang-v8";
+const FILES = ["./", "./index.html", "./french.js", "./lessons.js", "./polish.js", "./english.js",
+               "./sync.js", "./manifest.webmanifest", "./icon.svg", "./icon-192.png", "./icon-512.png"];
 
 self.addEventListener("install", e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(FILES)).then(() => self.skipWaiting()));

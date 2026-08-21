@@ -4,11 +4,11 @@
    Question types: mc (multiple choice), type (write it),
    listen (hear it, then answer).
    ============================================================ */
-const LESSONS = {};
-const EXTRA_VOCAB = [];
+const FR_LESSONS = {};
+const FR_EXTRA_VOCAB = [];
 
 /* ------------------------------------------------------------------ DAY 1 */
-LESSONS[1] = {
+FR_LESSONS[1] = {
 title:"The four sounds English doesn't have",
 mins:20,
 goal:"Produce the four French sounds that don't exist in English, and use the eight words you'll say most often.",
@@ -140,7 +140,7 @@ quiz:[
 };
 
 /* ------------------------------------------------------------------ DAY 2 */
-LESSONS[2] = {
+FR_LESSONS[2] = {
 title:"Silent letters, and how to answer Ça va ?",
 mins:20,
 goal:"Read French out loud without pronouncing letters that aren't there, and hold the shortest real conversation in the language.",
@@ -257,7 +257,7 @@ quiz:[
 ]
 };
 
-EXTRA_VOCAB.push(
+FR_EXTRA_VOCAB.push(
 ["Ça va bien","sa va bee-AN","I'm doing well","greet","Ça va bien, merci. Et toi ?","I'm good, thanks. And you?","",2],
 ["Pas mal","pa MAL","Not bad","greet","— Ça va ? — Pas mal.","— How's it going? — Not bad.","literally 'not bad'",2],
 ["Comme ci, comme ça","kom SEE kom SA","So-so","greet","Comme ci, comme ça.","So-so.","say it with a shrug",2],
@@ -268,7 +268,7 @@ EXTRA_VOCAB.push(
 );
 
 /* ------------------------------------------------------------------ DAY 3 */
-LESSONS[3] = {
+FR_LESSONS[3] = {
 title:"Je suis, tu es, il est — saying who you are",
 mins:20,
 goal:"Introduce yourself completely: name, nationality, job, and where you live.",
@@ -391,7 +391,7 @@ quiz:[
 ]
 };
 
-EXTRA_VOCAB.push(
+FR_EXTRA_VOCAB.push(
 ["je suis","zhuh SWEE","I am","verbs","Je suis américain.","I am American.","",3],
 ["tu es","tü EH","you are (friend)","verbs","Tu es français ?","Are you French?","",3],
 ["il est / elle est","eel EH / ell EH","he is / she is","verbs","Elle est infirmière.","She is a nurse.","",3],
@@ -407,7 +407,7 @@ EXTRA_VOCAB.push(
 );
 
 /* ------------------------------------------------------------------ DAY 4 */
-LESSONS[4] = {
+FR_LESSONS[4] = {
 title:"Numbers 0 to 20, and how old you are",
 mins:20,
 goal:"Count to 20, give your age and phone number, and dodge the two pronunciation traps in French numbers.",
@@ -512,7 +512,7 @@ quiz:[
 ]
 };
 
-EXTRA_VOCAB.push(
+FR_EXTRA_VOCAB.push(
 ["J'ai … ans","zhay … ahn","I am … years old","time","J'ai quarante ans.","I'm forty.","French 'has' years, not 'is'",4],
 ["Tu as quel âge ?","tü a kell AHZH","How old are you?","time","Tu as quel âge ?","How old are you?","uses avoir",4],
 ["onze, douze, treize","ohnz, dooz, trez","eleven, twelve, thirteen","time","Il a treize ans.","He is thirteen.","",4],
@@ -522,7 +522,7 @@ EXTRA_VOCAB.push(
 );
 
 /* ------------------------------------------------------------------ DAY 5 */
-LESSONS[5] = {
+FR_LESSONS[5] = {
 title:"Le, la, un, une — why every object has a gender",
 mins:20,
 goal:"Use the right article in front of any noun, and start every new word the way French people store it.",
@@ -623,7 +623,7 @@ quiz:[
 ]
 };
 
-EXTRA_VOCAB.push(
+FR_EXTRA_VOCAB.push(
 ["C'est…","say","It is / This is","glue","C'est mon ami Josh.","This is my friend Josh.","the most useful phrase for a beginner",5],
 ["C'est bon / C'est bien","say BOHN / say bee-AN","It's good (taste / quality)","glue","C'est bon !","It's delicious!","bon = food, bien = ideas",5],
 ["Qu'est-ce que c'est ?","kess-kuh SAY","What is that?","glue","Qu'est-ce que c'est ?","What's that?","learn as one chunk",5],
@@ -633,7 +633,7 @@ EXTRA_VOCAB.push(
 );
 
 /* ------------------------------------------------------------------ DAY 6 */
-LESSONS[6] = {
+FR_LESSONS[6] = {
 title:"Conversation — a first meeting, start to finish",
 mins:20,
 goal:"Run a complete first-meeting conversation without stopping. No new grammar today, only assembly.",
@@ -730,7 +730,7 @@ quiz:[
 ]
 };
 
-EXTRA_VOCAB.push(
+FR_EXTRA_VOCAB.push(
 ["monsieur / madame","muh-SYUH / ma-DAM","sir / ma'am","greet","Bonjour, madame.","Hello, ma'am.","use far more than in English",6],
 ["Je vous en prie","zhuh voo zahn PREE","You're welcome (polite)","greet","— Merci ! — Je vous en prie.","— Thanks! — You're welcome.","casual version: de rien",6],
 ["Voici","vwa-SEE","Here is","glue","Voici la clé.","Here's the key.","partner of voilà",6],
@@ -740,7 +740,7 @@ EXTRA_VOCAB.push(
 );
 
 /* ------------------------------------------------------------------ DAY 7 */
-LESSONS[7] = {
+FR_LESSONS[7] = {
 title:"Review + Checkpoint 1",
 mins:20,
 isCheckpoint:true,
