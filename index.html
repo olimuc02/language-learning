@@ -1272,7 +1272,7 @@ function audioHint(){
 /* ============================================================
    NAV
    ============================================================ */
-const VERSION="1.4 · phone-first";
+const VERSION="1.5";
 let CURRENT="today";
 const TABS=[["today","Today","📅"],["plan","Plan","🗺️"],["lessons","Lessons","📖"],["guides","Guides","📋"],["vocab","Words","🔤"],["practice","Practice","🎯"],["progress","Progress","📊"]];
 const nav=document.getElementById("nav");
@@ -1320,11 +1320,7 @@ function paintToday(){
 
   <div class="card" style="margin-top:14px">
     <div class="eyebrow">Today's session</div>
-    <div class="row">
-      <button class="btn ghost" onclick="openTimer()">⏱ Show the timer</button>
-      <button class="btn ghost" onclick="installApp()">📱 Put this on my phone</button>
-    </div>
-    <p class="muted" style="margin:10px 0 0;font-size:14px"><b>The clock starts on its own the moment you open a lesson</b> — you never have to set it.
+    <p class="muted" style="margin:0;font-size:14px"><b>The clock starts on its own when you open a new lesson</b> — you never have to set it.
     It chimes at each block change and logs the session when the 20 minutes are up.
     Total so far: <b>${studyMinutes()} minutes</b> across ${(S.sessions||[]).length} session${(S.sessions||[]).length===1?"":"s"}.</p>
   </div>
@@ -1912,11 +1908,7 @@ function paintProgress(){
     <tr><td><b>Sessions</b></td><td>${(S.sessions||[]).length}</td></tr>
     <tr><td><b>Last 7 days</b></td><td>${last7()} minutes</td></tr>
     <tr><td><b>On track?</b></td><td>${last7()>=100?'<span class="tag t-green">Yes — 5+ sessions this week</span>':last7()>=60?'<span class="tag t-gold">Close — aim for 140/week</span>':'<span class="tag t-red">Behind — 20 min a day is the whole plan</span>'}</td></tr>
-  </table>
-  <div class="row" style="margin-top:12px">
-    <button class="btn ghost sm" onclick="openTimer()">Show the timer</button>
-    <button class="btn ghost sm" onclick="installApp()">📱 Install on phone</button>
-  </div></div>
+  </table></div>
 
   <div class="card"><h3>Audio</h3>
   <p class="muted" style="margin:2px 0 12px;font-size:14px">French pronunciation is spoken by your Mac, so it works offline and costs nothing.
