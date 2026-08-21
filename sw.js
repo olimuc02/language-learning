@@ -1,5 +1,5 @@
 /* Offline cache so the course works on a plane, on the metro, anywhere. */
-const CACHE = "french-v6";
+const CACHE = "french-v7";
 const FILES = ["./", "./index.html", "./lessons.js", "./sync.js", "./manifest.webmanifest", "./icon.svg", "./icon-192.png", "./icon-512.png"];
 
 self.addEventListener("install", e => {

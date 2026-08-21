@@ -171,7 +171,7 @@ tr:last-child td{border-bottom:0}
 
 
 /* ---------- 20-minute study timer ---------- */
-.timer{position:fixed;right:16px;bottom:16px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:80;
+.timer{position:fixed;right:14px;bottom:14px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:80;
   background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:0 8px 30px rgba(29,36,51,.16);
   width:60px;height:60px;display:flex;align-items:center;justify-content:center;cursor:pointer;
   font-weight:700;font-size:13px;color:var(--blue);transition:width .2s,height .2s,border-radius .2s;overflow:hidden}
@@ -317,9 +317,11 @@ tr:last-child td{border-bottom:0}
   .lesson ul,.lesson ol{padding-left:19px}
 
   /* --- timer clears the tab bar --- */
-  .timer{bottom:calc(74px + env(safe-area-inset-bottom));right:13px;width:56px;height:56px}
-  .timer.open{width:calc(100vw - 26px)}
-  .toast{bottom:calc(84px + env(safe-area-inset-bottom))}
+  /* tucked into the corner, sitting just on top of the tab bar */
+  .timer{bottom:calc(60px + env(safe-area-inset-bottom));right:8px;width:50px;height:50px;
+         border-radius:14px;font-size:12.5px}
+  .timer.open{width:calc(100vw - 16px);right:8px;border-radius:16px;padding:16px 17px}
+  .toast{bottom:calc(120px + env(safe-area-inset-bottom))}
   .synccode{font-size:22px;letter-spacing:.06em}
 }
 
@@ -1272,7 +1274,7 @@ function audioHint(){
 /* ============================================================
    NAV
    ============================================================ */
-const VERSION="1.5";
+const VERSION="1.6";
 let CURRENT="today";
 const TABS=[["today","Today","📅"],["plan","Plan","🗺️"],["lessons","Lessons","📖"],["guides","Guides","📋"],["vocab","Words","🔤"],["practice","Practice","🎯"],["progress","Progress","📊"]];
 const nav=document.getElementById("nav");
