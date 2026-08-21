@@ -24,9 +24,10 @@ auto-play are under **Progress → Audio**. For a more natural voice than the de
 *System Settings → Accessibility → Spoken Content → Manage Voices* and download a French
 **(Enhanced)** voice, then restart the browser.
 
-**The 20-minute timer** lives in the bottom-right corner of every screen. It chimes at each
-block change (warm-up → new words → grammar → out loud → test), logs the session when you
-finish, and tracks your total study minutes.
+**The 20-minute timer starts by itself** the moment you open a lesson — you never set it.
+It lives in the bottom-right corner, chimes at each block change (warm-up → new words →
+grammar → out loud → test), logs the session when the 20 minutes are up, and tracks your
+total study minutes. Tap it to expand and see which block you're in.
 
 **On your phone:** tap *Put this on my phone* on the Today tab for the install steps.
 Once installed it opens full-screen like a real app and works with no signal.

@@ -187,6 +187,13 @@ tr:last-child td{border-bottom:0}
 .timer .tx{position:absolute;top:8px;right:11px;background:none;border:0;color:var(--muted);font-size:19px;line-height:1;padding:3px 6px}
 .timer .mini-note{font-size:12px;color:var(--muted);text-align:center;margin:9px 0 0}
 
+/* ---------- toast ---------- */
+.toast{position:fixed;left:50%;transform:translateX(-50%) translateY(20px);bottom:24px;
+  bottom:calc(24px + env(safe-area-inset-bottom));z-index:120;background:var(--blue);color:#fff;
+  padding:11px 20px;border-radius:999px;font-size:14px;font-weight:600;box-shadow:0 8px 26px rgba(29,36,51,.25);
+  opacity:0;pointer-events:none;transition:opacity .25s,transform .25s}
+.toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+
 /* ---------- homework ---------- */
 .hw{border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:9px;background:var(--card);display:flex;gap:12px;align-items:flex-start}
 .hw.done{background:var(--green-soft);border-color:var(--green)}
@@ -255,6 +262,8 @@ tr:last-child td{border-bottom:0}
   <section class="view" id="v-practice"></section>
   <section class="view" id="v-progress"></section>
 </main>
+
+<div class="toast" id="toast"></div>
 
 <div class="timer" id="timer" onclick="if(!T.open)openTimer()"><span id="tmini">20:00</span></div>
 
@@ -1195,11 +1204,12 @@ function paintToday(){
   <div class="card" style="margin-top:14px">
     <div class="eyebrow">Today's session</div>
     <div class="row">
-      <button class="btn" onclick="openTimer();startTimer()">▶ Start the 20-minute timer</button>
+      <button class="btn ghost" onclick="openTimer()">⏱ Show the timer</button>
       <button class="btn ghost" onclick="installApp()">📱 Put this on my phone</button>
     </div>
-    <p class="muted" style="margin:10px 0 0;font-size:14px">The timer chimes at each block change so you never have to watch the clock.
-    It logs the session when you finish. Total so far: <b>${studyMinutes()} minutes</b> across ${(S.sessions||[]).length} session${(S.sessions||[]).length===1?"":"s"}.</p>
+    <p class="muted" style="margin:10px 0 0;font-size:14px"><b>The clock starts on its own the moment you open a lesson</b> — you never have to set it.
+    It chimes at each block change and logs the session when the 20 minutes are up.
+    Total so far: <b>${studyMinutes()} minutes</b> across ${(S.sessions||[]).length} session${(S.sessions||[]).length===1?"":"s"}.</p>
   </div>
 
   <div class="card">
@@ -1217,7 +1227,7 @@ function paintToday(){
       <tr><td><b>13–17</b></td><td><b>Out loud</b> — you speak, I correct</td></tr>
       <tr><td><b>17–20</b></td><td><b>The test</b> — 80% to unlock tomorrow</td></tr>
     </table>
-    <div class="row" style="margin-top:12px"><button class="btn ghost sm" onclick="openTimer();startTimer()">Start the timer</button></div>
+    <p class="muted" style="margin:12px 0 0;font-size:13.5px">The timer runs these blocks for you automatically once a lesson is open. Tap the clock in the corner to see where you are.</p>
   </div>
 
   <div class="card">
@@ -1362,6 +1372,7 @@ function openLesson(d){
       <div><h4>${h.t}</h4><p>${h.d}</p></div></div>`;
   }).join("")}`:""}
   `);
+  autoStartTimer();
 }
 
 /* ============================================================
@@ -1772,7 +1783,7 @@ function paintProgress(){
     <tr><td><b>On track?</b></td><td>${last7()>=100?'<span class="tag t-green">Yes — 5+ sessions this week</span>':last7()>=60?'<span class="tag t-gold">Close — aim for 140/week</span>':'<span class="tag t-red">Behind — 20 min a day is the whole plan</span>'}</td></tr>
   </table>
   <div class="row" style="margin-top:12px">
-    <button class="btn sm" onclick="openTimer();startTimer()">Start a session</button>
+    <button class="btn ghost sm" onclick="openTimer()">Show the timer</button>
     <button class="btn ghost sm" onclick="installApp()">📱 Install on phone</button>
   </div></div>
 
@@ -1886,6 +1897,20 @@ function beep(times){
       o.start(t0); o.stop(t0+0.24);
     }
   }catch(e){}
+}
+let toastT=null;
+function toast(msg){
+  const el=document.getElementById("toast"); if(!el) return;
+  el.textContent=msg; el.classList.add("on");
+  clearTimeout(toastT);
+  toastT=setTimeout(()=>el.classList.remove("on"), 3200);
+}
+/* The clock starts the moment you open a lesson — you never set it yourself. */
+function autoStartTimer(){
+  if(T.running) return;
+  if(T.sec>=TOTAL) resetTimer();          // a finished session: begin a fresh one
+  startTimer();
+  toast("⏱ 20-minute session started — warm-up");
 }
 function openTimer(){ T.open=true; paintTimer(); }
 function closeTimer(){ T.open=false; paintTimer(); }
