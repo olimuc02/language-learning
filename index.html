@@ -29,7 +29,9 @@ a{color:var(--blue)}
 button{font:inherit;cursor:pointer}
 
 /* ---------- shell ---------- */
-.top{position:sticky;top:0;z-index:50;background:rgba(250,247,242,.92);backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid var(--line)}
+.topwrap{position:sticky;top:0;z-index:50}
+.top{background:rgba(250,247,242,.92);backdrop-filter:saturate(180%) blur(12px)}
+nav{background:rgba(250,247,242,.92);border-bottom:1px solid var(--line)}
 .top-in{max-width:1080px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
 .brand{display:flex;align-items:center;gap:10px;margin-right:auto}
 .flag{width:26px;height:18px;border-radius:3px;overflow:hidden;display:flex;box-shadow:0 0 0 1px rgba(0,0,0,.08)}
@@ -268,7 +270,8 @@ tr:last-child td{border-bottom:0}
    ============================================================ */
 @media(max-width:700px){
   /* --- header shrinks to a single scrollable strip --- */
-  .top{border-bottom:1px solid var(--line)}
+  .topwrap{background:var(--bg)}
+  .top{border-bottom:1px solid var(--line);background:var(--bg);backdrop-filter:none}
   .top-in{padding:10px 14px;gap:8px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
   .top-in::-webkit-scrollbar{display:none}
   .brand{margin-right:4px;flex:0 0 auto;padding:3px 6px 3px 3px;gap:7px}
@@ -384,6 +387,7 @@ tr:last-child td{border-bottom:0}
 </head>
 <body>
 
+<div class="topwrap">
 <header class="top">
   <div class="top-in">
     <button class="brand" id="langbtn" onclick="langPicker()">
@@ -397,8 +401,9 @@ tr:last-child td{border-bottom:0}
     <button class="pill" id="syncpill" onclick="go('progress')"><span id="syncdot">🔄</span> <b id="syncstate">…</b></button>
   </div>
   <div class="langbar" id="langbar"></div>
-  <nav id="nav"></nav>
 </header>
+<nav id="nav"></nav>
+</div>
 
 <main>
   <section class="view on" id="v-today"></section>
@@ -765,7 +770,7 @@ function audioHint(){
 /* ============================================================
    NAV
    ============================================================ */
-const VERSION="2.5";
+const VERSION="2.6";
 let CURRENT="today";
 const TABS=[["today","Today","📅"],["plan","Plan","🗺️"],["lessons","Lessons","📖"],["guides","Guides","📋"],["vocab","Words","🔤"],["practice","Practice","🎯"],["progress","Progress","📊"]];
 const nav=document.getElementById("nav");
