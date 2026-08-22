@@ -36,6 +36,11 @@ auto-play are under **Progress → Audio**. For a more natural voice than the de
 *System Settings → Accessibility → Spoken Content → Manage Voices* and download a French
 **(Enhanced)** voice, then restart the browser.
 
+**Daily tracking:** *Progress → Your 20 minutes a day* shows today's minutes against the
+20-minute goal, your current and best streak, days hit this month, and an 8-week grid.
+It counts **across all languages** — 10 minutes of Polish plus 10 of French is a day hit.
+The Today tab carries a compact version of the same bar.
+
 **The 20-minute timer starts by itself** the moment you open a lesson — you never set it.
 It lives in the bottom-right corner, chimes at each block change (warm-up → new words →
 grammar → out loud → test), logs the session when the 20 minutes are up, and tracks your

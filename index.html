@@ -190,6 +190,19 @@ tr:last-child td{border-bottom:0}
 .timer .tx{position:absolute;top:8px;right:11px;background:none;border:0;color:var(--muted);font-size:19px;line-height:1;padding:3px 6px}
 .timer .mini-note{font-size:12px;color:var(--muted);text-align:center;margin:9px 0 0}
 
+/* ---------- daily tracker ---------- */
+.dhead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:8px}
+.dbig{font-family:Georgia,serif;font-size:31px;color:var(--blue);line-height:1}
+.grid8{display:grid;grid-template-rows:repeat(7,1fr);grid-auto-flow:column;grid-auto-columns:1fr;gap:3px}
+.grid8 i,.glegend i{display:block;aspect-ratio:1;border-radius:3px;background:var(--line)}
+.grid8 i.lv1{background:#cfe0f7}
+.grid8 i.lv2{background:#7fa8e0}
+.grid8 i.lv3{background:var(--blue)}
+.grid8 i.today{box-shadow:0 0 0 2px var(--gold)}
+.glegend{display:flex;align-items:center;gap:4px;margin-top:8px;font-size:11px}
+.glegend i{width:11px;height:11px;aspect-ratio:auto}
+.glegend i.lv1{background:#cfe0f7}.glegend i.lv2{background:#7fa8e0}.glegend i.lv3{background:var(--blue)}
+
 /* ---------- language picker ---------- */
 .brand{background:none;border:0;padding:4px 8px 4px 4px;border-radius:11px;display:flex;align-items:center;gap:9px;text-align:left}
 .brand:hover{background:var(--blue-soft)}
@@ -696,7 +709,7 @@ function audioHint(){
 /* ============================================================
    NAV
    ============================================================ */
-const VERSION="2.1";
+const VERSION="2.2";
 let CURRENT="today";
 const TABS=[["today","Today","📅"],["plan","Plan","🗺️"],["lessons","Lessons","📖"],["guides","Guides","📋"],["vocab","Words","🔤"],["practice","Practice","🎯"],["progress","Progress","📊"]];
 const nav=document.getElementById("nav");
@@ -823,8 +836,14 @@ function paintTodayDrill(){
 }
 
 function sessionCard(){
-  return `<div class="card" style="margin-top:14px">
-    <div class="eyebrow">Today's session</div>
+  const t=todayMinutes(), done=t>=DAILY_GOAL, pct=Math.min(100,t/DAILY_GOAL*100);
+  return `<div class="card" style="margin-top:14px;border-color:${done?"var(--green)":"var(--line)"}">
+    <div class="dhead">
+      <div class="eyebrow" style="margin:0">Today's session</div>
+      <span class="tag ${done?"t-green":"t-gold"}">${t} / ${DAILY_GOAL} min${done?" ✓":""}</span>
+    </div>
+    <div class="bar" style="height:9px;margin:9px 0 12px"><i style="width:${pct}%;background:${done?"var(--green)":"var(--blue)"}"></i></div>
+    <p class="muted" style="margin:0 0 10px;font-size:14px">🔥 <b>${dailyStreak()}</b>-day streak · ${minutesLast(7)} min this week · tracked across every language.</p>
     <p class="muted" style="margin:0;font-size:14px"><b>The clock starts on its own when you open a new lesson</b> — you never have to set it.
     It chimes at each block change and logs the session when the 20 minutes are up.
     Total so far: <b>${studyMinutes()} minutes</b> across ${(S.sessions||[]).length} session${(S.sessions||[]).length===1?"":"s"}.</p>
@@ -1387,6 +1406,8 @@ function paintProgress(){
   <h2 style="margin-bottom:6px">Progress</h2>
   <p class="muted" style="margin-top:0">Started ${S.startDate}. Everything is saved in this browser — export a backup now and then.</p>
 
+  ${dailyCard()}
+
   <div class="mini">
     <div class="stat"><b>${doneCount()}/90</b><span>Lessons done</span></div>
     <div class="stat"><b>${S.streak||0}</b><span>Day streak</span></div>
@@ -1669,6 +1690,97 @@ function logSession(mins){
   bumpStreak(); save();
 }
 function studyMinutes(){ return (S.sessions||[]).reduce((a,b)=>a+b.m,0); }
+
+/* ---- daily 20-minute tracking, across every language ---- */
+const DAILY_GOAL = 20;
+function allSessions(){
+  const all=allStates(), out=[];
+  Object.keys(all).forEach(c=>{
+    (all[c].sessions||[]).forEach(x=> out.push({d:x.d, m:x.m, lang:c}));
+  });
+  return out;
+}
+function minutesByDay(){
+  const m={};
+  allSessions().forEach(x=>{ m[x.d]=(m[x.d]||0)+x.m; });
+  return m;
+}
+function dayKey(offset){
+  const d=new Date(); d.setDate(d.getDate()-offset);
+  return d.toISOString().slice(0,10);
+}
+function todayMinutes(){ return minutesByDay()[todayStr()]||0; }
+function dailyStreak(){
+  const m=minutesByDay();
+  let n=0, i=0;
+  if((m[dayKey(0)]||0) < DAILY_GOAL) i=1;      // today isn't done yet — don't break the streak
+  for(;;i++){
+    if((m[dayKey(i)]||0) >= DAILY_GOAL) n++;
+    else break;
+  }
+  return n;
+}
+function longestStreak(){
+  const m=minutesByDay(), days=Object.keys(m).filter(d=>m[d]>=DAILY_GOAL).sort();
+  let best=0, run=0, prev=null;
+  days.forEach(d=>{
+    if(prev){
+      const gap=(new Date(d)-new Date(prev))/864e5;
+      run = gap===1 ? run+1 : 1;
+    } else run=1;
+    prev=d; if(run>best) best=run;
+  });
+  return best;
+}
+function daysHitThisMonth(){
+  const m=minutesByDay(), pre=todayStr().slice(0,7);
+  return Object.keys(m).filter(d=>d.startsWith(pre) && m[d]>=DAILY_GOAL).length;
+}
+function minutesLast(nDays){
+  const m=minutesByDay(); let t=0;
+  for(let i=0;i<nDays;i++) t+=m[dayKey(i)]||0;
+  return t;
+}
+function langSplitLast(nDays){
+  const cut=dayKey(nDays-1), by={};
+  allSessions().filter(x=>x.d>=cut).forEach(x=>{ by[x.lang]=(by[x.lang]||0)+x.m; });
+  return by;
+}
+
+/* an 8-week grid, most recent day last */
+function streakGrid(){
+  const m=minutesByDay(), cells=[];
+  for(let i=55;i>=0;i--){
+    const d=dayKey(i), mins=m[d]||0;
+    const lvl = mins>=DAILY_GOAL ? 3 : mins>=10 ? 2 : mins>0 ? 1 : 0;
+    cells.push(`<i class="lv${lvl}${i===0?" today":""}" title="${d} — ${mins} min"></i>`);
+  }
+  return cells.join("");
+}
+function dailyCard(){
+  const t=todayMinutes(), pct=Math.min(100, t/DAILY_GOAL*100), done=t>=DAILY_GOAL;
+  const split=langSplitLast(7);
+  return `<div class="card" style="border-color:${done?"var(--green)":"var(--blue)"}">
+    <div class="eyebrow">Your 20 minutes a day</div>
+    <div class="dhead">
+      <div><b class="dbig">${t}</b><span class="muted"> / ${DAILY_GOAL} min today</span></div>
+      <span class="tag ${done?"t-green":"t-gold"}">${done?"done today":"not yet"}</span>
+    </div>
+    <div class="bar" style="height:12px"><i style="width:${pct}%;background:${done?"var(--green)":"var(--blue)"}"></i></div>
+    <div class="mini" style="margin-top:14px">
+      <div class="stat"><b>${dailyStreak()}</b><span>Day streak</span></div>
+      <div class="stat"><b>${longestStreak()}</b><span>Best streak</span></div>
+      <div class="stat"><b>${daysHitThisMonth()}</b><span>Days this month</span></div>
+      <div class="stat"><b>${minutesLast(7)}</b><span>Min this week</span></div>
+    </div>
+    <p class="muted" style="margin:16px 0 7px;font-size:12.5px;text-transform:uppercase;letter-spacing:.06em;font-weight:700">Last 8 weeks</p>
+    <div class="grid8">${streakGrid()}</div>
+    <div class="glegend"><span class="muted">less</span><i class="lv0"></i><i class="lv1"></i><i class="lv2"></i><i class="lv3"></i><span class="muted">20+ min</span></div>
+    ${Object.keys(split).length?`<p class="muted" style="margin:14px 0 0;font-size:13.5px">This week by language:
+      ${Object.keys(split).map(c=>`${LANGS[c]?LANGS[c].flag:""} ${LANGS[c]?LANGS[c].name:c} ${split[c]} min`).join(" · ")}</p>`:""}
+    <p class="muted" style="margin:9px 0 0;font-size:13px">Counted across every language. The timer logs a day automatically when you finish a session.</p>
+  </div>`;
+}
 function last7(){
   const cut=new Date(Date.now()-7*864e5).toISOString().slice(0,10);
   return (S.sessions||[]).filter(x=>x.d>=cut).reduce((a,b)=>a+b.m,0);
