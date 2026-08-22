@@ -39,7 +39,33 @@ Pass marks: 80% on a normal day, 75% on a checkpoint. Below that, the day repeat
 
 Oliver already speaks Polish. This track is **not** a beginner course — it targets
 precision vocabulary, idiom, register, and the grammar fluent speakers still fumble.
-8 sets written, 111 words, 84 questions. Sets are independent; do them in any order.
+9 sets written, 111 words, ~96 questions. Sets are independent; do them in any order.
+
+### Placement test — 2026-08-21
+
+**9/30 on the multiple choice, but that number is misleading.** The profile is a classic
+heritage speaker: the spoken language is intact, the written norms and the expanded
+register were never taught.
+
+| Section | Score | Read |
+|---|---|---|
+| Aspekt | 3/5 | Instincts good; the "perfective has no present tense" rule was missing |
+| Przypadki / liczebniki | 4/6 | Case system largely intact. Missed męskoosobowe (siedmiu) and na/na |
+| **Ortografia** | **0/6** | The gap. Diacritics absent, prescriptive norms unknown |
+| Słownictwo (advanced) | 1/6 | Precise/literary register never acquired |
+| **Idiomy** | **0/4** | Suggests home/family register rather than media or literary Polish |
+| Rejestr | 1/3 | Chose "Witam" — then correctly wrote "Dzień dobry" in the email |
+| Produkcja | strong | Communicates fluently and naturally. Aspect task done correctly. |
+
+**Estimated levels:** speaking ~B2/C1 · writing ~A2/B1 · advanced vocabulary ~A2.
+
+**Set order to work through:** 9 (ortografia) → 7 (pułapki) → 2 (idiomy) → 1 (precyzja)
+→ 5 (potoczny) → 3 (biznesowy) → 4 (aspekt) → 6 (łączniki) → 8 (literackie).
+
+Recurring written errors to keep drilling: missing ł/ż/ó/ę/ą throughout ·
+*wziąść* → wziąć · *w każdym bądź razie* → w każdym razie · *tą* for accusative *tę* ·
+*mimo tego* → mimo to · *jest warto* → warto · missing comma before *że* ·
+*jak chodzi o* → jeśli chodzi o · doubled *się*.
 
 1. Precyzja — better words than "fajny"
 2. Idiomy, które warto mieć w zapasie
@@ -70,6 +96,16 @@ rhetoric, character adjectives, business terms, confusables, and Latin/French bo
 7. Vivid Verbs
 
 ---
+
+## Slang — standing instruction
+
+Oliver asked (2026-08-21) that **every** language teach slang, colloquialisms and local
+phrases alongside the formal register — not formalities alone. Applies to French,
+Brazilian Portuguese and Polish especially.
+
+- 🇫🇷 French: **Argot** study guide added (verlan, fillers, texting, swearing with register warnings)
+- 🇵🇱 Polish: Set 5 *Potoczny polski* already covers this; expand as sets are added
+- 🇧🇷 Portuguese: build colloquial content in from the first set, not bolted on later
 
 ## Queued
 

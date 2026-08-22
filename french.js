@@ -710,6 +710,81 @@ With être, the participle agrees: a woman says <span class="fr">je suis allé<b
 <div class="box blue"><b>When in doubt, use vous</b>Being too formal is mildly amusing. Being too casual is genuinely rude. Wait for them to say <span class="fr">on peut se tutoyer</span> ("we can use tu").</div>
 `},
 
+{id:"argot", title:"Argot — How French People Actually Talk", sub:"The slang, texting and filler no textbook prints", tag:"Street French", body:`
+<h3>Why this matters early</h3>
+<p>Textbook French and street French are different languages. You will understand a menu long before you understand two friends talking. This sheet is the other half — keep it beside the formal material rather than instead of it.</p>
+<div class="box red"><b>Register warning</b>Almost nothing here belongs in a shop, an office or a conversation with someone older. Slang used at the wrong moment is worse than no slang. Read the tags.</div>
+
+<h3>Everyday words that replace the textbook ones</h3>
+<table>
+<tr><th>Slang</th><th>Say it</th><th>Textbook word</th><th>Means</th></tr>
+<tr><td class="fr">un mec</td><td class="say">an MEK</td><td class="fr">un homme</td><td>a guy</td></tr>
+<tr><td class="fr">une meuf</td><td class="say">ün MUHF</td><td class="fr">une femme</td><td>a woman (verlan of femme)</td></tr>
+<tr><td class="fr">un pote</td><td class="say">an POT</td><td class="fr">un ami</td><td>a mate</td></tr>
+<tr><td class="fr">bosser</td><td class="say">bo-SAY</td><td class="fr">travailler</td><td>to work</td></tr>
+<tr><td class="fr">bouffer</td><td class="say">boo-FAY</td><td class="fr">manger</td><td>to eat</td></tr>
+<tr><td class="fr">la bouffe</td><td class="say">la BOOF</td><td class="fr">la nourriture</td><td>food</td></tr>
+<tr><td class="fr">la thune</td><td class="say">la TÜN</td><td class="fr">l'argent</td><td>money, cash</td></tr>
+<tr><td class="fr">les fringues</td><td class="say">lay FRANG</td><td class="fr">les vêtements</td><td>clothes</td></tr>
+<tr><td class="fr">un bouquin</td><td class="say">an boo-KAN</td><td class="fr">un livre</td><td>a book</td></tr>
+<tr><td class="fr">une bagnole</td><td class="say">ün ban-YOL</td><td class="fr">une voiture</td><td>a car</td></tr>
+<tr><td class="fr">un flic</td><td class="say">an FLEEK</td><td class="fr">un policier</td><td>a cop</td></tr>
+<tr><td class="fr">le boulot</td><td class="say">luh boo-LOH</td><td class="fr">le travail</td><td>work, the job</td></tr>
+<tr><td class="fr">kiffer</td><td class="say">kee-FAY</td><td class="fr">aimer beaucoup</td><td>to love, be into</td></tr>
+</table>
+
+<h3>Verlan — syllables flipped backwards</h3>
+<p>French teenagers invert syllables. The word <span class="fr">verlan</span> is itself <span class="fr">l'envers</span> (backwards) flipped. A handful have entered ordinary speech:</p>
+<table>
+<tr><td class="fr">meuf</td><td>← femme</td><td>woman</td></tr>
+<tr><td class="fr">keuf</td><td>← flic</td><td>cop</td></tr>
+<tr><td class="fr">relou</td><td>← lourd</td><td>annoying, heavy going</td></tr>
+<tr><td class="fr">chelou</td><td>← louche</td><td>dodgy, sketchy</td></tr>
+<tr><td class="fr">ouf</td><td>← fou</td><td>crazy — <span class="fr">un truc de ouf</span> = something insane</td></tr>
+<tr><td class="fr">teuf</td><td>← fête</td><td>party</td></tr>
+</table>
+
+<h3>Reactions and fillers — the real fluency markers</h3>
+<table>
+<tr><td class="fr">Ça marche</td><td class="say">sa MARSH</td><td>Works for me / deal</td></tr>
+<tr><td class="fr">Nickel</td><td class="say">nee-KEL</td><td>Perfect, spot on</td></tr>
+<tr><td class="fr">Carrément</td><td class="say">kar-ay-MAHN</td><td>Absolutely, totally</td></tr>
+<tr><td class="fr">Grave</td><td class="say">GRAHV</td><td>Totally (agreeing hard)</td></tr>
+<tr><td class="fr">C'est chaud</td><td class="say">say SHOH</td><td>That's rough / tricky</td></tr>
+<tr><td class="fr">Ça craint</td><td class="say">sa KRAN</td><td>That sucks</td></tr>
+<tr><td class="fr">La galère</td><td class="say">la ga-LEHR</td><td>What a nightmare</td></tr>
+<tr><td class="fr">J'en peux plus</td><td class="say">zhahn puh PLÜ</td><td>I can't take any more</td></tr>
+<tr><td class="fr">N'importe quoi</td><td class="say">nam-port KWA</td><td>Nonsense / whatever</td></tr>
+<tr><td class="fr">Ça te dit ?</td><td class="say">sa tuh DEE</td><td>Fancy it?</td></tr>
+<tr><td class="fr">Bref</td><td class="say">BREF</td><td>Anyway / long story short</td></tr>
+<tr><td class="fr">Du coup</td><td class="say">dü KOO</td><td>So, therefore — used constantly</td></tr>
+<tr><td class="fr">Genre</td><td class="say">ZHAHN-ruh</td><td>Like… (filler)</td></tr>
+<tr><td class="fr">Quoi</td><td class="say">KWA</td><td>tagged onto the end of sentences, like "innit"</td></tr>
+</table>
+
+<h3>Swearing — know it, judge it</h3>
+<div class="box red"><b>Recognise before you use</b>These are everywhere in film and among friends, and nowhere in a bakery.</div>
+<table>
+<tr><td class="fr">Putain</td><td class="say">pü-TAN</td><td>The all-purpose expletive. Frequency ranges from mild to very strong depending on tone and company.</td></tr>
+<tr><td class="fr">Merde</td><td class="say">MEHRD</td><td>Damn / shit. Milder than the English.</td></tr>
+<tr><td class="fr">C'est le bordel</td><td class="say">say luh bor-DEL</td><td>It's chaos. Common, mildly rude.</td></tr>
+<tr><td class="fr">Ça me saoule</td><td class="say">sa muh SOOL</td><td>It's doing my head in.</td></tr>
+</table>
+
+<h3>Texting and messaging</h3>
+<table>
+<tr><td class="fr">slt</td><td>salut</td><td class="fr">bcp</td><td>beaucoup</td></tr>
+<tr><td class="fr">pk / pq</td><td>pourquoi</td><td class="fr">jsp</td><td>je sais pas</td></tr>
+<tr><td class="fr">tkt</td><td>t'inquiète (don't worry)</td><td class="fr">mdr</td><td>mort de rire (lol)</td></tr>
+<tr><td class="fr">ptdr</td><td>pété de rire (lmao)</td><td class="fr">stp / svp</td><td>s'il te / vous plaît</td></tr>
+<tr><td class="fr">à+ / @+</td><td>à plus (see you)</td><td class="fr">dsl</td><td>désolé</td></tr>
+</table>
+
+<h3>Two habits that instantly sound native</h3>
+<div class="box green"><b>1. Drop the "ne"</b>Nobody says <span class="fr">je ne sais pas</span> in casual speech. It is <span class="fr">je sais pas</span>, often crushed to <span class="say">shay pa</span>. Same with <span class="fr">c'est pas bon</span>, <span class="fr">j'ai pas faim</span>. Keep the ne in writing.</div>
+<div class="box green"><b>2. Use "on" for "we"</b><span class="fr">Nous allons au marché</span> is correct and sounds like a textbook. Real people say <span class="fr">On va au marché.</span> Note it takes the same verb form as il/elle.</div>
+`},
+
 {id:"convo", title:"Conversation Starter Kit", sub:"Scripts for the conversations you'll actually have", tag:"Days 6, 13, 20+", body:`
 <h3>Meeting someone</h3>
 <table>

@@ -832,3 +832,89 @@ quiz:[
  {t:"type", q:"Write the Polish word meaning <b>toil, hardship</b> with an archaic flavour.", ans:["znoj","znój"], why:"<b>Znój</b> — w znoju i pocie. Used deliberately for its old-fashioned weight."}
 ]
 };
+
+PL_SETS.push([9,"Ortografia — ó/u, rz/ż, ch/h, ą/ę","The written norms. Speech is fine; spelling is where the gaps are."]);
+
+PL_LESSONS[9] = {
+title:"Ortografia — ó/u, rz/ż, ch/h, ą/ę",
+mins:20, goal:"Spell Polish the way it is written, not the way it sounds.",
+body:`
+<h3>Why this set exists</h3>
+<p>Polish spelling records sounds that merged centuries ago. <b>ó</b> and <b>u</b> are now identical in speech, so are <b>rz</b> and <b>ż</b>, and <b>ch</b> and <b>h</b>. A speaker who learned Polish by ear has no way to hear which one to write — the information simply is not in the sound any more. That is not a knowledge gap, it is missing data, and the rules below put it back.</p>
+
+<h3>ó or u — look for the alternation</h3>
+<div class="box blue"><b>The test</b>Write <b>ó</b> when a related word has <b>o</b>, <b>e</b> or <b>a</b> in that slot.</div>
+<table>
+<tr><th>Word</th><th>Related form</th><th>Why</th></tr>
+<tr><td class="fr">mróz</td><td class="fr">mrozu, mrozem</td><td>ó ↔ o</td></tr>
+<tr><td class="fr">wóz</td><td class="fr">wozy</td><td>ó ↔ o</td></tr>
+<tr><td class="fr">stół</td><td class="fr">stołu</td><td>ó ↔ o</td></tr>
+<tr><td class="fr">niósł</td><td class="fr">niesie</td><td>ó ↔ e</td></tr>
+<tr><td class="fr">skrót</td><td class="fr">skrócić</td><td>ó ↔ o</td></tr>
+<tr><td class="fr">mój, twój, swój</td><td class="fr">mojego, twojego</td><td>ó ↔ o</td></tr>
+</table>
+<p><b>Always ó:</b> in the endings <b>-ów, -ówka, -ówna</b> — <span class="fr">samochodów, pocztówka, Nowakówna</span>.</p>
+<p><b>Just memorise these:</b> <span class="fr">ogórek, król, córka, wróbel, góra, próba, później, wkrótce, płótno</span>.</p>
+<p><b>Never ó at the start of a word</b> except <span class="fr">ósmy, ów, ówczesny</span>.</p>
+
+<h3>rz or ż — same test, different partners</h3>
+<div class="box blue"><b>The test</b>Write <b>rz</b> when a related word has <b>r</b>. Write <b>ż</b> when a related word has <b>g, dz, z, s, h</b>.</div>
+<table>
+<tr><th>rz ↔ r</th><th>ż ↔ g / dz / z / s</th></tr>
+<tr><td class="fr">morze → morski</td><td class="fr">może → mogę</td></tr>
+<tr><td class="fr">dworzec → dworu</td><td class="fr">książka → księga</td></tr>
+<tr><td class="fr">lekarz → lekarski</td><td class="fr">mosiężny → mosiądz</td></tr>
+<tr><td class="fr">rzeka → rzeczny</td><td class="fr">wożę → wozić</td></tr>
+</table>
+<div class="box red"><b>The rule that solves half of them</b>After <b>p, b, t, d, k, g, ch, j, w</b> it is <b>always rz</b>:<br>
+<span class="fr">przy, brzeg, trzy, drzewo, krzyk, grzyb, chrzest, wrzesień, ujrzeć</span>.<br><br>
+Exceptions worth knowing: <span class="fr">pszenica, pszczoła, kształt, bukszpan, wszystko, zawsze</span> — these take <b>sz</b>, not rz.</div>
+<p><b>Always ż after l, ł, r, n:</b> <span class="fr">lżej, łże, rżysko</span>.</p>
+<p><b>Memorise:</b> <span class="fr">żaba, żona, żyto, jeżeli, żeby, ryż, także, zawżdy</span>.</p>
+
+<h3>ch or h</h3>
+<div class="box blue"><b>The test</b><b>ch</b> alternates with <b>sz</b>. <b>h</b> alternates with <b>g</b>, <b>z</b> or <b>ż</b>.</div>
+<table>
+<tr><th>ch ↔ sz</th><th>h ↔ g / z / ż</th></tr>
+<tr><td class="fr">mucha → muszka</td><td class="fr">wahać się → waga</td></tr>
+<tr><td class="fr">druch → druszka</td><td class="fr">druh → drużyna</td></tr>
+<tr><td class="fr">cicho → ciszej</td><td class="fr">błahy → błazen</td></tr>
+</table>
+<p><b>ch is always the ending</b> of a word: <span class="fr">dach, gmach, na rękach, o domach</span>. A Polish word never ends in <b>h</b>.</p>
+<p><b>h mostly appears in borrowings:</b> <span class="fr">historia, hotel, herbata, honor, humor, bohater</span>.</p>
+
+<h3>ą or ę — and where they turn into om / em</h3>
+<table>
+<tr><td class="fr">wziąć</td><td>never <b>wziąść</b> — there is no ś in this verb</td></tr>
+<tr><td class="fr">włączać</td><td>from <b>łączyć</b>, so never <b>włanczać</b></td></tr>
+<tr><td class="fr">wziąłem / wzięłam</td><td>ą for a man, ę for a woman</td></tr>
+<tr><td class="fr">poszedłem / poszłam</td><td>never <b>poszłem</b></td></tr>
+<tr><td class="fr">idę, robię, piszę</td><td>first person always ends <b>-ę</b>, never <b>-em</b></td></tr>
+<tr><td class="fr">tę książkę</td><td>accusative is <b>tę</b>; <b>tą</b> is instrumental — z tą książką</td></tr>
+</table>
+
+<h3>Write these ten out by hand</h3>
+<p class="fr">mój · mróz · stół · ogórek · książka · przez · wrzesień · mucha · historia · wziąłem</p>
+<p>Handwriting them matters more than typing. The motor memory is what fixes spelling, which is why children copy words rather than reading them.</p>
+`,
+homework:[
+ {t:"Handwrite twenty words", d:"Write out by hand, twice each: mój, mróz, stół, skrót, ogórek, król, córka, morze, może, książka, przez, brzeg, trzy, wrzesień, mucha, cicho, historia, herbata, wziąłem, poszedłem. Typing does not build the same memory."},
+ {t:"Apply the alternation test", d:"For each of these, find the related word that proves the spelling: wóz, niósł, lekarz, wożę, mucha, wahać. If you can produce the partner word, you never have to memorise the spelling."},
+ {t:"Rewrite your own email", d:"Take question 33 from your placement test and rewrite it with every diacritic in place. Compare against the corrected version I gave you, word by word."},
+ {t:"Read aloud, then copy", d:"Take one paragraph of written Polish. Read it out loud, then copy it by hand, then check. Do this once a week — it is the single most effective exercise for a speaker whose ear is ahead of their eye."}
+],
+quiz:[
+ {t:"mc", q:"Which is correct?", a:["mróz","mruz","mrósz","mrus"], c:0, why:"<b>mróz</b> — because the genitive is <b>mrozu</b>. ó alternates with o."},
+ {t:"mc", q:"Why is it <b>morze</b> and not <b>może</b> when you mean 'sea'?", a:["rz alternates with r — morski","ż is only used at word ends","they are interchangeable","morze is a borrowing"], c:0, why:"<b>morze → morski</b> gives you rz. <b>może → mogę</b> gives you ż."},
+ {t:"mc", q:"After the letters p, b, t, d, k, g, ch, j, w you always write…", a:["rz","ż","sz","either"], c:0, why:"przy, brzeg, trzy, drzewo, krzyk, grzyb, chrzest, wrzesień. Watch for the sz exceptions: pszenica, pszczoła, kształt, wszystko."},
+ {t:"mc", q:"Which is correct?", a:["wziąć","wziąść","wziąźć","wzionść"], c:0, why:"<b>wziąć.</b> There is no ś anywhere in this verb."},
+ {t:"mc", q:"A man says he went. Which is right?", a:["poszedłem","poszłem","poszedłam","poszłam"], c:0, why:"<b>Poszedłem</b> for a man, <b>poszłam</b> for a woman. Poszłem is the most common spoken error in Polish."},
+ {t:"mc", q:"Which is correct?", a:["włączać","włanczać","właczać","włonczać"], c:0, why:"It comes from <b>łączyć</b>, so the ą stays: <b>włączać</b>."},
+ {t:"mc", q:"Why is it <b>mucha</b> and not <b>muha</b>?", a:["ch alternates with sz — muszka","h never appears mid-word","mucha is a borrowing","both spellings are accepted"], c:0, why:"<b>mucha → muszka.</b> The ch/sz alternation proves it."},
+ {t:"mc", q:"A Polish word can end in…", a:["ch, never h","h, never ch","either","neither"], c:0, why:"<b>dach, gmach, na rękach.</b> No native Polish word ends in h."},
+ {t:"mc", q:"Widzę ___ książkę. / Idę z ___ książką.", a:["tę / tą","tą / tę","tę / tę","tą / tą"], c:0, why:"<b>tę</b> is the accusative (direct object); <b>tą</b> is the instrumental, used after a preposition."},
+ {t:"type", q:"Write the Polish for <b>my</b> (masculine, e.g. my Polish) with the correct diacritic.", ans:["moj","mój"], why:"<b>mój</b> — because of <b>mojego</b>. The o in the related form gives you ó."},
+ {t:"type", q:"Write the Polish word for <b>book</b>.", ans:["ksiazka","książka"], why:"<b>książka</b> — ż because of <b>księga</b>."},
+ {t:"type", q:"Write the Polish word for <b>September</b>.", ans:["wrzesien","wrzesień"], why:"<b>wrzesień</b> — rz because it follows w, and ń at the end."}
+]
+};
