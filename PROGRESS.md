@@ -97,6 +97,13 @@ rhetoric, character adjectives, business terms, confusables, and Latin/French bo
 
 ---
 
+## Mixed practice
+
+**Practice → 🌍 All languages** pools every word from every unlocked language into one deck
+(426 cards: 226 French, 111 Polish, 89 English). Each card is spoken in its own language's
+voice, quiz distractors are drawn from the same language as the answer, and marking a word
+known writes to that language's own progress. Also reachable from the Today tab.
+
 ## Slang — standing instruction
 
 Oliver asked (2026-08-21) that **every** language teach slang, colloquialisms and local

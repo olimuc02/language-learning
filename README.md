@@ -27,7 +27,7 @@ Seven tabs:
 | **Lessons** | Every lesson you've been taught, saved in full, re-readable and printable |
 | **Study Guides** | 9 reference sheets — pronunciation, verbs, gender, questions, numbers, false friends, survival phrases, conversation scripts. All printable. |
 | **Vocabulary** | 200+ words by situation, with pronunciation, example sentences and memory hooks. Tap to mark known. |
-| **Practice** | Flashcards, multiple-choice quiz, speaking drills |
+| **Practice** | Flashcards, quiz, speaking drills — plus **🌍 All languages**, which shuffles French, Polish and English into one deck, each word spoken in its own voice |
 | **Progress** | Streak, word count, can-do checklist, checkpoint scores, backup/export |
 
 **Audio:** tap any blue French text anywhere in the app to hear it spoken by a French voice.

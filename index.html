@@ -136,6 +136,8 @@ tr:last-child td{border-bottom:0}
 .chips{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0}
 .chip{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:6px 13px;font-size:13px;font-weight:600;color:var(--muted)}
 .chip.on{background:var(--blue);border-color:var(--blue);color:#fff}
+.chip.mixchip{border-color:var(--gold);color:var(--gold)}
+.chip.mixchip.on{background:var(--gold);border-color:var(--gold);color:#fff}
 
 /* ---------- flashcards / quiz ---------- */
 .fc{background:var(--card);border:1px solid var(--line);border-radius:18px;min-height:230px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:30px;box-shadow:var(--shadow);cursor:pointer}
@@ -651,30 +653,50 @@ if(TTS){
   [200,600,1500,3000].forEach(ms=>setTimeout(loadVoices, ms));
 }
 
-function speak(text){
+/* pick a voice for any language, not just the active one */
+const JUNKV=/grandma|grandpa|rocko|shelley|sandy|flo|eddy|bubbles|jester|superstar|trinoids|whisper|bells|boing|organ|cellos|zarvox|wobble|bad news|good news/i;
+function voiceFor(code){
+  if(!TTS) return null;
+  const g=LANGS[code]; if(!g) return null;
+  const want=g.tts.slice(0,2).toLowerCase();
+  const all=TTS.getVoices()||[];
+  const list=all.filter(v=>v.lang && v.lang.toLowerCase().replace("_","-").startsWith(want));
+  const good=list.filter(v=>!JUNKV.test(v.name));
+  const pool=good.length?good:list;
+  const nice=g.nice||[];
+  return pool.find(v=>v.name===(P.voices[code]||""))
+      || pool.find(v=>/enhanced|premium|siri|neural/i.test(v.name))
+      || pool.find(v=>nice.some(n=>v.name.toLowerCase().includes(n)))
+      || pool.find(v=>v.lang.toLowerCase().replace("_","-")===g.tts.toLowerCase())
+      || pool[0] || null;
+}
+function speak(text, code){
   if(!TTS || !text) return;
   const t = String(text).replace(/\s+/g," ").replace(/·/g," , ").replace(/[…—–]/g," ").trim();
   if(!t) return;
-  if(!VOICE) loadVoices();                 // voices may have arrived since page load
+  const c = code || P.lang;
+  if(c===P.lang && !VOICE) loadVoices();    // voices may have arrived since page load
+  const v = (c===P.lang) ? VOICE : voiceFor(c);
   TTS.cancel();
   const u = new SpeechSynthesisUtterance(t);
   u.rate = P.rate || 0.85;
-  if(VOICE){
-    u.voice = VOICE;
-    u.lang  = VOICE.lang;                  // must match the voice or Chrome ignores it
+  if(v){
+    u.voice = v;
+    u.lang  = v.lang;                       // must match the voice or Chrome ignores it
   } else {
-    u.lang = L.tts;
-    warnNoVoice();
+    u.lang = (LANGS[c]||L).tts;
+    warnNoVoice((LANGS[c]||L).name);
   }
   TTS.speak(u);
 }
 let warned=false;
-function warnNoVoice(){
+function warnNoVoice(name){
   if(warned) return; warned=true;
+  const nm = name || L.name;
   setTimeout(()=>alert(
-    "No " + L.name + " voice is installed, so this is being read with whatever voice your system defaults to.\n\n"+
+    "No " + nm + " voice is installed, so this is being read with whatever voice your system defaults to.\n\n"+
     "Fix: System Settings \u2192 Accessibility \u2192 Spoken Content \u2192 System Voice \u2192 Manage Voices, "+
-    "download a " + L.name + " voice, then fully quit and reopen your browser."
+    "download a " + nm + " voice, then fully quit and reopen your browser."
   ),100);
 }
 function voiceLabel(){
@@ -709,7 +731,7 @@ function audioHint(){
 /* ============================================================
    NAV
    ============================================================ */
-const VERSION="2.2";
+const VERSION="2.3";
 let CURRENT="today";
 const TABS=[["today","Today","📅"],["plan","Plan","🗺️"],["lessons","Lessons","📖"],["guides","Guides","📋"],["vocab","Words","🔤"],["practice","Practice","🎯"],["progress","Progress","📊"]];
 const nav=document.getElementById("nav");
@@ -754,6 +776,7 @@ function paintTodayCourse(){
                  :`<button class="btn" onclick="askClaude()">Ask Claude to teach this</button>`}
       ${done?`<button class="btn ghost" onclick="setDay(${d+1})">Go to Day ${d+1} →</button>`
             :`<button class="btn ghost" onclick="markDone(${d})">Mark Day ${d} complete</button>`}
+      <button class="btn ghost" onclick="mixDrill()">🌍 Practice all languages</button>
     </div>
   </div>
 
@@ -791,7 +814,7 @@ function paintTodayDrill(){
     <p>${next?i.desc:"You have worked through every set. Repeat any of them, or ask Claude for new ones."}</p>
     <div class="row">
       ${next?`<button class="btn" onclick="openLesson(${next})">${S.completed[next]?"Redo this set":"Start this set"}</button>`:""}
-      <button class="btn ghost" onclick="go('practice')">Quick drill instead</button>
+      <button class="btn ghost" onclick="mixDrill()">🌍 Practice all languages</button>
     </div>
   </div>
 
@@ -1256,14 +1279,63 @@ function toggleKnown(w){ S.known[w]=!S.known[w]; save(); paintVocab(); }
 function toggleStar(w){ S.starred[w]=!S.starred[w]; save(); paintVocab(); }
 
 /* ============================================================
+   MIXED PRACTICE — every language in one deck
+   ============================================================ */
+function unlockedLangs(){ return LANG_ORDER.filter(c=>LANGS[c].mode!=="soon"); }
+
+const _vcache={};
+function langVocab(code){
+  if(_vcache[code]) return _vcache[code];
+  const g=LANGS[code];
+  if(!g || g.mode==="soon") return (_vcache[code]=[]);
+  const d=g.data();
+  const out=(d.vocab||[]).slice();
+  if(d.extra){
+    const have=new Set(out.map(v=>v[0]));
+    d.extra.forEach(v=>{ if(!have.has(v[0])){ out.push(v); have.add(v[0]); } });
+  }
+  return (_vcache[code]=out);
+}
+function langState(code){
+  if(code===P.lang) return S;
+  try{ return Object.assign(blank(), JSON.parse(localStorage.getItem(skey(code)))||{}); }
+  catch(e){ return blank(); }
+}
+function isKnownIn(code,w){ return !!(langState(code).known||{})[w]; }
+function isStarredIn(code,w){ return !!(langState(code).starred||{})[w]; }
+function setFlagIn(code, field, w, val){
+  if(code===P.lang){ S[field][w]=val; save(); return; }
+  const st=langState(code);
+  st[field]=st[field]||{}; st[field][w]=val;
+  st.updatedAt=new Date().toISOString();
+  localStorage.setItem(skey(code), JSON.stringify(st));
+  queuePush(); paintHeader();
+}
+/* every word from every unlocked language, tagged with where it came from */
+function mixPool(onlyNew){
+  const out=[];
+  unlockedLangs().forEach(code=>{
+    const st=langState(code);
+    langVocab(code).forEach(v=>{
+      if(!v[1]) return;                          // needs a pronunciation column
+      if(onlyNew && (st.known||{})[v[0]]) return;
+      const r=v.slice(); r.lang=code; out.push(r);
+    });
+  });
+  return out;
+}
+
+/* ============================================================
    PRACTICE — flashcards + quiz
    ============================================================ */
 let mode="fc", deck=[], di=0, flipped=false, pCat="all";
 let PQ=null;
+function mixDrill(){ pCat="mix"; mode="qz"; go("practice"); }
 function paintPractice(){
   document.getElementById("v-practice").innerHTML=`
   <h2 style="margin-bottom:6px">Practice</h2>
-  <p class="muted" style="margin-top:0">Flashcards build recognition. The quiz builds recall — which is the harder, more useful one.</p>
+  <p class="muted" style="margin-top:0">Flashcards build recognition. The quiz builds recall — the harder, more useful one.
+  <b>🌍 All languages</b> shuffles French, Polish and English into one deck, each word spoken in its own voice.</p>
   <div class="chips">
     <button class="chip ${mode==='fc'?'on':''}" onclick="mode='fc';buildDeck()">🃏 Flashcards</button>
     <button class="chip ${mode==='qz'?'on':''}" onclick="mode='qz';buildDeck()">✍️ Quiz me</button>
@@ -1271,7 +1343,9 @@ function paintPractice(){
   </div>
   ${mode==='sp'?speakBox():`
   <div class="chips">
-    <button class="chip ${pCat==='all'?'on':''}" onclick="pCat='all';buildDeck()">All words</button>
+    <button class="chip mixchip ${pCat==='mix'?'on':''}" onclick="pCat='mix';buildDeck()">🌍 All languages</button>
+    <button class="chip mixchip ${pCat==='mixnew'?'on':''}" onclick="pCat='mixnew';buildDeck()">🌍 All — not yet known</button>
+    <button class="chip ${pCat==='all'?'on':''}" onclick="pCat='all';buildDeck()">${L.flag} All ${L.name}</button>
     <button class="chip ${pCat==='star'?'on':''}" onclick="pCat='star';buildDeck()">★ Starred</button>
     <button class="chip ${pCat==='new'?'on':''}" onclick="pCat='new';buildDeck()">Not yet known</button>
     ${CATS.map(([id,n,e])=>`<button class="chip ${pCat===id?'on':''}" onclick="pCat='${id}';buildDeck()">${e} ${n}</button>`).join("")}
@@ -1280,13 +1354,16 @@ function paintPractice(){
   if(mode!=='sp') buildDeck();
 }
 function pool(){
+  if(pCat==='mix')    return mixPool(false);
+  if(pCat==='mixnew') return mixPool(true);
   return VOCAB.filter(v=>{
     if(pCat==='star') return S.starred[v[0]];
-    if(pCat==='new') return !S.known[v[0]];
-    if(pCat!=='all') return v[3]===pCat;
+    if(pCat==='new')  return !S.known[v[0]];
+    if(pCat!=='all')  return v[3]===pCat;
     return true;
-  }).filter(v=>v[1]);
+  }).filter(v=>v[1]).map(v=>{ const r=v.slice(); r.lang=P.lang; return r; });
 }
+function isMix(){ return pCat==='mix' || pCat==='mixnew'; }
 function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]} return a }
 function buildDeck(){
   const p=pool();
@@ -1301,8 +1378,8 @@ function paintChips(){
   const chips=document.querySelectorAll("#v-practice .chips")[1];
   if(!chips) return;
   [...chips.children].forEach(b=>b.classList.remove("on"));
-  const map={all:0,star:1,new:2};
-  const idx = map[pCat]!==undefined ? map[pCat] : 3+CATS.findIndex(c=>c[0]===pCat);
+  const map={mix:0,mixnew:1,all:2,star:3,new:4};
+  const idx = map[pCat]!==undefined ? map[pCat] : 5+CATS.findIndex(c=>c[0]===pCat);
   if(chips.children[idx]) chips.children[idx].classList.add("on");
   const m=document.querySelectorAll("#v-practice .chips")[0];
   [...m.children].forEach((b,n)=>b.classList.toggle("on", n===(mode==='fc'?0:mode==='qz'?1:2)));
@@ -1310,24 +1387,24 @@ function paintChips(){
 function renderCard(){
   const v=deck[di];
   document.getElementById("parea").innerHTML=`
-  <p class="muted" style="font-size:13.5px">Card ${di+1} of ${deck.length} · tap the card to flip${P.autoplay?" · audio plays automatically":""}</p>
+  <p class="muted" style="font-size:13.5px">Card ${di+1} of ${deck.length}${isMix()?` · ${LANGS[v.lang].flag} ${LANGS[v.lang].name}`:""} · tap the card to flip${P.autoplay?" · audio plays automatically":""}</p>
   <div class="bar"><i style="width:${(di)/deck.length*100}%"></i></div>
   <div class="fc" onclick="flipped=!flipped;renderCard()">
     ${flipped?`<div class="big">${v[2]}</div><div class="sub"><span class="say">${v[1]}</span></div>
       ${v[4]?`<div class="sub muted" style="margin-top:14px"><i class="fr">${v[4]}</i><br>${v[5]}</div>`:""}
       ${v[6]?`<div class="tip" style="margin-top:10px">💡 ${v[6]}</div>`:""}`
-     :`<div class="big">${v[0]}</div><div class="sub muted">tap to reveal</div>`}
+     :`${isMix()?`<div style="font-size:27px;line-height:1;margin-bottom:10px">${LANGS[v.lang].flag}</div>`:""}<div class="big">${v[0]}</div><div class="sub muted">tap to reveal</div>`}
   </div>
   <div class="row" style="margin-top:14px">
-    <button class="btn ghost" onclick="event.stopPropagation();speak('${escq(v[0])}')">🔊 Hear it</button>
+    <button class="btn ghost" onclick="event.stopPropagation();speak('${escq(v[0])}','${v.lang}')">🔊 Hear it</button>
     <button class="btn ghost" onclick="di=Math.max(0,di-1);flipped=false;renderCard()">← Back</button>
-    <button class="btn ghost" onclick="toggleKnown2('${escq(v[0])}')">${S.known[v[0]]?"✓ Known":"Mark known"}</button>
-    <button class="btn ghost" onclick="S.starred['${escq(v[0])}']=!S.starred['${escq(v[0])}'];save();renderCard()">${S.starred[v[0]]?"★ Starred":"☆ Star it"}</button>
+    <button class="btn ghost" onclick="toggleKnown2('${escq(v[0])}','${v.lang}')">${isKnownIn(v.lang,v[0])?"✓ Known":"Mark known"}</button>
+    <button class="btn ghost" onclick="setFlagIn('${v.lang}','starred','${escq(v[0])}',${!isStarredIn(v.lang,v[0])});renderCard()">${isStarredIn(v.lang,v[0])?"★ Starred":"☆ Star it"}</button>
     <button class="btn" onclick="di=(di+1)%deck.length;flipped=false;renderCard()">Next →</button>
   </div>`;
-  if(P.autoplay && !flipped) speak(v[0]);
+  if(P.autoplay && !flipped) speak(v[0], v.lang);
 }
-function toggleKnown2(w){ S.known[w]=!S.known[w]; save(); renderCard(); }
+function toggleKnown2(w, code){ setFlagIn(code||P.lang, "known", w, !isKnownIn(code||P.lang, w)); renderCard(); }
 function renderPQ(){
   const {qs,i,score}=PQ;
   if(i>=qs.length){
@@ -1339,23 +1416,25 @@ function renderPQ(){
     return;
   }
   const q=qs[i];
-  const wrong=shuffle(PQ.pool.filter(v=>v[0]!==q[0]&&v[2]!==q[2])).slice(0,3);
+  const sameLang=PQ.pool.filter(v=>v.lang===q.lang);
+  const wrong=shuffle((sameLang.length>=4?sameLang:PQ.pool).filter(v=>v[0]!==q[0]&&v[2]!==q[2])).slice(0,3);
   const opts=shuffle([q,...wrong]);
   PQ.opts=opts; PQ.right=opts.indexOf(q);
   document.getElementById("parea").innerHTML=`
-  <p class="muted" style="font-size:13.5px">Question ${i+1} of ${qs.length} · score ${score}</p>
+  <p class="muted" style="font-size:13.5px">Question ${i+1} of ${qs.length} · score ${score}${isMix()?` · ${LANGS[q.lang].flag} ${LANGS[q.lang].name}`:""}</p>
   <div class="bar"><i style="width:${i/qs.length*100}%"></i></div>
   <div class="card" style="text-align:center;padding:26px">
+    ${isMix()?`<div style="font-size:24px;line-height:1;margin-bottom:8px">${LANGS[q.lang].flag}</div>`:""}
     <div style="font-family:Georgia,serif;font-size:29px;color:var(--blue)">${q[0]}</div>
-    <button class="btn ghost sm" style="margin-top:12px" onclick="speak('${escq(q[0])}')">🔊 Hear it</button>
+    <button class="btn ghost sm" style="margin-top:12px" onclick="speak('${escq(q[0])}','${q.lang}')">🔊 Hear it</button>
   </div>
   <div id="popts" style="margin-top:14px">${opts.map((o,n)=>`<button class="q-opt" onclick="pAnswer(${n})">${o[2]}</button>`).join("")}</div>
   <div id="pfb"></div>`;
-  if(P.autoplay) speak(q[0]);
+  if(P.autoplay) speak(q[0], q.lang);
 }
 function pAnswer(n){
   const right=n===PQ.right, q=PQ.qs[PQ.i];
-  if(right)PQ.score++; else S.starred[q[0]]=true, save();
+  if(right) PQ.score++; else setFlagIn(q.lang,"starred",q[0],true);
   document.querySelectorAll("#popts .q-opt").forEach((b,idx)=>{b.onclick=null;
     if(idx===PQ.right)b.classList.add("right"); else if(idx===n)b.classList.add("wrong")});
   document.getElementById("pfb").innerHTML=
