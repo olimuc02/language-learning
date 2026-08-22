@@ -192,6 +192,18 @@ tr:last-child td{border-bottom:0}
 .timer .tx{position:absolute;top:8px;right:11px;background:none;border:0;color:var(--muted);font-size:19px;line-height:1;padding:3px 6px}
 .timer .mini-note{font-size:12px;color:var(--muted);text-align:center;margin:9px 0 0}
 
+/* ---------- one-tap language bar ---------- */
+.langbar{max-width:1080px;margin:0 auto;padding:0 20px 9px;display:flex;gap:6px;
+  overflow-x:auto;scrollbar-width:none}
+.langbar::-webkit-scrollbar{display:none}
+.lchip{flex:0 0 auto;display:flex;align-items:center;gap:6px;border:1px solid var(--line);
+  background:var(--card);border-radius:999px;padding:5px 11px;font-size:13px;font-weight:700;
+  color:var(--muted);line-height:1.4}
+.lchip .lc-flag{font-size:17px;line-height:1}
+.lchip.on{background:var(--blue);border-color:var(--blue);color:#fff}
+.lchip.more{font-size:15px;padding:5px 13px;letter-spacing:.06em}
+.lchip:active{transform:scale(.94)}
+
 /* ---------- daily tracker ---------- */
 .dhead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:8px}
 .dbig{font-family:Georgia,serif;font-size:31px;color:var(--blue);line-height:1}
@@ -259,10 +271,14 @@ tr:last-child td{border-bottom:0}
   .top{border-bottom:1px solid var(--line)}
   .top-in{padding:10px 14px;gap:8px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
   .top-in::-webkit-scrollbar{display:none}
-  .brand{margin-right:6px;flex:0 0 auto}
-  .brand h1{font-size:16px}
-  .brand small{font-size:10px}
-  .flag{width:22px;height:15px}
+  .brand{margin-right:4px;flex:0 0 auto;padding:3px 6px 3px 3px;gap:7px}
+  .brand b{font-size:15px}
+  .brand small{font-size:9.5px}
+  .lflag{font-size:20px}
+  .lchev{font-size:13px}
+  .langbar{padding:0 12px 9px;gap:7px}
+  .lchip{padding:8px 13px;font-size:13.5px}
+  .lchip .lc-flag{font-size:19px}
   .pill{padding:5px 10px;font-size:11.5px;flex:0 0 auto;white-space:nowrap}
   .pill.hide-phone{display:none}
   #syncpill b{display:none}
@@ -380,6 +396,7 @@ tr:last-child td{border-bottom:0}
     <div class="pill hide-phone">📚 <b id="p-words">0</b> words</div>
     <button class="pill" id="syncpill" onclick="go('progress')"><span id="syncdot">🔄</span> <b id="syncstate">…</b></button>
   </div>
+  <div class="langbar" id="langbar"></div>
   <nav id="nav"></nav>
 </header>
 
@@ -445,11 +462,12 @@ const LANGS = {
        data:()=>({sets:EN_SETS, lessons:EN_LESSONS, vocab:EN_VOCAB,
                   cats:EN_CATS, guides:EN_GUIDES}) },
 
-  pt:{ code:"pt", name:"Portuguese", flag:"🇧🇷", mode:"drill", tts:"pt-BR",
+  pt:{ code:"pt", name:"Portuguese", flag:"🇧🇷", mode:"course", tts:"pt-BR",
        nice:["luciana","felipe","joana","ricardo"],
-       tagline:"Brazilian, from zero",
-       blurb:"Brazilian Portuguese from scratch — sounds first, and slang from set three rather than year three.",
-       data:()=>({sets:PT_SETS, lessons:PT_LESSONS, vocab:PT_VOCAB,
+       tagline:"90-day Brazilian course",
+       blurb:"Brazilian Portuguese from scratch — sounds first, and slang from week one rather than year three.",
+       data:()=>({plan:PT_PLAN, phases:PT_PHASES, weeks:PT_WEEK_GOALS,
+                  lessons:PT_LESSONS, vocab:PT_VOCAB,
                   cats:PT_CATS, guides:PT_GUIDES}) },
   es:{ code:"es", name:"Spanish", flag:"🇪🇸", mode:"soon", tts:"es-ES",
        tagline:"not built yet", blurb:"Say \"start Spanish\" to Claude and I will build the track." },
@@ -558,6 +576,8 @@ function switchLang(code){
   applyLang(code);
   loadVoices();
   closeModal();
+  paintHeader();          // the title, flag and tagline all live here
+  paintLangBar();
   go("today");
   toast(LANGS[code].flag+" Switched to "+LANGS[code].name);
 }
@@ -611,13 +631,22 @@ function langPicker(){
   folder and the track gets written the same way these were.</div>`);
 }
 
+function paintLangBar(){
+  const el=document.getElementById("langbar"); if(!el) return;
+  el.innerHTML = unlockedLangs().map(c=>{
+    const g=LANGS[c], on=c===P.lang;
+    return `<button class="lchip ${on?"on":""}" onclick="switchLang('${c}')" aria-label="${g.name}">
+      <span class="lc-flag">${g.flag}</span>${on?`<span class="lc-name">${g.name}</span>`:""}</button>`;
+  }).join("") + `<button class="lchip more" onclick="langPicker()" aria-label="All languages">⋯</button>`;
+}
+
 function paintHeader(){
   document.getElementById("l-flag").textContent = L.flag;
   document.getElementById("l-name").textContent = L.name;
   document.getElementById("l-tag").innerHTML = L.tagline;
   const u=document.getElementById("p-unit");
   if(u) u.innerHTML = MODE==="course"
-    ? `Day <b id="p-day">${S.currentDay}</b> / 90`
+    ? `Day <b id="p-day">${S.currentDay}</b> / ${PLAN.length}`
     : `<b id="p-day">${doneCount()}</b> / ${totalUnits()} sets`;
   document.getElementById("p-streak").textContent=S.streak||0;
   document.getElementById("p-words").textContent=knownCount();
@@ -736,7 +765,7 @@ function audioHint(){
 /* ============================================================
    NAV
    ============================================================ */
-const VERSION="2.4";
+const VERSION="2.5";
 let CURRENT="today";
 const TABS=[["today","Today","📅"],["plan","Plan","🗺️"],["lessons","Lessons","📖"],["guides","Guides","📋"],["vocab","Words","🔤"],["practice","Practice","🎯"],["progress","Progress","📊"]];
 const nav=document.getElementById("nav");
@@ -750,7 +779,9 @@ paintNav();
 nav.onclick=e=>{ const b=e.target.closest("button"); if(b) go(b.dataset.t) };
 function go(t){
   CURRENT=t;
+  paintHeader();
   paintNav();
+  paintLangBar();
   TABS.forEach(([id])=>{
     document.getElementById("v-"+id).classList.toggle("on",id===t);
     nav.querySelector(`[data-t="${id}"]`).classList.toggle("on",id===t);
@@ -787,7 +818,7 @@ function paintTodayCourse(){
 
   <div class="mini">
     <div class="stat"><b>${doneCount()}</b><span>Days done</span></div>
-    <div class="stat"><b>${Math.round(doneCount()/90*100)}%</b><span>Course complete</span></div>
+    <div class="stat"><b>${Math.round(doneCount()/Math.max(1,PLAN.length)*100)}%</b><span>Course complete</span></div>
     <div class="stat"><b>${knownCount()}</b><span>Words learned</span></div>
     <div class="stat"><b>${S.streak||0}</b><span>Day streak</span></div>
   </div>
@@ -802,7 +833,7 @@ function paintTodayCourse(){
   </div>
 
   ${blocksCard()}
-  ${claudeCard(`"Continue my French course"`, `"Teach me Day ${d}"`, "French", d)}`;
+  ${claudeCard(`"Continue my ${L.name} course"`, `"Teach me ${L.name} Day ${d}"`, L.name, d)}`;
 }
 
 /* ---------- a language you already speak (Polish, English) ---------- */
@@ -996,7 +1027,7 @@ function paintPlanCourse(){
   h+=`<div class="card" style="margin-top:22px"><h3>All 90 days at a glance</h3>
     <p class="muted" style="font-size:14px;margin:4px 0 12px">Green = done · blue ring = where you are · gold dot = checkpoint or exam</p>
     <div class="days">${PLAN.map(r=>{
-      const d=r[0], chk=/Checkpoint|EXAM|exam/.test(r[1]);
+      const d=r[0], chk=/Checkpoint|EXAM|exam|EXAME|Exame/.test(r[1]);
       return `<button class="day ${S.completed[d]?'done':''} ${d===S.currentDay?'now':''} ${chk?'chk':''}" onclick="dayModal(${d})">${d}</button>`;
     }).join("")}</div></div>
 
@@ -1030,7 +1061,7 @@ function paintLessons(){
   const ids=Object.keys(LESSONS).map(Number).sort((a,b)=>a-b);
   document.getElementById("v-lessons").innerHTML=`
   <h2 style="margin-bottom:6px">Lesson Archive</h2>
-  <p class="muted" style="margin-top:0">Every lesson you've been taught, saved in full. Re-read any of them any time — repetition is how this sticks.</p>
+  <p class="muted" style="margin-top:0">Every ${L.name} lesson you've been taught, saved in full. Re-read any of them any time — repetition is how this sticks.</p>
   ${ids.length?`<div class="g-list">${ids.map(d=>{
     const l=LESSONS[d], done=S.completed[d], q=S.quiz[d];
     const hw=(l.homework||[]).length, hwd=(l.homework||[]).filter((_,i)=>S.hw[d+"-"+i]).length;
@@ -1252,7 +1283,7 @@ function paintVocab(){
   });
   document.getElementById("v-vocab").innerHTML=`
   <h2 style="margin-bottom:6px">Vocabulary</h2>
-  <p class="muted" style="margin-top:0">${VOCAB.length} words and phrases, ordered by how useful they actually are. Tap a card to <b>hear it</b>; use ✓ to mark it known and ★ to send it to your drill deck.</p>
+  <p class="muted" style="margin-top:0">${VOCAB.length} ${L.name} words and phrases, ordered by how useful they actually are. Tap a card to <b>hear it</b>; use ✓ to mark it known and ★ to send it to your drill deck.</p>
   ${audioHint()}
   <input type="search" id="vs" placeholder="Search French or English…" value="${esc(vQ)}">
   <div class="chips">
@@ -1513,7 +1544,7 @@ function paintProgress(){
     <div class="eyebrow">Vocabulary target</div>
     <div class="bar" style="height:12px"><i style="width:${Math.min(100,knownCount()/target*100)}%"></i></div>
     <p class="muted" style="margin:6px 0 0;font-size:14px">${MODE==="course"
-      ? `${knownCount()} known · target for Day ${S.currentDay} is about ${target}. Milestones: 150 by Day 21 · 600 by Day 45 · 1,100 by Day 66 · 1,600 by Day 90.<br>1,000 words covers roughly 80% of everyday spoken French.`
+      ? `${knownCount()} known · target for Day ${S.currentDay} is about ${target}. Milestones: 150 by Day 21 · 600 by Day 45 · 1,100 by Day 66 · 1,600 by Day 90.<br>1,000 words covers roughly 80% of everyday spoken ${L.name}.`
       : `${knownCount()} of ${VOCAB.length} words in this track marked as owned. Mark a word known only when you could produce it, not just recognise it.`}</p>
   </div>
 
@@ -1925,7 +1956,7 @@ function installApp(){
 }
 
 /* boot */
-paintHeader(); paintTimer(); go("today"); startSync();
+paintHeader(); paintLangBar(); paintTimer(); go("today"); startSync();
 </script>
 </body>
 </html>

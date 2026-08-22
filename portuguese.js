@@ -888,3 +888,134 @@ quiz:[
  {t:"listen", play:"Tô cansado, vou dormir.", q:"Listen. What is being said?", a:["I'm tired, I'm going to sleep.","I'm hungry, I'm going to eat.","I'm late, I'm going to run.","I'm bored, I'm going home."], c:0, why:"<b>Tô cansado, vou dormir.</b> — contraction plus ir + infinitive, both very Brazilian."}
 ]
 };
+
+/* ============================================================
+   THE 90-DAY BRAZILIAN PORTUGUESE PLAN
+   Same shape as the French course. Slang is woven through the
+   whole thing rather than saved for an "advanced" phase.
+   ============================================================ */
+const PT_PHASES = [
+  {n:1, days:[1,21],  name:"Sons e Sobrevivência",  goal:"Stop reading Portuguese as if it were Spanish, and survive a first meeting.", tag:"t-blue"},
+  {n:2, days:[22,45], name:"Na Rua",                goal:"Eat, pay, travel and ask for help without English.", tag:"t-gold"},
+  {n:3, days:[46,66], name:"Passado e Futuro",      goal:"Escape the present tense and start telling stories.", tag:"t-red"},
+  {n:4, days:[67,90], name:"Opinião e Conversa",    goal:"Hold your end of a real Brazilian conversation.", tag:"t-green"},
+];
+
+const PT_WEEK_GOALS = {
+ 1:{t:"Sounds and hellos",       g:"Be understood, and greet anyone appropriately.", m:"Say a 30-second self-introduction out loud without reading it."},
+ 2:{t:"Ser, estar, ter",         g:"Use both verbs for 'to be' without thinking.", m:"Ten sentences alternating ser and estar, correctly, at speed."},
+ 3:{t:"Doing things",            g:"Describe an ordinary day.", m:"Speak for 60 seconds about your routine, unscripted."},
+ 4:{t:"Food and restaurants",    g:"Order a full meal and pay.", m:"Role-play a restaurant scene with a fast-talking waiter."},
+ 5:{t:"Money and shopping",      g:"Buy things and understand the price.", m:"Handle a 15-exchange shopping role-play in reais."},
+ 6:{t:"Getting around",          g:"Navigate a Brazilian city.", m:"Give directions from your hotel to the beach, in Portuguese."},
+ 7:{t:"The past tense",          g:"Say what you did yesterday.", m:"Tell a 5-sentence story about last Saturday."},
+ 8:{t:"The imperfect",           g:"Describe how things used to be.", m:"Full A1 exam — vocabulary, grammar, listening, a 60-word text."},
+ 9:{t:"Pronouns and the future", g:"Talk about plans without repeating nouns.", m:"Describe next month in 8 sentences using pronouns."},
+10:{t:"Opinions and connectors", g:"Give an opinion and defend it.", m:"Argue one side of a light debate for 2 minutes."},
+11:{t:"Health and problems",     g:"Get help when something goes wrong.", m:"Pharmacy and police role-play, unscripted."},
+12:{t:"Register and nuance",     g:"Switch between formal and street Portuguese.", m:"One formal phone call, one casual papo with a friend."},
+13:{t:"Final exams",             g:"Prove the 90 days worked.", m:"15-minute unscripted oral exam, graded honestly."},
+};
+
+const PT_PLAN = [
+ [1,"Sons do português","The five rules that make you understandable. R as H, di/ti, final vowels, nasals, lh/nh."],
+ [2,"O essencial","Oi, tudo bem, obrigado — and the gender rule that catches everyone."],
+ [3,"Eu sou, você é","Ser for identity: name, nationality, job."],
+ [4,"Números 0 a 20, idade","Counting, age, and phone numbers Brazilian-style."],
+ [5,"O, a, um, uma","Gender and articles — far more predictable than French."],
+ [6,"Gíria brasileira","E aí, beleza, valeu, né. How people actually talk."],
+ [7,"Revisão + Checkpoint 1","Week 1, tested four ways."],
+ [8,"Estar — estados e lugares","Moods, states, weather, location. And tô."],
+ [9,"Ser vs estar","The distinction that changes what a sentence means."],
+ [10,"Ter — e tem para 'there is'","Possession, and the Brazilian way to say there is."],
+ [11,"Perguntas","Asking questions — and the intonation that does most of the work."],
+ [12,"Não — negação","Negation, and the double negative Brazilians use freely."],
+ [13,"Família e pessoas","Your people, in Portuguese."],
+ [14,"Revisão + Checkpoint 2","Week 2 test."],
+ [15,"Verbos -ar","One pattern unlocks hundreds of verbs."],
+ [16,"Verbos -er e -ir","The other two families."],
+ [17,"Ir + infinitivo","The easy future. Vou fazer, vamos ver."],
+ [18,"Dias, meses, horas","Scheduling anything."],
+ [19,"Sua rotina","Reflexive verbs, gently. Me levanto, me deito."],
+ [20,"Conversa: um dia normal","Describe your whole day out loud."],
+ [21,"Revisão + EXAME DA FASE 1","Three weeks, one test."],
+ [22,"No restaurante","Eu queria — the single most useful phrase for a traveller."],
+ [23,"O cardápio","Reading a Brazilian menu, and the false friends on it."],
+ [24,"Comida brasileira","Feijoada, pão de queijo, açaí — the forty foods you will meet."],
+ [25,"A conta, gorjeta, dividir","Ending a meal without awkwardness."],
+ [26,"No bar","Cerveja gelada, chope, caipirinha, petiscos."],
+ [27,"Conversa: uma noite no restaurante","Arrive, order, complain, pay, leave."],
+ [28,"Revisão + Checkpoint 4","Week 4 test."],
+ [29,"Números 20 a 1000, reais","Prices, and understanding them said fast."],
+ [30,"Quanto custa?","Asking, understanding the answer, paying."],
+ [31,"Cores, tamanhos, roupas","Describing what you want."],
+ [32,"Provar, trocar, devolver","Fitting rooms, exchanges, returns."],
+ [33,"Na feira e na padaria","Markets, quantities, and haggling politely."],
+ [34,"Conversa: um dia de compras","Three shops, three different tones."],
+ [35,"Revisão + Checkpoint 5","Week 5 test."],
+ [36,"Na rua","Directions, money, transport and getting help."],
+ [37,"Onde fica, onde tem","Prepositions of place, and which verb to use."],
+ [38,"Transporte","Ônibus, metrô, Uber, rodoviária, aeroporto."],
+ [39,"No hotel","Check-in, keys, wifi, and 'the shower is broken'."],
+ [40,"Pedindo ajuda","Com licença — the phrases that open doors."],
+ [41,"Conversa: chegando numa cidade nova","Airport to hotel to dinner, all in Portuguese."],
+ [42,"Revisão + Checkpoint 6","Week 6 test."],
+ [43,"Exame da Fase 2: escuta e leitura","Menus, signs, announcements."],
+ [44,"Exame da Fase 2: escrita","A 60-word message to a hotel."],
+ [45,"Primeiro dia só em português","I speak Portuguese. English only if you are truly stuck."],
+ [46,"O pretérito perfeito","The past tense: falei, comi, parti."],
+ [47,"Irregulares no passado","The twenty that break the pattern."],
+ [48,"Ser, ir, ter, fazer no passado","Fui, fui, tive, fiz — including the one that does double duty."],
+ [49,"Negativas e perguntas no passado","Where does 'não' go now?"],
+ [50,"Ontem, semana passada","Anchoring a story in time."],
+ [51,"Conversa: o que eu fiz no fim de semana","Your first real storytelling."],
+ [52,"Revisão + Checkpoint 7","Week 7 test."],
+ [53,"O imperfeito","One ending set, almost no exceptions."],
+ [54,"Descrições e costumes","Quando eu era criança…"],
+ [55,"Perfeito vs imperfeito","The rule that works: photo versus film."],
+ [56,"Contando uma história","Background and events together."],
+ [57,"Infância e memórias","Growing up, school, places you lived."],
+ [58,"Conversa: como eu cresci","Ten minutes, mostly Portuguese."],
+ [59,"Revisão + CHECKPOINT 8 = EXAME A1","The real milestone. 75% confirms A1."],
+ [60,"Pronomes: me, te, o, a","Stop repeating nouns."],
+ [61,"Pronomes indiretos","Lhe, nos — and where Brazilians actually put them."],
+ [62,"Isso, isto, aquilo","Pointing at things precisely."],
+ [63,"Futuro com ir, revisitado","The future you will actually use."],
+ [64,"Futuro simples","Farei, comerei — for writing and emphasis."],
+ [65,"Conversa: seus planos e seu trabalho","Work vocabulary in a real conversation."],
+ [66,"Revisão + Checkpoint 9","Week 9 test."],
+ [67,"Eu acho que…","Giving opinions, and five softer alternatives."],
+ [68,"Porque, mas, então","How sentences get longer than five words."],
+ [69,"Concordar e discordar","Agreeing and disagreeing, politely and less politely."],
+ [70,"Comparações","Mais, menos, tão quanto."],
+ [71,"Superlativos e reações","Nossa, que absurdo — how Brazilians react."],
+ [72,"Conversa: um debate leve","Pick a side and defend it."],
+ [73,"Revisão + Checkpoint 10","Week 10 test."],
+ [74,"O corpo e onde dói","Estou com dor de…"],
+ [75,"Na farmácia","The Brazilian pharmacy does more than you expect."],
+ [76,"No médico","Symptoms, history, instructions."],
+ [77,"Emergências","Polícia, roubo, documentos perdidos. 190, 192, 193."],
+ [78,"Reclamando com jeitinho","Complaining the Brazilian way."],
+ [79,"Conversa: um dia ruim no Rio","Everything goes wrong. In Portuguese."],
+ [80,"Revisão + Checkpoint 11","Week 11 test."],
+ [81,"Você poderia? — o condicional","Politeness as a verb form."],
+ [82,"Precisa, tem que, deve","Obligation."],
+ [83,"Subjuntivo, devagar","Just the phrases that trigger it."],
+ [84,"Senhor, você, gíria pesada","Register — the thing textbooks skip."],
+ [85,"Ligações e mensagens","Phone calls, WhatsApp, and how Brazilians actually message."],
+ [86,"Conversa: uma ligação formal e um papo","Same content, two registers."],
+ [87,"Revisão + Checkpoint 12","Week 12 test."],
+ [88,"EXAME FINAL: escuta e leitura","Real Portuguese, at real speed."],
+ [89,"EXAME FINAL: escrita","150 words about your life."],
+ [90,"EXAME ORAL FINAL","15 unscripted minutes. Honest grade at the end."],
+];
+
+/* the six written lessons sit at their natural places in the plan */
+(function placeLessons(){
+  const map={1:1, 2:2, 3:6, 4:22, 5:36, 6:9};
+  const moved={};
+  Object.keys(PT_LESSONS).forEach(k=>{ moved[map[k]||k]=PT_LESSONS[k]; });
+  Object.keys(PT_LESSONS).forEach(k=>delete PT_LESSONS[k]);
+  Object.assign(PT_LESSONS, moved);
+  PT_LESSONS[7]  = undefined; delete PT_LESSONS[7];
+})();

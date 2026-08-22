@@ -114,18 +114,35 @@ Brazilian Portuguese and Polish especially.
 - 🇵🇱 Polish: Set 5 *Potoczny polski* already covers this; expand as sets are added
 - 🇧🇷 Portuguese: **done** — gíria set plus a slang study guide, contractions and né? taught early
 
-## 🇧🇷 Brazilian Portuguese — from zero
+## 🇧🇷 Brazilian Portuguese — 90-day course
 
-Live as of 2026-08-21. Ordered drill sets rather than a 90-day plan, so it can run alongside
-French. 119 words, 5 guides, 6 sets, 69 questions. Slang is built in from set 3, not deferred.
+**Current day:** 1. Same structure as French: 4 phases, 13 weeks, checkpoints, phase exams,
+final oral exam on Day 90. 119 words, 5 guides, 69 questions written so far.
 Voice: **Luciana** (pt_BR) is installed.
 
-1. Sons do português — the five pronunciation rules (R=H, di/ti→ji/chi, final -o/-e, nasals, lh/nh)
-2. O essencial — greetings, courtesy, introductions
-3. Gíria brasileira — slang, contractions, né?, saudade
-4. Comida e restaurante
-5. Na rua — directions, money, emergencies
-6. Ser, estar e os verbos
+| Phase | Days | Focus |
+|---|---|---|
+| 1 | 1–21 | Sons e Sobrevivência |
+| 2 | 22–45 | Na Rua |
+| 3 | 46–66 | Passado e Futuro |
+| 4 | 67–90 | Opinião e Conversa |
+
+Six lessons written, placed at their natural days:
+
+| Day | Lesson |
+|---|---|
+| 1 | Sons do português — the five pronunciation rules |
+| 2 | O essencial — greetings, courtesy, introductions |
+| 6 | Gíria brasileira — slang, contractions, né?, saudade |
+| 9 | Ser vs estar |
+| 22 | No restaurante |
+| 36 | Na rua |
+
+**Next to write:** Day 3 — Eu sou, você é.
+
+Slang is woven through the whole plan, not deferred to an advanced phase — gíria lands
+on Day 6, week one. Nasal vowels overlap directly with French (pão / pain), so the two
+courses reinforce each other.
 
 Nasal vowels overlap directly with French (pão / pain), so the two reinforce each other.
 

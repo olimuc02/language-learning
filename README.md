@@ -6,7 +6,7 @@ Tap the flag in the top-left to switch.
 | Track | Mode | What it is |
 |---|---|---|
 | 🇫🇷 **French** | 90-day course | From zero. Structured plan, phases, checkpoints. |
-| 🇧🇷 **Portuguese** | training sets | Brazilian, from zero. Sounds first, slang from set three. |
+| 🇧🇷 **Portuguese** | 90-day course | Brazilian, from zero. Same structure as French — phases, checkpoints, final oral exam. Slang from week one. |
 | 🇵🇱 **Polish** | training sets | You already speak it — precision, idiom, register, and the grammar fluent speakers fumble. |
 | 🇬🇧 **English** | training sets | Precision vocabulary, rhetoric, confusables, Latin and French borrowings. |
 | 🇪🇸🇩🇪 | not built | Say "start Spanish" or "start German" and the track gets written. |
