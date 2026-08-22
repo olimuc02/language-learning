@@ -270,23 +270,30 @@ tr:last-child td{border-bottom:0}
    PHONE — bottom tab bar, full-screen sheets, thumb-sized targets
    ============================================================ */
 @media(max-width:700px){
-  /* --- header: everything fits, nothing scrolls sideways --- */
+  /* --- header: language row on top, a quiet stat line under it --- */
   .topwrap{background:var(--bg)}
-  .top{border-bottom:1px solid var(--line);background:var(--bg);backdrop-filter:none}
-  .top-in{padding:7px 11px 5px;gap:5px;flex-wrap:nowrap;overflow:visible;
-          justify-content:space-between;align-items:center}
-  /* the flag row below already names the language, so the title button is redundant here */
+  .top{border-bottom:1px solid var(--line);background:var(--bg);backdrop-filter:none;
+       display:flex;flex-direction:column}
+  .langbar{order:1;padding:9px 12px 0;gap:6px}
+  .top-in{order:2;padding:8px 13px 9px;gap:0;flex-wrap:nowrap;overflow:visible;
+          justify-content:flex-start;align-items:center}
+  /* the flag row names the language, so the title button is redundant on a phone */
   .brand{display:none}
-  .pill{padding:5px 9px;font-size:12px;flex:0 1 auto;min-width:0;white-space:nowrap;
-        justify-content:center;gap:3px}
-  .pill .lbl{display:none}          /* "day streak", "words" — the icons say it */
-  .pill.hide-phone{display:flex}
-  #syncpill{flex:0 0 auto;padding:5px 9px}
+
+  /* stats become one typographic line, not four floating bubbles */
+  .pill{background:none;border:0;padding:0;font-size:12.5px;font-weight:600;
+        color:var(--muted);white-space:nowrap;flex:0 0 auto;gap:4px}
+  .pill .lbl{display:inline}
+  .pill + .pill:not(#syncpill)::before{content:"";display:inline-block;width:3px;height:3px;
+        border-radius:50%;background:var(--line);margin:0 9px 2px}
+  .pdim{color:var(--muted);opacity:.7}
+  #syncpill{margin-left:auto;font-size:14px;opacity:.5;padding:0 2px}
   #syncpill b{display:none}
-  .langbar{padding:0 11px 7px;gap:5px}
-  .lchip{padding:6px 10px;font-size:12.5px;gap:5px}
+
+  /* the flags read as one segmented control */
+  .lchip{padding:7px 11px;font-size:12.5px;gap:6px;height:34px;border-radius:17px}
   .lchip .lc-flag{font-size:17px}
-  .lchip.more{padding:6px 11px}
+  .lchip.more{padding:7px 12px;letter-spacing:.1em}
 
   /* --- nav becomes a bottom tab bar --- */
   nav{position:fixed;left:0;right:0;bottom:0;z-index:90;display:flex;padding:0;
@@ -775,9 +782,9 @@ function audioHint(){
 /* ============================================================
    NAV
    ============================================================ */
-const VERSION="2.7";
+const VERSION="2.8";
 let CURRENT="today";
-const TABS=[["today","Today","📅"],["plan","Plan","🗺️"],["lessons","Lessons","📖"],["guides","Guides","📋"],["vocab","Words","🔤"],["practice","Practice","🎯"],["progress","Progress","📊"]];
+const TABS=[["today","Today","📅"],["plan","Plan","🗺️"],["lessons","Lessons","📖"],["guides","Guides","📋"],["vocab","Words","🔤"],["practice","Practice","🎯"],["progress","Stats","📊"]];
 const nav=document.getElementById("nav");
 function paintNav(){
   nav.innerHTML=TABS.map(([id,l,ic])=>{
