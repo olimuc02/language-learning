@@ -412,6 +412,7 @@ tr:last-child td{border-bottom:0}
 <script src="lessons.js"></script>
 <script src="polish.js"></script>
 <script src="english.js"></script>
+<script src="portuguese.js"></script>
 <script src="sync.js"></script>
 <script>
 /* ============================================================
@@ -444,14 +445,18 @@ const LANGS = {
        data:()=>({sets:EN_SETS, lessons:EN_LESSONS, vocab:EN_VOCAB,
                   cats:EN_CATS, guides:EN_GUIDES}) },
 
-  pt:{ code:"pt", name:"Portuguese", flag:"🇧🇷", mode:"soon", tts:"pt-BR",
-       tagline:"after French", blurb:"Brazilian Portuguese. French does most of the heavy lifting, so this one goes much faster." },
+  pt:{ code:"pt", name:"Portuguese", flag:"🇧🇷", mode:"drill", tts:"pt-BR",
+       nice:["luciana","felipe","joana","ricardo"],
+       tagline:"Brazilian, from zero",
+       blurb:"Brazilian Portuguese from scratch — sounds first, and slang from set three rather than year three.",
+       data:()=>({sets:PT_SETS, lessons:PT_LESSONS, vocab:PT_VOCAB,
+                  cats:PT_CATS, guides:PT_GUIDES}) },
   es:{ code:"es", name:"Spanish", flag:"🇪🇸", mode:"soon", tts:"es-ES",
-       tagline:"after Portuguese", blurb:"Easier pronunciation than either, and you will already know the grammar shapes." },
+       tagline:"not built yet", blurb:"Say \"start Spanish\" to Claude and I will build the track." },
   de:{ code:"de", name:"German", flag:"🇩🇪", mode:"soon", tts:"de-DE",
-       tagline:"last", blurb:"A different family, so a fresh start — but by then you will know how to learn a language." },
+       tagline:"not built yet", blurb:"Say \"start German\" to Claude and I will build the track." },
 };
-const LANG_ORDER = ["fr","pl","en","pt","es","de"];
+const LANG_ORDER = ["fr","pt","pl","en","es","de"];
 
 /* the active language's content, swapped in by applyLang() */
 let L, MODE, PLAN, PHASES, WEEK_GOALS, LESSONS, VOCAB, CATS, GUIDES, SETS;
@@ -592,18 +597,18 @@ function langPicker(){
   ${LANG_ORDER.map(c=>{
     const g=LANGS[c], st=langStat(c), on=c===P.lang, soon=g.mode==="soon";
     return `<button class="lrow ${on?"on":""} ${soon?"soon":""}"
-      onclick="${soon?`alert('${g.name} is queued up — we start it once French is done. Two half-learned languages are worth less than one usable one.')`:`switchLang('${c}')`}">
+      onclick="${soon?`alert('${g.name} is not built yet.\\n\\nOpen Claude Code in this folder and say: start ${g.name}')`:`switchLang('${c}')`}">
       <span class="lf">${g.flag}</span>
       <span><h4>${g.name}${on?' <span class="tag t-green" style="margin-left:5px">active</span>':""}</h4>
       <p>${g.blurb}</p></span>
-      <span class="lstat">${soon?'<span class="tag t-gold">soon</span>':
+      <span class="lstat">${soon?'<span class="tag t-gold">not built</span>':
         `<b style="font-family:Georgia,serif;font-size:19px;color:var(--blue)">${st.done}</b>
          <div class="muted" style="font-size:11px;text-transform:uppercase;letter-spacing:.06em">${g.mode==="course"?"days":"sets"}</div>`}</span>
     </button>`;
   }).join("")}
-  <div class="box blue" style="margin-top:6px"><b>Why the last three are locked</b>
-  Portuguese, Spanish and German start once French reaches Day 90. Running two beginner courses at once
-  halves the progress on both — and Portuguese and Spanish get dramatically easier once French is in place.</div>`);
+  <div class="box blue" style="margin-top:6px"><b>Adding a language</b>
+  Spanish and German aren't built yet. Say <b>"start Spanish"</b> or <b>"start German"</b> to Claude in this
+  folder and the track gets written the same way these were.</div>`);
 }
 
 function paintHeader(){
@@ -731,7 +736,7 @@ function audioHint(){
 /* ============================================================
    NAV
    ============================================================ */
-const VERSION="2.3";
+const VERSION="2.4";
 let CURRENT="today";
 const TABS=[["today","Today","📅"],["plan","Plan","🗺️"],["lessons","Lessons","📖"],["guides","Guides","📋"],["vocab","Words","🔤"],["practice","Practice","🎯"],["progress","Progress","📊"]];
 const nav=document.getElementById("nav");

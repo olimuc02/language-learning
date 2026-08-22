@@ -112,11 +112,26 @@ Brazilian Portuguese and Polish especially.
 
 - 🇫🇷 French: **Argot** study guide added (verlan, fillers, texting, swearing with register warnings)
 - 🇵🇱 Polish: Set 5 *Potoczny polski* already covers this; expand as sets are added
-- 🇧🇷 Portuguese: build colloquial content in from the first set, not bolted on later
+- 🇧🇷 Portuguese: **done** — gíria set plus a slang study guide, contractions and né? taught early
+
+## 🇧🇷 Brazilian Portuguese — from zero
+
+Live as of 2026-08-21. Ordered drill sets rather than a 90-day plan, so it can run alongside
+French. 119 words, 5 guides, 6 sets, 69 questions. Slang is built in from set 3, not deferred.
+Voice: **Luciana** (pt_BR) is installed.
+
+1. Sons do português — the five pronunciation rules (R=H, di/ti→ji/chi, final -o/-e, nasals, lh/nh)
+2. O essencial — greetings, courtesy, introductions
+3. Gíria brasileira — slang, contractions, né?, saudade
+4. Comida e restaurante
+5. Na rua — directions, money, emergencies
+6. Ser, estar e os verbos
+
+Nasal vowels overlap directly with French (pão / pain), so the two reinforce each other.
 
 ## Queued
 
-Portuguese → Spanish → German, each starting once French reaches Day 90.
+Spanish and German are in the picker but unbuilt. Oliver picks what he works on — no gating.
 
 ---
 

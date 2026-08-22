@@ -6,9 +6,10 @@ Tap the flag in the top-left to switch.
 | Track | Mode | What it is |
 |---|---|---|
 | 🇫🇷 **French** | 90-day course | From zero. Structured plan, phases, checkpoints. |
+| 🇧🇷 **Portuguese** | training sets | Brazilian, from zero. Sounds first, slang from set three. |
 | 🇵🇱 **Polish** | training sets | You already speak it — precision, idiom, register, and the grammar fluent speakers fumble. |
 | 🇬🇧 **English** | training sets | Precision vocabulary, rhetoric, confusables, Latin and French borrowings. |
-| 🇧🇷🇪🇸🇩🇪 | queued | Portuguese, Spanish, German — start once French hits Day 90. |
+| 🇪🇸🇩🇪 | not built | Say "start Spanish" or "start German" and the track gets written. |
 
 ## The app
 
@@ -85,6 +86,7 @@ Other things you can say:
 | `lessons.js` | French lessons — body, homework, test questions |
 | `polish.js` | Polish words, guides and training sets |
 | `english.js` | English words, guides and training sets |
+| `portuguese.js` | Brazilian Portuguese words, guides and training sets |
 | `sync.js` | Cross-device sync — the sync code, and the additive merge |
 | `manifest.webmanifest`, `sw.js`, `icon-*.png` | Make it installable on a phone and usable offline |
 
@@ -100,6 +102,6 @@ Other things you can say:
 
 ## After French
 
-Portuguese, Spanish and German are already in the language picker, greyed out. They unlock at French Day 90.
+Portuguese is live. Spanish and German sit in the picker unbuilt — ask and they get written.
 (Portuguese and Spanish get much faster because French does the heavy lifting —
 the three are cousins. German is a fresh start and gets a full 90 days.)
