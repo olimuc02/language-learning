@@ -315,10 +315,12 @@ tr:last-child td{border-bottom:0}
   .hero{padding:17px;border-radius:15px}
   .hero h2{font-size:20px;margin:2px 0 8px}
   .hero p{font-size:14.5px}
-  .hero .row{flex-direction:row;flex-wrap:wrap;gap:8px;margin-top:14px}
-  .hero .row .btn{flex:1 1 calc(50% - 4px);width:auto;text-align:center;
-                  padding:12px 8px;font-size:14px}
-  .hero .row .btn:first-child{flex:1 1 100%;font-size:15px;padding:13px 10px}
+  .hero .row{flex-direction:row;flex-wrap:wrap;gap:8px;margin-top:14px;
+             align-items:stretch}          /* stretch, not centre — equal heights */
+  .hero .row .btn{flex:1 1 0;min-width:0;width:auto;text-align:center;
+                  padding:13px 8px;font-size:14px;line-height:1.25;
+                  display:flex;align-items:center;justify-content:center}
+  .hero .row .btn:first-child{flex:1 1 100%;font-size:15px;padding:14px 10px}
   .mini{grid-template-columns:repeat(2,1fr);gap:9px}
   .stat{padding:12px 13px}
   .stat b{font-size:22px}
@@ -782,7 +784,7 @@ function audioHint(){
 /* ============================================================
    NAV
    ============================================================ */
-const VERSION="2.9";
+const VERSION="3.0";
 let CURRENT="today";
 const TABS=[["today","Today","📅"],["plan","Plan","🗺️"],["lessons","Lessons","📖"],["guides","Guides","📋"],["vocab","Words","🔤"],["practice","Practice","🎯"],["progress","Stats","📊"]];
 const nav=document.getElementById("nav");
@@ -829,7 +831,7 @@ function paintTodayCourse(){
                  :`<button class="btn" onclick="askClaude()">Ask Claude to teach this</button>`}
       ${done?`<button class="btn ghost" onclick="setDay(${d+1})">Go to Day ${d+1} →</button>`
             :`<button class="btn ghost" onclick="markDone(${d})">Mark Day ${d} complete</button>`}
-      <button class="btn ghost" onclick="mixDrill()">🌍 Practice all languages</button>
+      <button class="btn ghost" onclick="mixDrill()">🌍 All languages</button>
     </div>
   </div>
 
@@ -867,7 +869,7 @@ function paintTodayDrill(){
     <p>${next?i.desc:"You have worked through every set. Repeat any of them, or ask Claude for new ones."}</p>
     <div class="row">
       ${next?`<button class="btn" onclick="openLesson(${next})">${S.completed[next]?"Redo this set":"Start this set"}</button>`:""}
-      <button class="btn ghost" onclick="mixDrill()">🌍 Practice all languages</button>
+      <button class="btn ghost" onclick="mixDrill()">🌍 All languages</button>
     </div>
   </div>
 
