@@ -782,7 +782,7 @@ function audioHint(){
 /* ============================================================
    NAV
    ============================================================ */
-const VERSION="2.8";
+const VERSION="2.9";
 let CURRENT="today";
 const TABS=[["today","Today","📅"],["plan","Plan","🗺️"],["lessons","Lessons","📖"],["guides","Guides","📋"],["vocab","Words","🔤"],["practice","Practice","🎯"],["progress","Stats","📊"]];
 const nav=document.getElementById("nav");
@@ -1670,14 +1670,7 @@ function paintProgress(){
     <button class="btn red sm" onclick="if(confirm('Erase all progress? This cannot be undone.')){localStorage.removeItem(KEY);S=blank();save();paintProgress()}">Reset everything</button>
   </div></div>
 
-  <div class="card"><h3>After French</h3>
-  <p style="margin:0 0 8px">Same app, same structure, in this order:</p>
-  <table>
-    <tr><td style="width:180px"><b>Brazilian Portuguese</b></td><td>Much faster — maybe 60 days. French does most of the heavy lifting; the two share huge amounts of vocabulary.</td></tr>
-    <tr><td><b>Spanish</b></td><td>Faster still. Easier pronunciation than both, and you'll already know the grammar shapes.</td></tr>
-    <tr><td><b>German</b></td><td>Full 90 days. Different family, so it's a fresh start — but by then you'll know how to learn a language.</td></tr>
-  </table>
-  <p class="muted" style="margin:10px 0 0;font-size:14px">Don't start the next one until you finish Day 90. Two half-learned languages are worth less than one usable one.</p></div>`;
+  `;
 }
 function addCp(){
   const d=parseInt(document.getElementById("cpd").value), p=parseInt(document.getElementById("cps").value);
