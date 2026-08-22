@@ -1,5 +1,5 @@
 /* Offline cache so the course works on a plane, on the metro, anywhere. */
-const CACHE = "lang-v14";
+const CACHE = "lang-v15";
 const FILES = ["./", "./index.html", "./french.js", "./lessons.js", "./polish.js", "./english.js",
                "./portuguese.js", "./sync.js", "./manifest.webmanifest", "./icon.svg", "./icon-192.png", "./icon-512.png"];
 
