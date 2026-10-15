@@ -146,6 +146,42 @@ courses reinforce each other.
 
 Nasal vowels overlap directly with French (pão / pain), so the two reinforce each other.
 
+## 🌺 Hawaiian — 90-day island course (added 2026-10-15)
+
+Goal: live in Hawaiʻi like a local, aiming at B2-equivalent over time. Three layers taught
+together from week one: real Hawaiian, the Hawaiian words used inside everyday English
+(pau, kuleana, mauka/makai…), and **Pidgin** (Hawaiʻi Creole English), with register tags.
+Pidgin text uses class `pg` (orange, not spoken: the TTS voice would mangle it).
+
+**Audio:** no Hawaiian TTS voice exists on Apple or Google, so the track uses an Italian
+voice (closest vowels). It skips the ʻokina, so the red "say it" guide is the reference.
+
+| Phase | Days | Focus |
+|---|---|---|
+| 1 | 1–21 | Kani a me ke Aloha — sounds, greetings, local words |
+| 2 | 22–45 | Ma ke Kaona — food, shopping, directions, the ocean |
+| 3 | 46–66 | Ka Nohona — past/future, work, ʻohana, kuleana |
+| 4 | 67–90 | Kamaʻilio — culture, Pidgin at speed, final talk story |
+
+Lessons written: Days **1** (sounds), **2** (aloha), **3** (He ___ au), **6** (Pidgin & local words),
+**22** (plate lunch & poke), **36** (mauka/makai). 142 words, 4 guides (Kani, Pidgin, Sentence
+Building, Road to B2). **Next to write:** Day 4 — Helu, numbers 1 to 10.
+
+## 🎯 Goal: B2 in French, Portuguese and Hawaiian (set 2026-10-15)
+
+20 min/day **per language**, practical "survive living there" focus, Duolingo-style fun.
+The **Road to B2** guide (roadmap.js, shown first in all three Guides tabs) has the honest
+maths: ~550–650 h for FR/PT and ~700–900 h for Hawaiian. 20 min/day alone means 4½–7 years.
+20 min of study + 30 min of free listening gets B2 in ~24–30 months (FR/PT) and ~30–40 (HAW).
+The 90-day courses cover A1 into A2. When one finishes, write "stage 2" (A2→B1) on request.
+
+## 🎨 Redesign (2026-10-15)
+
+Playful, chunky UI: Nunito font, 3D buttons, one accent colour per language
+(FR blue, PT green, HAW coral, PL red, EN purple) set via `--blue` in `applyLang()`,
+automatic dark mode. Today tab has **Today's Rings** (20 min each for FR/PT/HAW, filled
+from that language's logged sessions), a **Week Path** of lesson nodes, and confetti on a pass.
+
 ## Queued
 
 Spanish and German are in the picker but unbuilt. Oliver picks what he works on — no gating.

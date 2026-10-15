@@ -1,7 +1,7 @@
 {
   "name": "Language Learning",
   "short_name": "Languages",
-  "description": "French course, Polish and English training sets, study guides, vocabulary and a 20-minute study timer",
+  "description": "French, Brazilian Portuguese and Hawaiian courses to B2, plus Polish and English training — 20 practical minutes a day per language",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",

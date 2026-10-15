@@ -1,7 +1,7 @@
 /* Offline cache so the course works on a plane, on the metro, anywhere. */
-const CACHE = "lang-v18";
+const CACHE = "lang-v19";
 const FILES = ["./", "./index.html", "./french.js", "./lessons.js", "./polish.js", "./english.js",
-               "./portuguese.js", "./sync.js", "./manifest.webmanifest", "./icon.svg", "./icon-192.png", "./icon-512.png"];
+               "./portuguese.js", "./hawaiian.js", "./roadmap.js", "./sync.js", "./manifest.webmanifest", "./icon.svg", "./icon-192.png", "./icon-512.png"];
 
 self.addEventListener("install", e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(FILES)).then(() => self.skipWaiting()));
