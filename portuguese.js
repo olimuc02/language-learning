@@ -1018,4 +1018,5 @@ const PT_PLAN = [
   Object.keys(PT_LESSONS).forEach(k=>delete PT_LESSONS[k]);
   Object.assign(PT_LESSONS, moved);
   PT_LESSONS[7]  = undefined; delete PT_LESSONS[7];
+  PT_VOCAB.forEach(v=>{ if(map[v[7]]) v[7]=map[v[7]]; });   // words follow their lesson to its day
 })();

@@ -182,7 +182,17 @@ Playful, chunky UI: Nunito font, 3D buttons, one accent colour per language
 automatic dark mode. Today tab has **Today's Rings** (20 min each for FR/PT/HAW, filled
 from that language's logged sessions), a **Week Path** of lesson nodes, and confetti on a pass.
 
-## Queued
+## 📝 Word by Word + extra examples (2026-10-19)
+
+Oliver asked for more definitions and example sentences in every lesson. Every lesson
+(all languages) now ends with a **Word by Word** section, built automatically from the
+lesson's words (matched by lesson number or by appearing in the body): meaning, sentence,
+tip. Languages can add an EXAMPLES map for richer cards: `{d: plain-English definition,
+ex: [[sentence, English]…], vs: [everyday, precise]}`.
+- 🇵🇱 Polish: **done for all 111 words** in `polish_examples.js` (Set 1 has everyday→precise pairs).
+- Still to write: FR, PT, HAW, EN example maps. When writing new lessons, add entries too.
+- Fixed: "Nie rób z igły widły" → "wideł" (genitive after negation).
+
 
 Spanish and German are in the picker but unbuilt. Oliver picks what he works on — no gating.
 

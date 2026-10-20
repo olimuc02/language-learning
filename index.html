@@ -317,6 +317,30 @@ tr:last-child td{border-bottom:0}
 .hw p{margin:0;font-size:14px;color:var(--muted)}
 .hw.done h4{text-decoration:line-through;color:var(--muted)}
 
+
+/* ---------- word by word ---------- */
+.wlist{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+.wcard{background:var(--card);border:2px solid var(--line);border-radius:18px;padding:14px 16px;box-shadow:0 3px 0 var(--line)}
+.wtop .fr{font-size:19px}
+.wmean{font-weight:800;margin:2px 0 4px}
+.wdef{margin:0 0 8px;font-size:14px;color:var(--muted);line-height:1.5}
+.wvs{display:grid;gap:6px;margin:0 0 8px;font-size:14px}
+.wvs div{display:flex;gap:8px;align-items:baseline}
+.wvs .tag{flex:0 0 auto;min-width:68px;text-align:center}
+.wvs i{font-style:normal}
+.wexs{border-top:2px dashed var(--line);padding-top:6px}
+.wx{display:grid;grid-template-columns:auto 1fr;column-gap:4px;padding:5px 0;font-size:14px}
+.wx i{font-style:normal}
+.wx span{grid-column:2;color:var(--muted);font-size:13.5px}
+.wcard .tip{font-size:12.5px;margin-top:6px;color:var(--gold);font-weight:800}
+.wmore{margin-top:8px;border-top:2px dashed var(--line);padding-top:6px}
+.wmore summary{cursor:pointer;font-weight:900;font-size:13px;color:var(--blue);list-style:none}
+.wmore summary::-webkit-details-marker{display:none}
+.wmore summary:before{content:"＋ "}
+.wmore[open] summary:before{content:"－ "}
+.wmore .wdef{margin-top:6px}
+@media(max-width:700px){ .wlist{grid-template-columns:1fr} }
+
 /* ---------- celebration ---------- */
 .confetti{position:fixed;inset:0;pointer-events:none;z-index:200;overflow:hidden}
 .confetti i{position:absolute;top:-20px;width:10px;height:14px;border-radius:3px;animation:fall linear forwards}
@@ -478,6 +502,7 @@ tr:last-child td{border-bottom:0}
 <script src="french.js"></script>
 <script src="lessons.js"></script>
 <script src="polish.js"></script>
+<script src="polish_examples.js"></script>
 <script src="english.js"></script>
 <script src="portuguese.js"></script>
 <script src="hawaiian.js"></script>
@@ -504,7 +529,7 @@ const LANGS = {
        nice:["zosia","krzysztof","ewa","agnieszka"],
        tagline:"maintenance &amp; expansion",
        blurb:"You already speak it. This sharpens precision, idiom and register.",
-       data:()=>({sets:PL_SETS, lessons:PL_LESSONS, vocab:PL_VOCAB,
+       data:()=>({sets:PL_SETS, lessons:PL_LESSONS, vocab:PL_VOCAB, examples:PL_EX,
                   cats:PL_CATS, guides:PL_GUIDES}) },
 
   en:{ code:"en", name:"English", flag:"🇬🇧", mode:"drill", tts:"en-GB", accent:"#7b4dff",
@@ -536,7 +561,7 @@ const LANGS = {
 const LANG_ORDER = ["fr","pt","haw","pl","en","es","de"];
 
 /* the active language's content, swapped in by applyLang() */
-let L, MODE, PLAN, PHASES, WEEK_GOALS, LESSONS, VOCAB, CATS, GUIDES, SETS;
+let L, MODE, PLAN, PHASES, WEEK_GOALS, LESSONS, VOCAB, CATS, GUIDES, SETS, EXAMPLES;
 
 function applyLang(code){
   L = LANGS[code] || LANGS.fr;
@@ -545,7 +570,7 @@ function applyLang(code){
   const tc=document.querySelector('meta[name="theme-color"]'); if(tc) tc.content = L.accent || "#2f6bff";
   const d = (L.mode === "soon") ? {} : L.data();
   PLAN=d.plan||[]; PHASES=d.phases||[]; WEEK_GOALS=d.weeks||{};
-  LESSONS=d.lessons||{}; CATS=d.cats||[]; GUIDES=d.guides||[]; SETS=d.sets||[];
+  LESSONS=d.lessons||{}; CATS=d.cats||[]; GUIDES=d.guides||[]; SETS=d.sets||[]; EXAMPLES=d.examples||{};
   VOCAB=(d.vocab||[]).slice();
   if(d.extra){                                   // words introduced by individual lessons
     const have=new Set(VOCAB.map(v=>v[0]));
@@ -1210,6 +1235,7 @@ function openLesson(d){
   ${l.goal?`<p class="muted" style="margin:0 0 12px"><b>Goal:</b> ${l.goal}</p>`:""}
   ${audioHint()}
   <div class="lesson">${l.body}</div>
+  ${wordByWord(d,l)}
 
   <div class="hr"></div>
   <h3 style="margin:0 0 4px">The test</h3>
@@ -1236,6 +1262,56 @@ function openLesson(d){
   }).join("")}`:""}
   `);
   autoStartTimer(d);
+}
+
+/* ============================================================
+   WORD BY WORD — every lesson ends with a card per word:
+   what it means, a usage note, and example sentences.
+   Extra sentences come from the language's EXAMPLES map, if any.
+   ============================================================ */
+function lessonWords(d,l){
+  const seen=new Set(), out=[];
+  const inBody=new Set();
+  (l.body||"").replace(/class="(?:fr|pg)">([^<]+)</g,(m,t)=>{ inBody.add(t.trim().toLowerCase()); return m; });
+  VOCAB.forEach(v=>{
+    const k=v[0].toLowerCase();
+    if(seen.has(k)) return;
+    if(v[7]===d || inBody.has(k)){ seen.add(k); out.push(v); }
+  });
+  return out.slice(0,30);
+}
+function exLine(pl,en){
+  return `<div class="wx"><button class="spk" data-t="${escq(pl)}" title="Hear it">🔊</button><i class="fr">${pl}</i><span>${en}</span></div>`;
+}
+function wordCardFull(v){
+  const x=EXAMPLES[v[0]]||{};
+  return `<div class="wcard">
+    <div class="wtop"><span class="fr">${v[0]}</span>${v[1]?` <span class="say">${v[1]}</span>`:""}</div>
+    <div class="wmean">${v[2]}</div>
+    ${x.d?`<p class="wdef">${x.d}</p>`:""}
+    ${x.vs?`<div class="wvs"><div><span class="tag t-red">Everyday</span><i>${x.vs[0]}</i></div><div><span class="tag t-green">Precise</span><i class="fr">${x.vs[1]}</i></div></div>`:""}
+    <div class="wexs">
+      ${v[4]?exLine(v[4],v[5]):""}
+      ${(x.ex||[]).map(e=>exLine(e[0],e[1])).join("")}
+    </div>
+    ${v[6]?`<div class="tip">💡 ${v[6]}</div>`:""}
+  </div>`;
+}
+function wordByWord(d,l){
+  const ws=lessonWords(d,l);
+  if(!ws.length) return "";
+  return `<div class="hr"></div>
+  <h3 style="margin:0 0 4px">Word by Word</h3>
+  <p class="muted" style="margin:0 0 12px;font-size:14.5px">Every word from this lesson with its meaning and example sentences. Tap any sentence to hear it.</p>
+  <div class="wlist">${ws.map(wordCardFull).join("")}</div>`;
+}
+function moreExamples(v){
+  const x=EXAMPLES[v[0]]; if(!x) return "";
+  return `<details class="wmore" onclick="event.stopPropagation()"><summary>More Examples</summary>
+    ${x.d?`<p class="wdef">${x.d}</p>`:""}
+    ${x.vs?`<div class="wvs"><div><span class="tag t-red">Everyday</span><i>${x.vs[0]}</i></div><div><span class="tag t-green">Precise</span><i class="fr">${x.vs[1]}</i></div></div>`:""}
+    ${(x.ex||[]).map(e=>exLine(e[0],e[1])).join("")}
+  </details>`;
 }
 
 /* ============================================================
@@ -1406,7 +1482,7 @@ function paintVocab(){
   <h2 style="margin-bottom:6px">Vocabulary</h2>
   <p class="muted" style="margin-top:0">${VOCAB.length} ${L.name} words and phrases, ordered by how useful they actually are. Tap a card to <b>hear it</b>; use ✓ to mark it known and ★ to send it to your drill deck.</p>
   ${audioHint()}
-  <input type="search" id="vs" placeholder="Search French or English…" value="${esc(vQ)}">
+  <input type="search" id="vs" placeholder="Search ${L.name} or English…" value="${esc(vQ)}">
   <div class="chips">
     <button class="chip ${vCat==='all'?'on':''}" onclick="vCat='all';paintVocab()">All ${VOCAB.length}</button>
     ${CATS.map(([id,n,e])=>{const c=VOCAB.filter(v=>v[3]===id).length;
@@ -1426,6 +1502,7 @@ function paintVocab(){
       <div class="en">${v[2]}</div>
       ${v[4]?`<div class="ex"><button class="spk" data-t="${escq(v[4])}" title="Hear the sentence">🔊</button><i>${v[4]}</i><br>${v[5]}</div>`:""}
       ${v[6]?`<div class="tip">💡 ${v[6]}</div>`:""}
+      ${moreExamples(v)}
     </div>`;
   }).join("")}</div>`;
   const s=document.getElementById("vs");

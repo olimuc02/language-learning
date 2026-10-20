@@ -42,7 +42,7 @@ const PL_VOCAB = [
 ["mieć muchy w nosie","niedk.","to be in a huff","idiomy","Nie zaczepiaj go, ma muchy w nosie.","Don't bother him, he's in a mood.","literally: flies in the nose",2],
 ["urwanie głowy","rzecz.","a madhouse, chaos","idiomy","W pracy urwanie głowy.","Work is absolute chaos.","",2],
 ["wyjść na swoje","dk.","to break even, come out fine","idiomy","Po wszystkim wyszedł na swoje.","In the end he came out fine.","",2],
-["robić z igły widły","niedk.","to make a mountain out of a molehill","idiomy","Nie rób z igły widły.","Don't blow it out of proportion.","needle into a pitchfork",2],
+["robić z igły widły","niedk.","to make a mountain out of a molehill","idiomy","Nie rób z igły wideł.","Don't blow it out of proportion.","needle into a pitchfork",2],
 ["mieć węża w kieszeni","niedk.","to be stingy","idiomy","On ma węża w kieszeni.","He's tight-fisted.","a snake in the pocket",2],
 ["bułka z masłem","rzecz.","a piece of cake","idiomy","Ten egzamin to bułka z masłem.","That exam is a piece of cake.","a roll with butter",2],
 ["rzucić okiem","dk.","to take a quick look","idiomy","Rzuć okiem na tę umowę.","Take a look at this contract.","",2],
