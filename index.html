@@ -341,6 +341,45 @@ tr:last-child td{border-bottom:0}
 .wmore .wdef{margin-top:6px}
 @media(max-width:700px){ .wlist{grid-template-columns:1fr} }
 
+
+/* ---------- chat practice ---------- */
+.tk-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.tk-head b{font-size:19px}
+.tk-goal{font-size:13.5px;margin:6px 0 14px}
+.tk-chat{display:flex;flex-direction:column;gap:10px;padding-bottom:12px}
+.tk-row{display:flex}
+.tk-row.me{justify-content:flex-end}
+.tk-b{max-width:84%;padding:11px 15px;border-radius:20px;font-size:16px;line-height:1.45;font-weight:600}
+.tk-b.ai{background:var(--card);border:2px solid var(--line);border-bottom-left-radius:6px}
+.tk-b.ai .fr{font-weight:700;color:var(--ink)}
+.tk-b.me{background:var(--blue);color:#fff;border-bottom-right-radius:6px;box-shadow:0 3px 0 var(--blue-deep)}
+.tk-tools{display:flex;gap:6px;margin-top:6px;align-items:center}
+.tk-tr{border:2px solid var(--line2);background:var(--bg);border-radius:8px;font-size:11px;font-weight:900;padding:1px 7px;color:var(--muted)}
+.tk-en{font-size:13.5px;margin-top:4px;font-weight:600}
+.tk-fb{align-self:stretch;background:var(--card);border:2px solid var(--line);border-radius:18px;padding:12px 14px;box-shadow:0 3px 0 var(--line)}
+.tk-fb.perfect{border-color:color-mix(in srgb,var(--green) 45%,transparent)}
+.tk-fb.fix{border-color:color-mix(in srgb,var(--red) 40%,transparent)}
+.tk-fbh{margin-bottom:8px}
+.tk-best{background:var(--green-soft);border-radius:12px;padding:8px 10px}
+.tk-why{margin:8px 0 0;font-size:14.5px}
+.tk-sit{margin:6px 0 0;font-size:14px;color:var(--gold);font-weight:700}
+.tk-alt{display:flex;align-items:flex-start;gap:6px;padding:7px 0;border-bottom:2px dashed var(--line)}
+.tk-alt:last-child{border-bottom:0}
+.tk-alt > div{flex:1;min-width:0}
+.tk-alt .fr{font-size:15.5px}
+.tk-alt .tag{margin-left:4px;vertical-align:1px}
+.tk-star{background:none;border:0;font-size:19px;line-height:1;color:var(--gold);padding:2px 4px}
+.tk-words{display:flex;flex-direction:column;gap:3px;font-size:14px}
+.tk-typing{display:flex;gap:5px;padding:15px 18px}
+.tk-typing i{width:8px;height:8px;border-radius:50%;background:var(--muted);animation:bob 1s infinite}
+.tk-typing i:nth-child(2){animation-delay:.15s}.tk-typing i:nth-child(3){animation-delay:.3s}
+.tk-bar{position:sticky;bottom:0;background:var(--bg);padding:10px 0 4px;border-top:2px solid var(--line)}
+.tk-inrow{display:flex;gap:8px;align-items:flex-end}
+.tk-inrow textarea{flex:1;resize:none;min-height:52px}
+.tk-hint{border:0;background:none;color:var(--blue);font-weight:900;font-size:13.5px;padding:0 0 8px}
+.tk-hintx{margin:0 0 8px;font-size:14px;color:var(--muted);font-weight:700}
+@media(max-width:700px){ .tk-bar{bottom:calc(64px + env(safe-area-inset-bottom))} .tk-b{max-width:90%} .tk-inrow{padding-right:58px} }
+
 /* ---------- celebration ---------- */
 .confetti{position:fixed;inset:0;pointer-events:none;z-index:200;overflow:hidden}
 .confetti i{position:absolute;top:-20px;width:10px;height:14px;border-radius:3px;animation:fall linear forwards}
@@ -481,6 +520,7 @@ tr:last-child td{border-bottom:0}
   <section class="view" id="v-guides"></section>
   <section class="view" id="v-vocab"></section>
   <section class="view" id="v-practice"></section>
+  <section class="view" id="v-talk"></section>
   <section class="view" id="v-progress"></section>
 </main>
 
@@ -507,6 +547,7 @@ tr:last-child td{border-bottom:0}
 <script src="portuguese.js"></script>
 <script src="hawaiian.js"></script>
 <script src="roadmap.js"></script>
+<script src="talk.js"></script>
 <script src="sync.js"></script>
 <script>
 /* ============================================================
@@ -853,10 +894,10 @@ function audioHint(){
    ============================================================ */
 const VERSION="3.0";
 let CURRENT="today";
-const TABS=[["today","Today","📅"],["plan","Plan","🗺️"],["lessons","Lessons","📖"],["guides","Guides","📋"],["vocab","Words","🔤"],["practice","Practice","🎯"],["progress","Stats","📊"]];
+const TABS=[["today","Today","📅"],["plan","Plan","🗺️"],["lessons","Lessons","📖"],["guides","Guides","📋"],["vocab","Words","🔤"],["practice","Practice","🎯"],["talk","Chat","💬"],["progress","Stats","📊"]];
 const nav=document.getElementById("nav");
 function paintNav(){
-  nav.innerHTML=TABS.map(([id,l,ic])=>{
+  nav.innerHTML=TABS.filter(([id])=>id!=="talk"||hasTalk()).map(([id,l,ic])=>{
     if(id==="plan") l = MODE==="course" ? "Plan" : "Sets";
     return `<button data-t="${id}"><span class="ni">${ic}</span><span class="nl">${l}</span></button>`;
   }).join("");
@@ -870,9 +911,9 @@ function go(t){
   paintLangBar();
   TABS.forEach(([id])=>{
     document.getElementById("v-"+id).classList.toggle("on",id===t);
-    nav.querySelector(`[data-t="${id}"]`).classList.toggle("on",id===t);
+    const nb=nav.querySelector(`[data-t="${id}"]`); if(nb) nb.classList.toggle("on",id===t);
   });
-  ({today:paintToday,plan:paintPlan,lessons:paintLessons,guides:paintGuides,vocab:paintVocab,practice:paintPractice,progress:paintProgress})[t]();
+  ({today:paintToday,plan:paintPlan,lessons:paintLessons,guides:paintGuides,vocab:paintVocab,practice:paintPractice,progress:paintProgress,talk:paintTalk})[t]();
   enhanceTables(document.getElementById("v-"+t));
   window.scrollTo(0,0);
 }
@@ -939,6 +980,7 @@ function paintTodayDrill(){
     <p>${next?i.desc:"You have worked through every set. Repeat any of them, or ask Claude for new ones."}</p>
     <div class="row">
       ${next?`<button class="btn" onclick="openLesson(${next})">${S.completed[next]?"Redo this set":"Start this set"}</button>`:""}
+      ${hasTalk()?`<button class="btn ghost" onclick="go('talk')">💬 Chat Practice</button>`:""}
       <button class="btn ghost" onclick="mixDrill()">🌍 All languages</button>
     </div>
   </div>
