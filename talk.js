@@ -55,7 +55,7 @@ pl: [
  {id:"narzekanie", e:"🌧️", t:"The Art of Complaining", pl:"Narzekanie po polsku",
   role:"Ola, a close friend, venting over coffee about her boss, the weather and prices. Classic Polish complaining as bonding.",
   goal:"Join in the complaining naturally, sympathise with the right phrases, and offer advice without sounding preachy."},
- {id:"luzno",    e:"🗣️", t:"Free Chat", pl:"Luźna rozmowa",
+ {id:"luzno",    e:"🗣️", t:"Casual Chat", pl:"Luźna rozmowa",
   role:"Marta, a friendly Polish friend the learner's age, curious about his life in the US, his work and his travels.",
   goal:"Open-ended catch-up: weekend, work, plans, opinions. Keep it flowing and natural."},
 ],
@@ -314,7 +314,7 @@ function talkPicker(){
     <h2>Learn by Talking</h2>
     <p>Pick a real-life situation. Claude plays the other person, you reply in ${L.name}, and every reply gets coached on how it would <b>sound</b>: the native way to say it, and other ways natives would put it. Spelling and missing accents are ignored.</p>
     <div class="row">
-      <button class="btn" onclick="talkStart('luzno')">Start a Free Chat</button>
+      <button class="btn" onclick="talkStart('luzno')">Start a Casual Chat</button>
       <button class="btn ghost" onclick="talkPhrases()">★ Saved Phrases (${ph})</button>
     </div>
   </div>
