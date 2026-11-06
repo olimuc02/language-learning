@@ -10,6 +10,7 @@
 
 const HAW_CATS = [
  ["kumu","Essentials","🌺"],
+ ["kamailio","Conversation","💬"],
  ["local","Local Words","🏝️"],
  ["pidgin","Pidgin","🤙"],
  ["ai","Food (ʻAi)","🍱"],
@@ -46,6 +47,79 @@ const HAW_VOCAB = [
 ["Hiki iā ʻoe ke ʻōlelo mālie?","HEE-kee ee-AH OH-eh keh OH-leh-loh MAH-lee-eh","Can you speak slowly?","kumu","Hiki iā ʻoe ke ʻōlelo mālie?","Can you speak slowly?","",3],
 ["He aha kēia?","heh AH-hah KAY-ah","What is this?","kumu","He aha kēia? He ʻulu kēia.","What's this? It's breadfruit.","the most useful question a learner has",3],
 ["Hūi!","HOO-ee","Hey! (calling out)","kumu","Hūi! E Keola!","Hey, Keola!","to get attention across a beach or yard",2],
+
+// --- kamaʻilio (conversation: the phrases that keep a real chat going)
+// meeting people
+["Pehea kou lā?","PEH-heh-ah koh LAH","How's your day?","kamailio","Aloha e Keola! Pehea kou lā?","Hi Keola! How's your day going?","lā = day (and sun)",2],
+["Maikaʻi loa!","my-KAH-ee LOH-ah","Really good! / Great!","kamailio","— Pehea ʻoe? — Maikaʻi loa, mahalo!","— How are you? — Great, thanks!","loa = very; goes after the word it boosts",2],
+["Hauʻoli ka launa ʻana","how-OH-lee kah LOW-nah AH-nah","Nice to meet you","kamailio","Aloha, ʻo Oliver koʻu inoa. Hauʻoli ka launa ʻana!","Hi, I'm Oliver. Nice to meet you!","literally 'the meeting is a joy'",3],
+["Ma hea ʻoe e noho ai?","mah HEH-ah OH-eh eh NOH-hoh eye","Where do you live?","kamailio","Ma hea ʻoe e noho ai? — Noho au ma Kailua.","Where do you live? — I live in Kailua.","answer with 'Noho au ma ___'",3],
+["He aha kāu hana?","heh AH-hah KAH-oo HAH-nah","What do you do (for work)?","kamailio","He aha kāu hana? — He kauka au.","What do you do? — I'm a doctor.","answer with the He ___ au pattern",3],
+["Ke aʻo nei au i ka ʻōlelo Hawaiʻi","keh AH-oh NAY OW ee kah OH-leh-loh hah-VAI-ee","I'm learning Hawaiian","kamailio","E kala mai, ke aʻo nei au i ka ʻōlelo Hawaiʻi.","Sorry, I'm learning Hawaiian.","say this early: people slow down and help",3],
+["He malihini au","heh mah-lee-HEE-nee OW","I'm new here","kamailio","He malihini au. No Chicago mai au.","I'm new here. I'm from Chicago.","honest and humble — locals respect it",3],
+// keeping the chat alive
+["He aha ka nūhou?","heh AH-hah kah noo-HOH","What's new?","kamailio","Aloha e Pua! He aha ka nūhou?","Hey Pua! What's new?","nūhou also means 'news'",10],
+["ʻAʻohe nūhou","ah-OH-heh noo-HOH","Nothing new","kamailio","ʻAʻohe nūhou. A ʻo ʻoe?","Nothing new. And you?","ʻaʻohe = there is no",10],
+["Pehea ka ʻohana?","PEH-heh-ah kah oh-HAH-nah","How's the family?","kamailio","Pehea ka ʻohana? Maikaʻi nō?","How's the family? All good?","asked constantly — family comes first here",10],
+["ʻOiaʻiʻo?","oh-ee-ah-EE-oh","Really? / Is that so?","kamailio","— Ua ʻike au i ka honu! — ʻOiaʻiʻo?","— I saw a turtle! — Really?","literally 'the truth'",10],
+["Pololei!","poh-loh-LAY","Exactly! / That's right!","kamailio","— ʻOno ka poke ma laila? — Pololei!","— Is the poke good there? — Exactly!","also 'straight' and 'correct'",10],
+["Pēlā nō","PAY-lah NOH","Same here / that's how it is","kamailio","— Māluhiluhi au. — Pēlā nō!","— I'm tired. — Same here!","an easy, warm way to agree",10],
+["Malia paha","mah-LEE-ah PAH-hah","Maybe / perhaps","kamailio","— E hele ana ʻoe? — Malia paha.","— Are you going? — Maybe.","paha alone = 'maybe' after a word",10],
+["ʻAʻole au i ʻike","ah-OH-leh OW ee EE-keh","I don't know","kamailio","ʻAʻole au i ʻike, e kala mai.","I don't know, sorry.","",10],
+["He aha kou manaʻo?","heh AH-hah koh mah-NAH-oh","What do you think?","kamailio","He aha kou manaʻo? ʻOno?","What do you think? Tasty?","manaʻo = thought, opinion — also used in English",10],
+["No ke aha?","noh keh AH-hah","Why?","kamailio","No ke aha? He aha ka pilikia?","Why? What's the problem?","",10],
+["ʻO wai kēlā?","oh VAI KAY-lah","Who's that?","kamailio","ʻO wai kēlā kāne?","Who's that guy?","",10],
+// when you're lost
+["E ʻōlelo hou mai","eh OH-leh-loh HOH my","Say it again (to me)","kamailio","E kala mai, e ʻōlelo hou mai, e ʻoluʻolu.","Sorry, please say it again.","hou = again, mai = toward me",3],
+["He aha ka ʻōlelo Hawaiʻi no ___?","heh AH-hah kah OH-leh-loh hah-VAI-ee noh","What's the Hawaiian for ___?","kamailio","He aha ka ʻōlelo Hawaiʻi no 'beach'? — Kahakai.","What's the Hawaiian for 'beach'? — Kahakai.","your most powerful learning question",3],
+["Hiki iā ʻoe ke kōkua mai iaʻu?","HEE-kee ee-AH OH-eh keh koh-KOO-ah my ee-AH-oo","Can you help me?","kamailio","E kala mai, hiki iā ʻoe ke kōkua mai iaʻu?","Excuse me, can you help me?","",10],
+["Hiki iaʻu ke kōkua?","HEE-kee ee-AH-oo keh koh-KOO-ah","Can I help?","kamailio","Hiki iaʻu ke kōkua iā ʻoe?","Can I help you?","always offer at someone's house",25],
+// yes, no, plans
+["Hiki nō!","HEE-kee NOH","Sure! / Can do!","kamailio","— E hele kāua i kahakai? — Hiki nō!","— Beach, you and me? — Sure!","the friendliest yes",2],
+["ʻAʻole hiki","ah-OH-leh HEE-kee","I can't / not possible","kamailio","ʻAʻole hiki iaʻu i kēia lā, e kala mai.","I can't today, sorry.","",11],
+["E hele kāua!","eh HEH-leh KAH-wah","Let's go (you and me)!","kamailio","E hele kāua e ʻai!","Let's go eat, you and me!","kāua = you + me; kākou = all of us",15],
+["Aia i hea ʻoe?","EYE-ah ee HEH-ah OH-eh","Where are you?","kamailio","Aia i hea ʻoe? Aia au ma kahakai.","Where are you? I'm at the beach.","the texting classic",37],
+["Aia au ma ka hale","EYE-ah OW mah kah HAH-leh","I'm at home","kamailio","Aia au ma ka hale, hele mai!","I'm home, come over!","",37],
+["ʻEhia ka hola?","eh-HEE-ah kah HOH-lah","What time is it?","kamailio","ʻEhia ka hola? Ua lohi kākou!","What time is it? We're late!","",17],
+["I ka hola ʻehia?","ee kah HOH-lah eh-HEE-ah","At what time?","kamailio","Pāʻina i ka Pōʻaono. I ka hola ʻehia?","Party on Saturday. At what time?","",17],
+["I ka hola ʻelima","ee kah HOH-lah eh-LEE-mah","At five o'clock","kamailio","Pau hana i ka hola ʻelima?","Pau hana at five?","swap in any number 1–12",17],
+// feelings & body
+["Pōloli au","poh-LOH-lee OW","I'm hungry","kamailio","Pōloli loa au! E ʻai kākou.","I'm starving! Let's eat.","feeling-word first, then 'au'",50],
+["Makewai au","mah-keh-VAI OW","I'm thirsty","kamailio","Makewai au. He wai, e ʻoluʻolu.","I'm thirsty. Water, please.","",50],
+["Māluhiluhi au","mah-loo-hee-LOO-hee OW","I'm tired","kamailio","Māluhiluhi au, ua lōʻihi ka hana.","I'm tired, work was long.","",50],
+["Hauʻoli au","how-OH-lee OW","I'm happy","kamailio","Hauʻoli au i kou hele ʻana mai!","I'm happy you came!","",50],
+["Wela loa!","VEH-lah LOH-ah","So hot!","kamailio","Wela loa kēia lā!","It's so hot today!","the islands' favourite complaint",18],
+["Ke ua nei","keh OO-ah NAY","It's raining","kamailio","Ke ua nei ma uka.","It's raining up mauka.","ke ___ nei = happening now",18],
+["Nani loa!","NAH-nee LOH-ah","So beautiful!","kamailio","Nani loa ka napoʻo ʻana o ka lā!","What a beautiful sunset!","",9],
+["Nui ka nalu i kēia lā","NOO-ee kah NAH-loo ee KAY-ah LAH","The waves are big today","kamailio","Nui ka nalu i kēia lā, mālama pono!","Big surf today, be careful!","",43],
+// at someone's home
+["Hele mai e ʻai!","HEH-leh my eh AH-ee","Come eat!","kamailio","Hele mai e ʻai, nui ka ʻai!","Come eat, there's plenty of food!","you'll hear this at every gathering",25],
+["E noho mai","eh NOH-hoh my","Have a seat","kamailio","E komo mai, e noho mai!","Come in, have a seat!","",25],
+["Mahalo no ka ʻai","mah-HAH-loh noh kah AH-ee","Thanks for the food","kamailio","Mahalo nui no ka ʻai, ʻono loa!","Thanks so much for the food, delicious!","say it to the host before you leave",22],
+["Mahalo no kou kōkua","mah-HAH-loh noh koh koh-KOO-ah","Thanks for your help","kamailio","Mahalo nui no kou kōkua!","Thank you so much for your help!","",25],
+["Mahalo no ka hele ʻana mai","mah-HAH-loh noh kah HEH-leh AH-nah my","Thanks for coming","kamailio","Mahalo no ka hele ʻana mai, e Aunty!","Thanks for coming, Aunty!","",25],
+// celebrations (you're on island for all of these)
+["Mele Kalikimaka!","MEH-leh kah-lee-kee-MAH-kah","Merry Christmas!","kamailio","Mele Kalikimaka a Hauʻoli Makahiki Hou!","Merry Christmas and Happy New Year!","you'll be on island for it — use it all December",83],
+["Hauʻoli Makahiki Hou!","how-OH-lee mah-kah-HEE-kee HOH","Happy New Year!","kamailio","Hauʻoli Makahiki Hou, e ka ʻohana!","Happy New Year, family!","",83],
+["Hauʻoli lā hānau!","how-OH-lee LAH HAH-now","Happy birthday!","kamailio","Hauʻoli lā hānau iā ʻoe!","Happy birthday to you!","",83],
+["Aloha au iā ʻoe","ah-LOH-hah OW ee-AH OH-eh","I love you","kamailio","Aloha au iā ʻoe, e Tūtū.","I love you, Grandma.","",50],
+// goodbyes
+["Mālama pono!","MAH-lah-mah POH-noh","Take care!","kamailio","A hui hou, mālama pono!","See you, take care!","the warmest way to say goodbye",2],
+["A hui hou kākou","ah HOO-ee HOH KAH-koh","See you all again","kamailio","Mahalo nui, a hui hou kākou!","Thanks so much, see you all!","to a whole group",2],
+// local English & Pidgin you'll hear in every conversation
+["What school you went?","","Which high school did you go to?","kamailio","Eh, you from here? What school you went?","","local English — THE island icebreaker. It means high school, not college; it places you in the local map",6],
+["Eh, long time!","","Long time no see!","kamailio","Eh, long time! Howzit?","","local English — the standard reunion line",6],
+["Try wait","","Hang on a sec","kamailio","Try wait, I go get my keys.","","Pidgin — 'try' softens any request: try look, try come",19],
+["Can or not?","","Is that possible? / Can you?","kamailio","You can pick me up, can or not?","","Pidgin — answer 'Can!' or 'No can'",19],
+["Where you stay?","","Where are you (right now)?","kamailio","Where you stay? We stay at the beach already.","","Pidgin — stay = are (located)",19],
+["You going?","","Are you coming?","kamailio","Get one party Friday, you going?","","Pidgin — no 'are' needed",19],
+["Shoots den","","OK then, sounds good","kamailio","Shoots den, see you at five.","","Pidgin — safe for anyone; ends most plans",6],
+["No worry, beef curry","","Don't worry about it","kamailio","— Sorry I late! — No worry, beef curry.","","Pidgin — playful, with friends",19],
+["Garans","gah-RANS","Guaranteed, for sure","kamailio","Garans going rain later.","It's definitely going to rain later.","Pidgin — 'garans ballbarans' = absolutely guaranteed",19],
+["Ho, brah!","","Whoa, man! (surprise)","kamailio","Ho, brah, dat wave was huge!","","Pidgin — the all-purpose 'wow'",19],
+["Bodda you?","","Does it bother you?","kamailio","I go open da window, bodda you?","","Pidgin — polite check-in",19],
+["Eh, sorry ah","","Oops, sorry","kamailio","Eh, sorry ah, I neva see you.","Oops, sorry, I didn't see you.","Pidgin — neva = didn't",19],
+["Mahalo plenty","","Thanks a lot","kamailio","Mahalo plenty for da ride, brah.","","local English — warm and casual",6],
 
 // --- local (Hawaiian words inside everyday English)
 ["Pau","POW","Finished, done","local","Pau already?","Done already?","used in English all day: 'I'm pau'",6],
@@ -184,6 +258,165 @@ const HAW_VOCAB = [
    GUIDES
    ============================================================ */
 const HAW_GUIDES = [
+{id:"phrases", title:"Island Phrasebook", sub:"Real conversations, situation by situation: Hawaiian, local English and Pidgin side by side", tag:"Use today", body:`
+<p>This is the sheet to keep open on your phone. Each situation has the <b>Hawaiian</b> (blue, tap to hear it) and the way <b>locals actually say it</b> in everyday English or Pidgin (orange). Use the Hawaiian with anyone. People light up when a newcomer tries.</p>
+<div class="box green"><b>The daily habit</b>Every day, take the three phrases on the Today tab and say each one to a real person: a cashier, a neighbour, a coworker. Three real uses a day is about 600 by the time you leave.</div>
+
+<h3>1. The ten you'll use every day</h3>
+<table>
+<tr><td class="fr">Aloha!</td><td>Hello / goodbye</td><td>everyone, all day</td></tr>
+<tr><td class="fr">Mahalo (nui loa)</td><td>Thank you (very much)</td><td>every cashier, driver, server</td></tr>
+<tr><td class="fr">ʻAʻole pilikia</td><td>No problem / you're welcome</td><td>when someone thanks you</td></tr>
+<tr><td class="fr">Pehea ʻoe?</td><td>How are you?</td><td></td></tr>
+<tr><td class="fr">Maikaʻi nō, a ʻo ʻoe?</td><td>Good, and you?</td><td></td></tr>
+<tr><td class="fr">E kala mai</td><td>Excuse me / sorry</td><td>squeezing past, bumping someone</td></tr>
+<tr><td class="fr">Hiki nō!</td><td>Sure! / Can do!</td><td>saying yes to anything</td></tr>
+<tr><td class="fr">ʻOno!</td><td>Delicious!</td><td>every meal</td></tr>
+<tr><td class="fr">Mālama pono</td><td>Take care</td><td>parting</td></tr>
+<tr><td class="fr">A hui hou!</td><td>See you again!</td><td>parting</td></tr>
+</table>
+
+<h3>2. Meeting someone new</h3>
+<table>
+<tr><th>Hawaiian</th><th>English</th><th>Locals also say</th></tr>
+<tr><td class="fr">ʻO wai kou inoa?</td><td>What's your name?</td><td class="pg">What's your name?</td></tr>
+<tr><td class="fr">ʻO Oliver koʻu inoa.</td><td>My name is Oliver.</td><td></td></tr>
+<tr><td class="fr">Hauʻoli ka launa ʻana!</td><td>Nice to meet you!</td><td class="pg">Nice meeting you, brah.</td></tr>
+<tr><td class="fr">No hea mai ʻoe?</td><td>Where are you from?</td><td class="pg">You from here?</td></tr>
+<tr><td class="fr">No Chicago mai au.</td><td>I'm from Chicago.</td><td></td></tr>
+<tr><td class="fr">He malihini au.</td><td>I'm new here.</td><td class="pg">I just wen move here.</td></tr>
+<tr><td class="fr">Ma hea ʻoe e noho ai?</td><td>Where do you live?</td><td class="pg">Where you stay living?</td></tr>
+<tr><td class="fr">He aha kāu hana?</td><td>What do you do?</td><td class="pg">What you do for work?</td></tr>
+<tr><td></td><td>Which high school did you go to?</td><td class="pg">What school you went?</td></tr>
+</table>
+<div class="box blue"><b>"What school you went?"</b>The classic local question. It means <b>high school</b>, and it's how people place each other. You're not from here, so just smile and say <i>"I'm from Chicago — I went to ___ High."</i> Then ask them back. People love telling you about their school.</div>
+
+<h3>3. Keeping a conversation going</h3>
+<p>Most of a real conversation is short reactions. Learn these and you can keep up long before you can say long sentences.</p>
+<table>
+<tr><td class="fr">He aha ka nūhou?</td><td>What's new?</td></tr>
+<tr><td class="fr">ʻAʻohe nūhou.</td><td>Nothing new.</td></tr>
+<tr><td class="fr">Pehea kou lā?</td><td>How's your day?</td></tr>
+<tr><td class="fr">Pehea ka ʻohana?</td><td>How's the family?</td></tr>
+<tr><td class="fr">ʻOiaʻiʻo?</td><td>Really?</td></tr>
+<tr><td class="fr">Pololei!</td><td>Exactly! / Right!</td></tr>
+<tr><td class="fr">Pēlā nō.</td><td>Same here. / That's how it is.</td></tr>
+<tr><td class="fr">Malia paha.</td><td>Maybe.</td></tr>
+<tr><td class="fr">ʻAʻole au i ʻike.</td><td>I don't know.</td></tr>
+<tr><td class="fr">He aha kou manaʻo?</td><td>What do you think?</td></tr>
+<tr><td class="fr">No ke aha?</td><td>Why?</td></tr>
+<tr><td class="fr">ʻO wai kēlā?</td><td>Who's that?</td></tr>
+<tr><td class="pg">Ho, brah!</td><td>Whoa! (surprise)</td></tr>
+<tr><td class="pg">Fo real?</td><td>Seriously?</td></tr>
+<tr><td class="pg">Shoots.</td><td>Sounds good.</td></tr>
+</table>
+
+<h3>4. When you're lost (use these without shame)</h3>
+<table>
+<tr><td class="fr">Ke aʻo nei au i ka ʻōlelo Hawaiʻi.</td><td>I'm learning Hawaiian.</td></tr>
+<tr><td class="fr">ʻAʻole maopopo iaʻu.</td><td>I don't understand.</td></tr>
+<tr><td class="fr">E ʻōlelo hou mai, e ʻoluʻolu.</td><td>Please say that again.</td></tr>
+<tr><td class="fr">Hiki iā ʻoe ke ʻōlelo mālie?</td><td>Can you speak slowly?</td></tr>
+<tr><td class="fr">He aha ka ʻōlelo Hawaiʻi no "beach"?</td><td>What's the Hawaiian for "beach"?</td></tr>
+<tr><td class="fr">He aha kēia?</td><td>What's this?</td></tr>
+</table>
+<div class="box"><b>The magic question</b><span class="fr">He aha ka ʻōlelo Hawaiʻi no ___?</span> turns every Hawaiian speaker you meet into a teacher. Ask it once a day, then write the answer into a note on your phone.</div>
+
+<h3>5. Making plans and texting</h3>
+<table>
+<tr><td class="fr">E hele kāua i kahakai!</td><td>Let's go to the beach (you and me)!</td></tr>
+<tr><td class="fr">Hiki nō! / ʻAʻole hiki.</td><td>Sure! / I can't.</td></tr>
+<tr><td class="fr">I ka hola ʻehia?</td><td>At what time?</td></tr>
+<tr><td class="fr">I ka hola ʻelima.</td><td>At five.</td></tr>
+<tr><td class="fr">Aia i hea ʻoe?</td><td>Where are you?</td></tr>
+<tr><td class="fr">Aia au ma ka hale.</td><td>I'm at home.</td></tr>
+<tr><td class="pg">You going?</td><td>Are you coming?</td></tr>
+<tr><td class="pg">Try wait, I coming.</td><td>Hang on, I'm on my way.</td></tr>
+<tr><td class="pg">Can or not?</td><td>Can you, or not?</td></tr>
+<tr><td class="pg">Shoots den, laters.</td><td>OK then, see you.</td></tr>
+</table>
+
+<h3>6. How you feel</h3>
+<p>Feeling first, then <b>au</b> (I). Add <b>loa</b> for "very".</p>
+<table>
+<tr><td class="fr">Pōloli au.</td><td>I'm hungry.</td><td class="fr">Makewai au.</td><td>I'm thirsty.</td></tr>
+<tr><td class="fr">Māluhiluhi au.</td><td>I'm tired.</td><td class="fr">Hauʻoli au.</td><td>I'm happy.</td></tr>
+<tr><td class="fr">Wela loa!</td><td>So hot!</td><td class="fr">Ke ua nei.</td><td>It's raining.</td></tr>
+<tr><td class="fr">Nani loa!</td><td>So beautiful!</td><td class="fr">Maikaʻi loa!</td><td>Great!</td></tr>
+</table>
+
+<h3>7. At someone's home</h3>
+<table>
+<tr><td class="fr">E komo mai! E noho mai.</td><td>Come in! Have a seat.</td><td>what you'll hear</td></tr>
+<tr><td class="fr">Hele mai e ʻai!</td><td>Come eat!</td><td>what you'll hear</td></tr>
+<tr><td class="fr">Hiki iaʻu ke kōkua?</td><td>Can I help?</td><td>always offer</td></tr>
+<tr><td class="fr">Mahalo no ka ʻai. ʻOno loa!</td><td>Thanks for the food. Delicious!</td><td>before you leave</td></tr>
+<tr><td class="fr">Mahalo no kou kōkua.</td><td>Thanks for your help.</td><td></td></tr>
+</table>
+<div class="box green"><b>House rules nobody tells you</b>Shoes off at the door. Bring something (a dessert or drinks). Call older people <b>Aunty</b> and <b>Uncle</b>. Let the kūpuna eat first. When someone offers you a plate to take home, say yes.</div>
+
+<h3>8. Holidays while you're here</h3>
+<table>
+<tr><td class="fr">Mele Kalikimaka!</td><td>Merry Christmas!</td><td>December</td></tr>
+<tr><td class="fr">Hauʻoli Makahiki Hou!</td><td>Happy New Year!</td><td>January 1</td></tr>
+<tr><td class="fr">Hauʻoli lā hānau!</td><td>Happy birthday!</td><td>any time</td></tr>
+<tr><td><b>Lei Day</b></td><td>"May Day is Lei Day in Hawaiʻi." Wear or give a lei.</td><td>May 1</td></tr>
+</table>
+
+<h3>9. Goodbyes</h3>
+<table>
+<tr><td class="fr">A hui hou!</td><td>See you again!</td><td class="pg">Laters!</td></tr>
+<tr><td class="fr">A hui hou kākou!</td><td>See you all!</td><td class="pg">K, laters everybody.</td></tr>
+<tr><td class="fr">Mālama pono!</td><td>Take care!</td><td class="pg">Take care, ah.</td></tr>
+<tr><td class="fr">Aloha ʻoe.</td><td>Farewell (to one person).</td><td></td></tr>
+</table>
+`},
+
+{id:"seven", title:"Your 7 Months on Island", sub:"November to May: what to learn each month, and what you'll be able to say by the end", tag:"Your plan", body:`
+<p>You're in Hawaiʻi for about seven months, from November 2026 to early June 2027. Here's how to get from "Aloha, mahalo" to <b>real conversation</b> in that time.</p>
+
+<div class="box red"><b>The honest part</b>Day to day, most people on the islands speak <b>English and Pidgin</b>, sprinkled with Hawaiian words. Fluent Hawaiian speakers exist (immersion-school families, teachers, kūpuna, musicians), but you have to look for them. So there are two goals here:<br>
+<b>1. Local English and Pidgin:</b> understand all of it, sound natural in it. Very reachable in 7 months.<br>
+<b>2. Conversational Hawaiian (about A2):</b> chat about yourself, your day, food, plans and simple stories. Reachable in 7 months <b>only</b> with more than the 20-minute lesson. Plan on about 45 minutes a day in total (see below).</div>
+
+<h3>The daily routine (about 45 minutes, most of it in time you already have)</h3>
+<table>
+<tr><td style="width:96px"><b>20 min</b></td><td>The day's lesson in this app. The timer runs it for you.</td></tr>
+<tr><td><b>5 min</b></td><td>Today's Phrases (on the Today tab). Say each one to a real person.</td></tr>
+<tr><td><b>10 min</b></td><td><b>Chat tab</b>, 3 times a week. Start with "Casual Chat in Hawaiian" and "Introduce Yourself".</td></tr>
+<tr><td><b>15 min</b></td><td>Listening while you drive, cook or work out: Hawaiian music, Ke Aolama news, Pidgin comedy on YouTube.</td></tr>
+</table>
+
+<h3>Month by month</h3>
+<table>
+<tr><th>Month</th><th>Lessons</th><th>What you'll be able to do</th><th>Real-world mission</th></tr>
+<tr><td><b>1 · November</b></td><td>Days 1–30</td><td>Pronounce everything, greet anyone, introduce yourself, numbers, the local words</td><td>Say aloha and mahalo to every cashier. Say every place name right. Introduce yourself in Hawaiian to one person.</td></tr>
+<tr><td><b>2 · December</b></td><td>Days 31–60</td><td>Order food, shop, ask directions, beach and weather talk, say what you did</td><td>Order a plate lunch the local way. Farmers' market in Hawaiian. Mele Kalikimaka to everyone.</td></tr>
+<tr><td><b>3 · January</b></td><td>Days 61–90</td><td>Talk about your life, plans and family; culture and protocol; final 10-minute talk story</td><td>Find a beginner Hawaiian class or conversation group (community colleges, libraries and Hawaiian civic clubs run them).</td></tr>
+<tr><td><b>4 · February</b></td><td>Stage 2 (A2)</td><td>Longer stories, opinions, asking favours, the two kinds of "my"</td><td>One 30-minute talk story in Hawaiian a week, with a class partner, tutor or speaker you met.</td></tr>
+<tr><td><b>5 · March</b></td><td>Stage 2</td><td>Mele (songs) and ʻōlelo noʻeau (proverbs). Understand what a song is saying.</td><td>Learn one mele by heart and know what every line means.</td></tr>
+<tr><td><b>6 · April</b></td><td>Stage 2</td><td>Follow slower native speech; Pidgin at full speed</td><td>Watch the Merrie Monarch hula festival (early April, broadcast live) and follow parts of the Hawaiian commentary.</td></tr>
+<tr><td><b>7 · May</b></td><td>Stage 2 review</td><td>Hold a relaxed 20–30 minute conversation, mostly in Hawaiian</td><td>Lei Day, May 1. Final talk story with a fluent speaker before you leave.</td></tr>
+</table>
+<p class="muted">Stage 2 isn't written yet. When you reach Day 90, tell Claude <b>"start Hawaiian stage 2"</b> and it gets built around what you've found hard.</p>
+
+<h3>Where to find Hawaiian speakers</h3>
+<ul>
+<li><b>A class.</b> Community colleges, public libraries and Hawaiian civic clubs often run evening beginner classes. One class a week doubles your speaking time.</li>
+<li><b>Ask.</b> When someone uses a Hawaiian word, ask <span class="fr">He aha ka ʻōlelo Hawaiʻi no ___?</span> Speakers are often happy to help someone who's trying.</li>
+<li><b>Music and events.</b> Kanikapila (jam sessions), hula performances, and cultural events at museums and parks.</li>
+<li><b>Media.</b> Ke Aolama (short news in Hawaiian), ʻŌiwi TV, Hawaiian radio shows, and Duolingo Hawaiian as a daily add-on.</li>
+</ul>
+
+<h3>How you'll know it's working</h3>
+<table>
+<tr><td><b>End of November</b></td><td>You can introduce yourself for 30 seconds in Hawaiian without notes.</td></tr>
+<tr><td><b>End of January</b></td><td>You can hold a 10-minute simple talk story and get through a Chat scene without switching to English.</td></tr>
+<tr><td><b>End of March</b></td><td>You understand most of a slow conversation between two speakers, and every word of everyday Pidgin.</td></tr>
+<tr><td><b>End of May</b></td><td>20–30 minutes of real conversation, mostly in Hawaiian, about your life here.</td></tr>
+</table>
+`},
+
 {id:"kani", title:"Kani — Hawaiian Sounds", sub:"Thirteen letters, and the two marks that change meaning", tag:"Start here", body:`
 <h3>The whole alphabet</h3>
 <p>Hawaiian has only 13 letters: the five vowels <b>a e i o u</b>, the consonants <b>h k l m n p w</b>, and the <b>ʻokina</b> (ʻ). Every word ends in a vowel. Every vowel is pronounced, every time.</p>
@@ -354,8 +587,8 @@ const HAW_PLAN = [
  [1,"Kani — Hawaiian sounds","Thirteen letters, the ʻokina, the kahakō, and island place names."],
  [2,"Aloha — greetings","Aloha, mahalo, pehea ʻoe — the words you'll use every single day."],
  [3,"He ___ au — who you are","Name, where you're from, what you do. The sentence pattern that unlocks everything."],
- [4,"Helu — numbers 1 to 10","Counting, plus phone numbers and prices."],
- [5,"Ka / ke — 'the'","Articles, and kēia / kēlā (this / that)."],
+ [4,"Helu — numbers 1 to 10","Counting, swapping phone numbers, asking 'how many?' and 'how much?'."],
+ [5,"Kēia, kēlā — this and that","Point, ask, choose: He aha kēlā? ʻO kēhea? Plus ka, ke and nā (the)."],
  [6,"Local talk — Pidgin & island words","Howzit, shoots, pau, da kine. How people actually talk."],
  [7,"Review + Checkpoint 1","Week 1, tested four ways."],
  [8,"Pronouns","Au, ʻoe, ʻo ia — and the four words for 'we'."],
@@ -655,6 +888,192 @@ quiz:[
  {t:"type", q:"Write the Hawaiian word for <b>teacher</b>.", ans:["kumu"], why:"<b>Kumu</b> — also means 'source' or 'foundation'."},
  {t:"type", q:"Write <b>I</b> in Hawaiian.", ans:["au","wau"], why:"<b>au</b> (or wau)."},
  {t:"listen", play:"ʻO Oliver koʻu inoa.", q:"Listen, then choose what you heard.", a:["My name is Oliver.","Oliver is a teacher.","Where is Oliver?","Oliver is from Chicago."], c:0, why:"<b>ʻO Oliver koʻu inoa.</b>"}
+]
+};
+
+HAW_LESSONS[4] = {
+title:"Helu — numbers 1 to 10",
+mins:20, goal:"Count to ten, swap phone numbers, and ask 'how many?' and 'how much?' in a real conversation.",
+body:`
+<h3>Why numbers, this early</h3>
+<p>Numbers come up in almost every real exchange: a phone number at a party, a price at the market, how many kids someone has, what time to meet. Today you learn 1 to 10 and three questions that use them.</p>
+
+<h3>1. One to ten</h3>
+<p>Every number from 1 to 9 starts with <b>ʻe-</b> (a glottal stop, then "eh"). Ten is the odd one out.</p>
+<table>
+<tr><td class="fr">ʻekahi</td><td>1</td><td class="fr">ʻeono</td><td>6</td></tr>
+<tr><td class="fr">ʻelua</td><td>2</td><td class="fr">ʻehiku</td><td>7</td></tr>
+<tr><td class="fr">ʻekolu</td><td>3</td><td class="fr">ʻewalu</td><td>8</td></tr>
+<tr><td class="fr">ʻehā</td><td>4</td><td class="fr">ʻeiwa</td><td>9</td></tr>
+<tr><td class="fr">ʻelima</td><td>5</td><td class="fr">ʻumi</td><td>10</td></tr>
+</table>
+<p>And <span class="fr">ʻole</span> is zero. It also means "without" or "not", the same word you'll see in <i>ʻaʻole</i>.</p>
+<div class="box blue"><b>Where you'll hear these first</b>At any hula class or performance: <span class="fr">ʻEkahi, ʻelua, ʻekolu, ʻehā!</span> is the count the kumu calls out to start the dancers.</div>
+
+<h3>2. Sound tips</h3>
+<ul>
+<li><span class="fr">ʻewalu</span> (8): the <b>w</b> after <i>e</i> sounds like a soft <b>v</b>: eh-VAH-loo.</li>
+<li><span class="fr">ʻehā</span> (4): the line on the <b>ā</b> makes it long: eh-HAAH.</li>
+<li><span class="fr">ʻumi</span> (10): start with that little catch in the throat, like "uh-oh".</li>
+</ul>
+
+<h3>3. "How many?" — ʻEhia?</h3>
+<p><span class="fr">ʻEhia</span> means "how many" or "how much". Put the thing after it.</p>
+<table>
+<tr><td class="fr">ʻEhia āu keiki?</td><td>How many kids do you have?</td></tr>
+<tr><td class="fr">ʻElua aʻu keiki.</td><td>I have two kids.</td></tr>
+<tr><td class="fr">ʻAʻohe aʻu keiki.</td><td>I don't have kids.</td></tr>
+<tr><td class="fr">ʻEhia ou makahiki?</td><td>How old are you? (lit. how many your years?)</td></tr>
+<tr><td class="fr">ʻEhiku ona makahiki.</td><td>He/she is seven.</td></tr>
+</table>
+<p class="muted">Adult ages need numbers above ten, which come on Day 29. For now, kids' ages are the perfect practice.</p>
+
+<h3>4. "How much?" — ʻEhia kālā?</h3>
+<p><span class="fr">kālā</span> = dollar, money (it comes from "dollar").</p>
+<table>
+<tr><td class="fr">ʻEhia kālā?</td><td>How many dollars? / How much?</td></tr>
+<tr><td class="fr">ʻElima kālā.</td><td>Five dollars.</td></tr>
+<tr><td class="fr">ʻElua maiʻa, e ʻoluʻolu.</td><td>Two bananas, please.</td></tr>
+<tr><td class="fr">ʻEkahi wale nō.</td><td>Just one.</td></tr>
+</table>
+
+<h3>5. Swapping phone numbers</h3>
+<p>Phone numbers are said one digit at a time, just like in English.</p>
+<table>
+<tr><td class="fr">He aha kou helu kelepona?</td><td>What's your phone number?</td></tr>
+<tr><td class="fr">ʻEwalu, ʻole, ʻewalu…</td><td>8, 0, 8… (Hawaiʻi's area code)</td></tr>
+</table>
+
+<h3>6. How locals actually say it</h3>
+<p>In everyday local English, numbers stay in English, but notice the Pidgin habits:</p>
+<table>
+<tr><td class="pg">Can I get one plate lunch?</td><td><b>one</b> instead of "a"</td></tr>
+<tr><td class="pg">How much dis?</td><td>How much is this?</td></tr>
+<tr><td class="pg">Two scoop rice</td><td>never "two scoops"</td></tr>
+<tr><td class="pg">Get choke people today.</td><td>There are tons of people today.</td></tr>
+</table>
+
+<h3>A real exchange — read it out loud</h3>
+<table>
+<tr><td><b>Kaʻiulani</b></td><td class="fr">Aloha! He aha kou makemake?</td><td>Hi! What would you like?</td></tr>
+<tr><td><b>You</b></td><td class="fr">Aloha! ʻEkolu maiʻa, e ʻoluʻolu. ʻEhia kālā?</td><td>Hi! Three bananas, please. How much?</td></tr>
+<tr><td><b>Kaʻiulani</b></td><td class="fr">ʻElua kālā.</td><td>Two dollars.</td></tr>
+<tr><td><b>You</b></td><td class="fr">Mahalo nui!</td><td>Thanks so much!</td></tr>
+<tr><td><b>Kaʻiulani</b></td><td class="fr">ʻAʻole pilikia. A hui hou!</td><td>No problem. See you!</td></tr>
+</table>
+`,
+homework:[
+ {t:"Count everything", d:"Count 10 real things out loud in Hawaiian: steps, plates, palm trees, cars at a light."},
+ {t:"Your number", d:"Say your own phone number in Hawaiian three times, digit by digit, without looking."},
+ {t:"ʻEhia kālā?", d:"Next time you buy something, say the price to yourself in Hawaiian (if it's under $10), then say mahalo out loud."},
+ {t:"Chat practice", d:"Open the Chat tab and do 'Farmers' Market'. Buy at least two things and ask the price."}
+],
+quiz:[
+ {t:"mc", q:"<b>ʻekolu</b> is…", a:["3","2","4","8"], c:0, why:"ʻekahi 1, ʻelua 2, <b>ʻekolu 3</b>."},
+ {t:"mc", q:"<b>ʻewalu</b> is…", a:["8","6","7","9"], c:0, why:"ʻewalu = 8, said eh-VAH-loo."},
+ {t:"mc", q:"Which number does NOT start with ʻe-?", a:["ʻumi (10)","ʻelima (5)","ʻeiwa (9)","ʻehā (4)"], c:0, why:"Ten is <b>ʻumi</b>. 1–9 all start with ʻe-."},
+ {t:"mc", q:"<b>ʻEhia kālā?</b> means…", a:["How much? (how many dollars)","Where's the money?","Is it free?","Five dollars"], c:0, why:"ʻEhia = how many/much, kālā = dollar."},
+ {t:"mc", q:"<b>ʻEhia āu keiki?</b> means…", a:["How many kids do you have?","How old is your kid?","Where are your kids?","Are those your kids?"], c:0, why:"ʻEhia + āu (your) + keiki (kids)."},
+ {t:"mc", q:"How do you say <b>zero</b> in a phone number?", a:["ʻole","ʻumi","ʻekahi","ʻaʻole"], c:0, why:"<b>ʻole</b> = zero / without."},
+ {t:"mc", q:"<b>ʻEkahi wale nō</b> means…", a:["Just one","One more","The first one","Only ten"], c:0, why:"wale nō = only, just."},
+ {t:"mc", q:"A local at a counter says <b>\"Can I get one plate lunch?\"</b> Why \"one\"?", a:["In Pidgin, 'one' does the job of 'a'","They want exactly one, not two","It's rude to say 'a'","It's a Hawaiian word"], c:0, why:"Pidgin uses <b>one</b> as the article: one dog, one plate, one shark."},
+ {t:"mc", q:"<b>He aha kou helu kelepona?</b> asks for…", a:["Your phone number","Your age","Your address","Your name"], c:0, why:"helu = number, kelepona = telephone."},
+ {t:"type", q:"Write the Hawaiian for <b>5</b>.", ans:["ʻelima","'elima","elima"], why:"<b>ʻelima</b>."},
+ {t:"type", q:"Write the Hawaiian for <b>10</b>.", ans:["ʻumi","'umi","umi"], why:"<b>ʻumi</b>."},
+ {t:"listen", play:"ʻElua maiʻa, e ʻoluʻolu.", q:"Listen, then choose what you heard.", a:["Two bananas, please.","Two dollars, please.","Ten bananas.","How many bananas?"], c:0, why:"<b>ʻElua maiʻa, e ʻoluʻolu.</b>"},
+ {t:"listen", play:"ʻEhia kālā?", q:"Listen, then choose what you heard.", a:["How much?","How many kids?","How old are you?","What time is it?"], c:0, why:"<b>ʻEhia kālā?</b>"}
+]
+};
+
+HAW_LESSONS[5] = {
+title:"Kēia, kēlā — this and that",
+mins:20, goal:"Point at things and talk about them: what's this, which one, I want this one. Plus the three words for 'the'.",
+body:`
+<h3>The most useful words for a beginner</h3>
+<p>When you don't know a word, you can still point. Today's words let you ask about anything you can see, and choose between things, in any shop, market or kitchen.</p>
+
+<h3>1. Three kinds of "this / that"</h3>
+<p>Hawaiian has one more than English. It cares about <b>who the thing is close to</b>.</p>
+<table>
+<tr><td class="fr">kēia</td><td>this (near me)</td></tr>
+<tr><td class="fr">kēnā</td><td>that (near you)</td></tr>
+<tr><td class="fr">kēlā</td><td>that (over there, away from both of us)</td></tr>
+</table>
+
+<h3>2. Asking about anything</h3>
+<table>
+<tr><td class="fr">He aha kēia?</td><td>What's this?</td></tr>
+<tr><td class="fr">He maiʻa kēia.</td><td>This is a banana.</td></tr>
+<tr><td class="fr">He aha kēnā?</td><td>What's that (by you)?</td></tr>
+<tr><td class="fr">He aha kēlā?</td><td>What's that (over there)?</td></tr>
+<tr><td class="fr">He honu kēlā!</td><td>That's a turtle!</td></tr>
+</table>
+<p>Same pattern as Day 3: <b>He + thing + who/what</b>. <i>He kumu au</i> (I'm a teacher), <i>He maiʻa kēia</i> (this is a banana).</p>
+
+<h3>3. Choosing — ʻO kēhea?</h3>
+<table>
+<tr><td class="fr">ʻO kēhea?</td><td>Which one?</td></tr>
+<tr><td class="fr">ʻO kēia.</td><td>This one.</td></tr>
+<tr><td class="fr">ʻO kēlā.</td><td>That one (over there).</td></tr>
+<tr><td class="fr">Makemake au i kēia.</td><td>I want this one.</td></tr>
+<tr><td class="fr">ʻOno kēia!</td><td>This is delicious!</td></tr>
+</table>
+
+<h3>4. Time words built on kēia</h3>
+<p>You'll use these in every conversation about plans:</p>
+<table>
+<tr><td class="fr">i kēia lā</td><td>today (this day)</td></tr>
+<tr><td class="fr">i kēia pō</td><td>tonight (this night)</td></tr>
+<tr><td class="fr">i kēia pule</td><td>this week</td></tr>
+</table>
+<p><span class="fr">Wela loa i kēia lā!</span> — It's so hot today!</p>
+
+<h3>5. "The": ka, ke and nā</h3>
+<table>
+<tr><td class="fr">ke</td><td>before words starting with <b>k, e, a, o</b></td><td><span class="fr">ke kai</span> (the sea), <span class="fr">ke ala</span> (the road)</td></tr>
+<tr><td class="fr">ka</td><td>everything else</td><td><span class="fr">ka wai</span> (the water), <span class="fr">ka hale</span> (the house)</td></tr>
+<tr><td class="fr">nā</td><td>"the" for more than one, any word</td><td><span class="fr">nā keiki</span> (the kids), <span class="fr">nā maiʻa</span> (the bananas)</td></tr>
+</table>
+<div class="box"><b>Don't stress the rule</b>A few words break it (<span class="fr">ke ʻano</span>, "the kind"). If you pick the wrong one, everyone still understands you. Learn the common ones by ear: <i>ke kai, ka lā, ka ʻai, ka wai, ke kahakai</i>.</div>
+
+<h3>6. How locals say it</h3>
+<table>
+<tr><td class="pg">Dis one or dat one?</td><td>This one or that one?</td></tr>
+<tr><td class="pg">Which one you like?</td><td>Which one do you want?</td></tr>
+<tr><td class="pg">Dis kine</td><td>this kind (of thing)</td></tr>
+<tr><td class="pg">Da kine</td><td>whatchamacallit (for when the word won't come)</td></tr>
+</table>
+
+<h3>A real exchange — read it out loud</h3>
+<table>
+<tr><td><b>You</b></td><td class="fr">E kala mai, he aha kēlā?</td><td>Excuse me, what's that?</td></tr>
+<tr><td><b>Seller</b></td><td class="fr">He lilikoʻi kēlā. ʻOno loa!</td><td>That's passion fruit. Really good!</td></tr>
+<tr><td><b>You</b></td><td class="fr">A he aha kēia?</td><td>And what's this?</td></tr>
+<tr><td><b>Seller</b></td><td class="fr">He ʻulu kēia.</td><td>That's breadfruit.</td></tr>
+<tr><td><b>You</b></td><td class="fr">Makemake au i ka lilikoʻi. ʻElua, e ʻoluʻolu.</td><td>I'd like the passion fruit. Two, please.</td></tr>
+<tr><td><b>Seller</b></td><td class="fr">Hiki nō!</td><td>Sure!</td></tr>
+</table>
+`,
+homework:[
+ {t:"Point and ask", d:"Walk around your home. Point at 10 things and ask 'He aha kēia?' or 'He aha kēlā?' out loud. Answer in English if you don't know the Hawaiian yet."},
+ {t:"The magic question", d:"Ask one real person 'He aha ka ʻōlelo Hawaiʻi no ___?' about anything. Save the answer in a phone note."},
+ {t:"Three distances", d:"Put a cup next to you, one across the table, and one across the room. Say kēia, kēnā, kēlā for each."},
+ {t:"Chat practice", d:"In the Chat tab, do 'Casual Chat in Hawaiian' for 5 minutes. Use 'i kēia lā' at least twice."}
+],
+quiz:[
+ {t:"mc", q:"<b>He aha kēia?</b> means…", a:["What's this?","Who's this?","Where is this?","Is this good?"], c:0, why:"He aha = what, kēia = this."},
+ {t:"mc", q:"Which word means <b>that, over there</b> (away from both of you)?", a:["kēlā","kēia","kēnā","kēhea"], c:0, why:"kēia = near me, kēnā = near you, <b>kēlā</b> = over there."},
+ {t:"mc", q:"Which word means <b>that, near you</b>?", a:["kēnā","kēlā","kēia","nā"], c:0, why:"<b>kēnā</b> points at something by the person you're talking to."},
+ {t:"mc", q:"<b>ʻO kēhea?</b> means…", a:["Which one?","Who is it?","Where is it?","How much?"], c:0, why:"kēhea = which."},
+ {t:"mc", q:"<b>Makemake au i kēia</b> means…", a:["I want this one","I like that one","This one is good","I don't want this"], c:0, why:"Makemake au i ___ = I want ___."},
+ {t:"mc", q:"<b>i kēia pō</b> means…", a:["tonight","today","this week","this morning"], c:0, why:"pō = night. i kēia lā = today, i kēia pule = this week."},
+ {t:"mc", q:"Which is right for <b>the sea</b>?", a:["ke kai","ka kai","nā kai","kēia kai"], c:0, why:"<b>ke</b> before words starting with k, e, a, o."},
+ {t:"mc", q:"Which is right for <b>the water</b>?", a:["ka wai","ke wai","nā wai","he wai"], c:0, why:"<b>ka</b> before most letters, including w."},
+ {t:"mc", q:"<b>nā keiki</b> means…", a:["the kids","a kid","this kid","no kids"], c:0, why:"<b>nā</b> = the, for more than one."},
+ {t:"mc", q:"At a market a local asks <b>\"Dis one or dat one?\"</b> They mean…", a:["This one or that one?","Do you want a discount?","Is this yours?","Are you done?"], c:0, why:"Pidgin: dis = this, dat = that."},
+ {t:"type", q:"Write the Hawaiian for <b>today</b> (3 words).", ans:["i kēia lā","i keia la","i kēia la","i keia lā"], why:"<b>i kēia lā</b> — literally 'on this day'."},
+ {t:"type", q:"Answer the seller: <b>He aha kēia?</b> (it's a banana). <b>He ___ kēia.</b>", ans:["maiʻa","mai'a","maia"], why:"<b>He maiʻa kēia.</b>"},
+ {t:"listen", play:"He honu kēlā!", q:"Listen, then choose what you heard.", a:["That's a turtle!","This is a fish!","What's that?","Where's the turtle?"], c:0, why:"<b>He honu kēlā!</b> honu = sea turtle."}
 ]
 };
 

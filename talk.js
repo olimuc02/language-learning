@@ -59,13 +59,69 @@ pl: [
   role:"Marta, a friendly Polish friend the learner's age, curious about his life in the US, his work and his travels.",
   goal:"Open-ended catch-up: weekend, work, plans, opinions. Keep it flowing and natural."},
 ],
+
+/* Hawaiian: two kinds of scene.
+   mode "haw"   = a Hawaiian speaker who talks to him IN Hawaiian, slowly, at his level.
+   mode "local" = everyday island life: locals speak English with Pidgin and Hawaiian words,
+                  and he practises sounding local (and slipping Hawaiian in where locals do). */
+haw: [
+ {id:"luzno",   e:"🌺", t:"Casual Chat in Hawaiian", pl:"Kamaʻilio", mode:"haw",
+  role:"Keola, a friendly Hawaiian speaker in his 30s who went to a Hawaiian-immersion school. Patient, laughs easily, loves helping newcomers who try.",
+  goal:"A relaxed catch-up in simple Hawaiian: how are you, what's new, what did you do today, what are you up to this weekend."},
+ {id:"intro",   e:"👋", t:"Introduce Yourself", pl:"ʻO wai kou inoa?", mode:"haw",
+  role:"Kumu Leilani, a warm Hawaiian-language teacher meeting the learner at a community class. Speaks slowly and only in Hawaiian, with a little English to rescue him.",
+  goal:"Say your name, where you're from, where you live now, what you do, and why you're learning Hawaiian. Ask her the same back."},
+ {id:"aunty",   e:"🥭", t:"Talk Story With Aunty Next Door", pl:"Me ka ʻAnakē", mode:"local",
+  role:"Aunty Mapuana, a retired neighbour in her 60s who speaks local English full of Pidgin and drops Hawaiian phrases into everything. Generous, nosy in a loving way, always feeding people.",
+  goal:"Small talk over the fence: she asks where you're from and 'what school you went', offers you a bag of mangoes, and asks you to kōkua with something. Accept graciously and offer help."},
+ {id:"plate",   e:"🍱", t:"Plate Lunch Counter", pl:"Ma ka hale ʻaina", mode:"local",
+  role:"Uncle at the window of a busy local plate-lunch spot. Fast, friendly, heavy Pidgin, a line of people behind you.",
+  goal:"Order a plate lunch (two scoop rice, one mac), a poke bowl and a drink, ask what's ʻono today, and pay. Use mahalo and local ordering style."},
+ {id:"market",  e:"🍍", t:"Farmers' Market", pl:"Ka mākeke", mode:"haw",
+  role:"Kaʻiulani, a farmer at a weekend market stall who happily speaks Hawaiian with anyone who tries. Sells maiʻa (banana), ʻulu, lilikoʻi, papaya and avocado.",
+  goal:"Greet her in Hawaiian, ask what things are (He aha kēia?), ask prices (ʻEhia kālā?), buy two or three things, and thank her."},
+ {id:"beach",   e:"🌊", t:"Lifeguard at the Beach", pl:"Ma kahakai", mode:"local",
+  role:"Kai, a lifeguard on duty at a popular beach. Calm, direct, local English with some Pidgin. Today has a strong current and a jellyfish warning.",
+  goal:"Ask about conditions before swimming, understand the warning (currents, where it's safe, where it's kapu), and ask where to go instead."},
+ {id:"surf",    e:"🏄", t:"In the Surf Lineup", pl:"I ka nalu", mode:"local",
+  role:"Bruddah Kawika, a local surfer at his home break. Friendly if you show respect, quick to give stink eye if you don't. Heavy Pidgin.",
+  goal:"Say howzit, show respect, ask about the break, and handle it when he tells you that wave was his."},
+ {id:"lost",    e:"🧭", t:"Asking Directions", pl:"Aia i hea?", mode:"haw",
+  role:"Pualani, a university student waiting at a bus stop who is happy to answer in Hawaiian, using mauka, makai and simple directions.",
+  goal:"Ask where the restroom, a store and the beach are (Aia i hea…?), and understand directions given with mauka and makai."},
+ {id:"pau",     e:"🍻", t:"Pau Hana With Coworkers", pl:"Pau hana", mode:"local",
+  role:"Jordan and Malia, two local coworkers at after-work drinks and pūpū. Casual, joking, mix of local English, Pidgin and Hawaiian words, tease the newcomer kindly.",
+  goal:"Join the banter, talk about your week and weekend plans, react to the food, and say goodbye the local way."},
+ {id:"party",   e:"🎉", t:"Baby's First Lūʻau", pl:"Pāʻina", mode:"local",
+  role:"Uncle Bobby, the baby's grand-uncle at a backyard first-birthday lūʻau. Proud, welcoming, insists you eat and take a plate home.",
+  goal:"Greet the family properly, congratulate them, talk story about the food and music, accept a plate home, and thank the host on the way out."},
+ {id:"hike",    e:"⛰️", t:"Hiking With a Friend", pl:"Hele wāwae", mode:"haw",
+  role:"Noelani, a friend who is a fluent Hawaiian speaker, hiking with the learner. Points at things and names them: mauna, wailele, lāʻau, manu. Keeps it simple.",
+  goal:"Talk about the hike in Hawaiian: the weather, how you feel (tired, hot, thirsty), what you see, and plans to eat afterwards."},
+ {id:"text",    e:"📱", t:"Texting Plans", pl:"Leka uila", mode:"haw",
+  role:"Keola, a Hawaiian-speaking friend texting to make plans. Short messages, simple Hawaiian, the occasional 'shoots' or emoji.",
+  goal:"Agree on what to do Saturday, what time, and where to meet (Aia i hea? I ka hola ʻehia?)."},
+],
+};
+
+/* who the learner is, per language — shapes the coaching */
+const TALK_LEARNER = {
+haw: `Oliver, an American living in Hawaiʻi from November 2026 to mid-2027 (seven months). He is a BEGINNER in Hawaiian (roughly A1, working through a 90-day course) and wants to reach a real conversational level. He also wants to understand and sound natural in local island English and Pidgin. He cares about SPEAKING, not writing.
+
+LANGUAGE LEVEL — VERY IMPORTANT
+Scenes have a MODE given in the scenario.
+- MODE haw: speak Hawaiian at his level: short, simple sentences (He ___ au / verb-first patterns, E + verb, Aia i hea, ʻEhia, makemake au i), common words only, one idea per line. Use correct ʻokina and kahakō. If he is clearly lost, add a few English words in brackets, never a full English reply. Gradually raise the level as he does well.
+- MODE local: speak like a real local in that situation: English with natural Pidgin and the Hawaiian words locals actually use (mahalo, pau, ʻono, kōkua, keiki, mauka/makai, shoots, howzit…). Do not overdo heavy Pidgin to the point of caricature. In feedback, push him to use Hawaiian words and phrases where locals naturally would, and the safe Pidgin words; warn him if he uses Pidgin in a way that sounds like mocking it.
+In both modes, best_version and alternatives should be Hawaiian (MODE haw) or natural local speech (MODE local). Use register "slang" for Pidgin, "casual" for relaxed local English or casual Hawaiian, "neutral" for standard, "formal" for respectful speech to kūpuna or teachers.
+IGNORE missing ʻokina and kahakō when he types (phones make them hard) unless the missing mark makes a genuinely different word a listener would hear; then explain gently. Always write them correctly yourself.
+Point out cultural fit too: calling elders Aunty/Uncle, saying mahalo, not calling himself "Hawaiian", respecting kapu.`,
 };
 
 /* ---------- the tutor's instructions (kept identical every call so it caches) ---------- */
-function talkSystem(langName){ return `You are a conversation partner and speaking coach for ${langName}.
+function talkSystem(langName, code){ return `You are a conversation partner and speaking coach for ${langName}.
 
 THE LEARNER
-Oliver, an American heritage speaker. He speaks ${langName} fluently at roughly B2/C1 but learned it at home, not in school. His goal is to sound like a native in real-life situations. He cares about SPEAKING, not writing.
+${TALK_LEARNER[code] || `Oliver, an American heritage speaker. He speaks ${langName} fluently at roughly B2/C1 but learned it at home, not in school. His goal is to sound like a native in real-life situations. He cares about SPEAKING, not writing.`}
 
 HOW THE SESSION WORKS
 The first user message describes a scenario: your character and the goal. Stay in character for the whole conversation. Speak like a real native in that situation — natural rhythm, colloquial where the character would be, formal where the situation demands it. Keep each in-character reply short (1–3 sentences) and always end with something the learner has to respond to, so the conversation keeps moving toward the scenario's goal. Introduce small complications so it isn't too easy.
@@ -136,6 +192,11 @@ function talkSave(){ try{ localStorage.setItem(talkStoreKey(), JSON.stringify(TK
 function talkApiKey(){ try{ return localStorage.getItem(TALK_KEY)||""; }catch(e){ return ""; } }
 function talkScenarios(){ return TALK_SCENARIOS[P.lang] || []; }
 function hasTalk(){ return !!TALK_SCENARIOS[P.lang]; }
+const TALK_UI = {
+  pl:{own:"Własny scenariusz", type:"Napisz po polsku…", eg:"e.g. Buying a used car from a private seller in Gdańsk"},
+  haw:{own:"Kou manaʻo", type:"Write in Hawaiian, or local English…", eg:"e.g. Buying a used car from a local seller"},
+};
+function talkUI(){ return TALK_UI[P.lang] || {own:"Your own", type:"Write your reply…", eg:"e.g. Meeting a friend's parents for the first time"}; }
 
 async function talkClient(){
   if(TK_CLIENT) return TK_CLIENT;
@@ -156,7 +217,7 @@ async function talkCall(messages, schema){
     fallbacks: "default",
     cache_control: { type: "ephemeral" },
     output_config: { effort: "medium", format: { type: "json_schema", schema } },
-    system: talkSystem(L.name),
+    system: talkSystem(L.name, P.lang),
     messages,
   });
   if(res.stop_reason === "refusal") throw new Error("REFUSAL");
@@ -179,10 +240,10 @@ function talkErr(e){
 async function talkStart(id, custom){
   if(!talkApiKey()) return talkKeyModal();
   const sc = id==="custom"
-    ? {id:"custom", e:"✨", t:"Your Own Scenario", pl:"Własny scenariusz", role:"Whoever fits the situation the learner describes.", goal:custom}
+    ? {id:"custom", e:"✨", t:"Your Own Scenario", pl:talkUI().own, role:"Whoever fits the situation the learner describes.", goal:custom}
     : talkScenarios().find(s=>s.id===id);
   if(!sc) return;
-  const opener = `SCENARIO START.\nYour character: ${sc.role}\nThe learner's goal: ${sc.goal}\nOpen the scene in character with your first line.`;
+  const opener = `SCENARIO START.${sc.mode?`\nMODE: ${sc.mode}`:""}\nYour character: ${sc.role}\nThe learner's goal: ${sc.goal}\nOpen the scene in character with your first line.`;
   TK = {sc, msgs:[{role:"user", content:opener}], turns:[], busy:true, err:""};
   autoStartTimer("talk-"+P.lang);
   paintTalk();
@@ -296,7 +357,7 @@ function paintTalk(){
   <div class="tk-bar">
     ${last&&last.who==="ai"&&last.hint&&!TK.busy?`<button class="tk-hint" onclick="talkHint(this)" data-h="${tkH(last.hint)}">💡 What Could I Say?</button>`:""}
     <div class="tk-inrow">
-      <textarea id="tk-in" rows="2" placeholder="Napisz po polsku…" ${TK.busy?"disabled":""}></textarea>
+      <textarea id="tk-in" rows="2" placeholder="${tkH(talkUI().type)}" ${TK.busy?"disabled":""}></textarea>
       <button class="btn" onclick="talkSend()" ${TK.busy?"disabled":""}>Send</button>
     </div>
   </div>`;
@@ -332,7 +393,7 @@ function talkPicker(){
     <div class="g" style="cursor:default">
       <h4>✨ Your Own Scenario</h4>
       <p style="margin-bottom:9px">Describe any situation, in English or ${L.name}.</p>
-      <textarea id="tk-custom" rows="2" placeholder="e.g. Buying a used car from a private seller in Gdańsk"></textarea>
+      <textarea id="tk-custom" rows="2" placeholder="${tkH(talkUI().eg)}"></textarea>
       <button class="btn sm" style="margin-top:8px" onclick="const v=document.getElementById('tk-custom').value.trim(); if(v) talkStart('custom', v)">Start</button>
     </div>
   </div>

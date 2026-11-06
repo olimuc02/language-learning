@@ -589,8 +589,8 @@ const LANGS = {
                   cats:PT_CATS, guides:PT_GUIDES}) },
   haw:{ code:"haw", name:"Hawaiian", flag:"🌺", mode:"course", tts:"it-IT", accent:"#e8603c",
        nice:["alice","federica","luca","paola"],
-       tagline:"90-day island course",
-       blurb:"Live like a local: Hawaiian, the island words in everyday English, and Pidgin, all from week one.",
+       tagline:"top priority · 7 months on island",
+       blurb:"Talk story like a local: conversational Hawaiian, the island words in everyday English, and Pidgin, all from week one.",
        data:()=>({plan:HAW_PLAN, phases:HAW_PHASES, weeks:HAW_WEEK_GOALS,
                   lessons:HAW_LESSONS, vocab:HAW_VOCAB,
                   cats:HAW_CATS, guides:HAW_GUIDES}) },
@@ -599,7 +599,7 @@ const LANGS = {
   de:{ code:"de", name:"German", flag:"🇩🇪", mode:"soon", tts:"de-DE",
        tagline:"not built yet", blurb:"Say \"start German\" to Claude and I will build the track." },
 };
-const LANG_ORDER = ["fr","pt","haw","pl","en","es","de"];
+const LANG_ORDER = ["haw","fr","pt","pl","en","es","de"];   // Hawaiian first: in Hawaiʻi Nov 2026 – mid 2027
 
 /* the active language's content, swapped in by applyLang() */
 let L, MODE, PLAN, PHASES, WEEK_GOALS, LESSONS, VOCAB, CATS, GUIDES, SETS, EXAMPLES;
@@ -632,7 +632,7 @@ const PKEY="lt-prefs";
 function skey(code){ return "lt-state-"+code; }
 
 function blankPrefs(){
-  return {lang:"fr", syncCode:"", voices:{}, rate:0.85, autoplay:true};
+  return {lang:"haw", syncCode:"", voices:{}, rate:0.85, autoplay:true};
 }
 function blank(){
   return {startDate:new Date().toISOString().slice(0,10), currentDay:1, completed:{}, quiz:{}, checkpoints:{},
@@ -665,6 +665,8 @@ function loadLang(code){
 })();
 
 let P = loadPrefs();
+/* Nov 2026: Hawaiian became the top priority — open on it once, then respect whatever he picks */
+if(!P.hawFirst){ P.lang="haw"; P.hawFirst=1; try{ localStorage.setItem(PKEY, JSON.stringify(P)); }catch(e){} }
 let S = loadLang(P.lang);
 applyLang(P.lang);
 
@@ -952,6 +954,7 @@ function paintTodayCourse(){
   </div>
 
   ${iosBanner()}
+  ${phraseCard()}
   ${sessionCard()}
   ${pathCard(d)}
 
@@ -1023,6 +1026,32 @@ function paintTodayDrill(){
 
   ${blocksCard()}
   ${claudeCard(`"Give me a ${L.name} drill"`, `"New ${L.name} vocabulary"`, L.name, next||1)}`;
+}
+
+/* Today's Phrases — three conversation phrases a day, rotating by date.
+   Shown for any language with a "kamailio" (conversation) category. */
+function phraseCard(){
+  const pool=VOCAB.filter(v=>v[3]==="kamailio");
+  if(!pool.length) return "";
+  const day=Math.floor(Date.parse(todayStr())/864e5), n=3, start=(day*n)%pool.length;
+  const picks=[0,1,2].map(i=>pool[(start+i)%pool.length]);
+  const cls=v=>/pidgin|local english/i.test(v[6]||"")?"pg":"fr";
+  return `<div class="card" style="margin-top:16px">
+    <div class="dhead">
+      <div class="eyebrow" style="margin:0">💬 Today's Phrases</div>
+      <span class="tag t-gold">Say Them Out Loud</span>
+    </div>
+    ${picks.map(v=>`<div class="check" style="display:block">
+      <div><span class="${cls(v)}" style="font-size:17px">${v[0]}</span>${v[1]?` <span class="muted" style="font-size:13px">${v[1]}</span>`:""}</div>
+      <div style="font-weight:700;margin-top:2px">${v[2]}</div>
+      ${v[4]?`<div class="muted" style="font-size:13.5px;margin-top:3px"><i>${v[4]}</i>${v[5]?` — ${v[5]}`:""}</div>`:""}
+      ${v[6]?`<div class="muted" style="font-size:13px;margin-top:2px">💡 ${v[6]}</div>`:""}
+    </div>`).join("")}
+    <div class="row" style="margin-top:12px">
+      <button class="btn sm" onclick="openGuide('phrases')">📖 Full Phrasebook</button>
+      ${hasTalk()?`<button class="btn ghost sm" onclick="go('talk')">💬 Practise in Chat</button>`:""}
+    </div>
+  </div>`;
 }
 
 /* three rings — 20 minutes in each course language, every day */

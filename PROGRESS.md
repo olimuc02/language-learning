@@ -146,7 +146,20 @@ courses reinforce each other.
 
 Nasal vowels overlap directly with French (pão / pain), so the two reinforce each other.
 
-## 🌺 Hawaiian — 90-day island course (added 2026-10-15)
+## 🌺 Hawaiian — 90-day island course (added 2026-10-15) — TOP PRIORITY
+
+**2026-11-05: Hawaiian is now first priority.** Oliver is living in Hawaiʻi for ~7 months
+(Nov 2026 → early Jun 2027) and wants a conversational level. Changes:
+- Hawaiian is first in LANG_ORDER (picker, rings) and the default; app opened on it once (`P.hawFirst`).
+- **Conversation** vocab category (`kamailio`, 62 phrases: small talk, reactions, plans, feelings,
+  at someone's home, holidays, local English/Pidgin). **Today's Phrases** card shows 3 a day.
+- Guides: **Island Phrasebook** (situation by situation) and **Your 7 Months on Island**
+  (month-by-month plan, ~45 min/day: lesson + phrases + Chat 3×/wk + listening; honest that
+  conversational Hawaiian ≈ A2 by May only with the extra time).
+- **Chat tab for Hawaiian**: 12 scenarios in talk.js, two modes — `haw` (speaker talks simple
+  Hawaiian at his level) and `local` (English + Pidgin + Hawaiian words). Learner profile in `TALK_LEARNER.haw`.
+- Days **4** (numbers, ʻEhia?, phone numbers) and **5** (kēia/kēnā/kēlā, ʻO kēhea?, ka/ke/nā) written.
+- When he reaches Day 90 (~late Jan 2027), write **Stage 2 (A2)** — month plan in the 7-month guide.
 
 Goal: live in Hawaiʻi like a local, aiming at B2-equivalent over time. Three layers taught
 together from week one: real Hawaiian, the Hawaiian words used inside everyday English
@@ -163,9 +176,9 @@ voice (closest vowels). It skips the ʻokina, so the red "say it" guide is the r
 | 3 | 46–66 | Ka Nohona — past/future, work, ʻohana, kuleana |
 | 4 | 67–90 | Kamaʻilio — culture, Pidgin at speed, final talk story |
 
-Lessons written: Days **1** (sounds), **2** (aloha), **3** (He ___ au), **6** (Pidgin & local words),
+Lessons written: Days **1** (sounds), **2** (aloha), **3** (He ___ au), **4** (helu), **5** (kēia/kēlā), **6** (Pidgin & local words),
 **22** (plate lunch & poke), **36** (mauka/makai). 142 words, 4 guides (Kani, Pidgin, Sentence
-Building, Road to B2). **Next to write:** Day 4 — Helu, numbers 1 to 10.
+Building, Road to B2). **Next to write:** Day 7 — Review + Checkpoint 1 (25 q).
 
 ## 🎯 Goal: B2 in French, Portuguese and Hawaiian (set 2026-10-15)
 
