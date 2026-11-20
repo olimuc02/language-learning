@@ -111,6 +111,9 @@ main{max-width:1080px;margin:0 auto;padding:24px 20px 90px}
 .muted{color:var(--muted)}
 .hr{height:2px;background:var(--line);margin:18px 0}
 input[type=text],input[type=search],select,textarea{font:inherit;font-weight:600;padding:11px 14px;border:2px solid var(--line2);border-radius:14px;background:var(--card);color:var(--ink);width:100%}
+.rrow{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0;border-top:1px solid var(--line)}
+.rrow b{display:block;font-size:15px}.rrow span{display:block;font-size:13px}
+.rrow input[type=time]{font:inherit;font-weight:800;font-size:16px;padding:9px 12px;border:2px solid var(--line2);border-radius:14px;background:var(--card);color:var(--ink);min-width:120px}
 input:focus,select:focus,textarea:focus{outline:3px solid var(--blue-soft);border-color:var(--blue)}
 table{width:100%;border-collapse:collapse;font-size:14.5px}
 th,td{text-align:left;padding:9px 10px;border-bottom:2px solid var(--line);vertical-align:top}
@@ -549,6 +552,7 @@ tr:last-child td{border-bottom:0}
 <script src="roadmap.js"></script>
 <script src="talk.js"></script>
 <script src="sync.js"></script>
+<script src="reminders.js"></script>
 <script>
 /* ============================================================
    LANGUAGES
@@ -894,7 +898,7 @@ function audioHint(){
 /* ============================================================
    NAV
    ============================================================ */
-const VERSION="3.0";
+const VERSION="3.1";
 let CURRENT="today";
 const TABS=[["today","Today","📅"],["plan","Plan","🗺️"],["lessons","Lessons","📖"],["guides","Guides","📋"],["vocab","Words","🔤"],["practice","Practice","🎯"],["talk","Chat","💬"],["progress","Stats","📊"]];
 const nav=document.getElementById("nav");
@@ -1892,6 +1896,8 @@ function paintProgress(){
   :`<p class="muted" style="margin:0">This browser doesn't support speech. Safari or Chrome will work.</p>`}
   </div>
 
+  ${typeof remindersCard==="function" ? remindersCard() : ""}
+
   <div class="card"><h3>Sync across devices</h3>
   <p class="muted" style="margin:2px 0 12px;font-size:14px">Your Mac and your iPhone stay identical automatically — every language, with its own lessons, scores, homework, words and study time.
   It syncs whenever you open the app, switch back to it, or finish anything.</p>
@@ -2065,6 +2071,7 @@ function logSession(mins){
   S.sessions=S.sessions||[];
   S.sessions.push({d:todayStr(), m:mins, i:Math.random().toString(36).slice(2,8)});
   bumpStreak(); save();
+  if(typeof remindLog==="function") remindLog(mins);
 }
 function studyMinutes(){ return (S.sessions||[]).reduce((a,b)=>a+b.m,0); }
 
