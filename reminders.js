@@ -120,7 +120,7 @@ function b64ToBytes(b){
 async function enableReminders(){
   if(!pushSupported()){
     if(isIOS() && !isStandalone()){
-      alert("On iPhone, reminders only work from the home-screen app.\n\nIn Safari tap Share → Add to Home Screen, open the app from there, then come back to Progress → Reminders.");
+      alert("On iPhone, reminders only work from the home-screen app.\n\nIn Safari tap Share → Add to Home Screen, open the app from there, then come back to Stats → Reminders.");
     } else {
       alert("This browser can't receive notifications. Use the app on your iPhone (added to the home screen) or Chrome/Safari on the Mac.");
     }

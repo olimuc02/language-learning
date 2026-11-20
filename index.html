@@ -898,7 +898,7 @@ function audioHint(){
 /* ============================================================
    NAV
    ============================================================ */
-const VERSION="3.1";
+const VERSION="3.2";
 let CURRENT="today";
 const TABS=[["today","Today","📅"],["plan","Plan","🗺️"],["lessons","Lessons","📖"],["guides","Guides","📋"],["vocab","Words","🔤"],["practice","Practice","🎯"],["talk","Chat","💬"],["progress","Stats","📊"]];
 const nav=document.getElementById("nav");
@@ -1796,6 +1796,8 @@ function paintProgress(){
 
   ${dailyCard()}
 
+  ${typeof remindersCard==="function" ? remindersCard() : ""}
+
   <div class="mini">
     <div class="stat"><b>${doneCount()}/90</b><span>Lessons done</span></div>
     <div class="stat"><b>${S.streak||0}</b><span>Day streak</span></div>
@@ -1895,8 +1897,6 @@ function paintProgress(){
     <br><br>Voices named Grandma, Rocko, Flo, Eddy and similar are novelty voices — right language, silly delivery.</div>`}`
   :`<p class="muted" style="margin:0">This browser doesn't support speech. Safari or Chrome will work.</p>`}
   </div>
-
-  ${typeof remindersCard==="function" ? remindersCard() : ""}
 
   <div class="card"><h3>Sync across devices</h3>
   <p class="muted" style="margin:2px 0 12px;font-size:14px">Your Mac and your iPhone stay identical automatically — every language, with its own lessons, scores, homework, words and study time.

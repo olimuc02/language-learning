@@ -222,7 +222,7 @@ After writing: update this file, commit, push — the phone updates itself.
 
 ## 🔔 Reminders (added 2026-11-19)
 
-Progress → Reminders turns on push notifications (iPhone: home-screen app only).
+Stats tab (📊) → Reminders (top of the page) turns on push notifications (iPhone: home-screen app only).
 Daily Reminder (default 6 PM) + Streak Saver (default 9 PM), skipped on days with 20+ min logged
 (any language, any device on the same sync code, counted by the phone's local date).
 Sender: `.github/workflows/reminders.yml` runs `reminders/send.mjs` every 15 min; keys are the
