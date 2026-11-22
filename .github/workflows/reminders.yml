@@ -2,7 +2,11 @@ name: Practice reminders
 on:
   schedule:
     - cron: "*/15 * * * *"
-  workflow_dispatch:
+  workflow_dispatch:        # started every 5 min by the Cloudflare timer in reminder-timer/
+# one run at a time, so a reminder can never go out twice
+concurrency:
+  group: reminders
+  cancel-in-progress: false
 jobs:
   send:
     runs-on: ubuntu-latest
