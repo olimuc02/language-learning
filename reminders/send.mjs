@@ -5,7 +5,7 @@ import webpush from "web-push";
 
 const PROJECT = "tasks-oj", KEY = "AIzaSyDu-bAYH7t7rf-y3Fs0K1GjyvjFrSTDSSc";
 const BASE = `https://firestore.googleapis.com/v1/projects/${PROJECT}/databases/(default)/documents/french_progress`;
-const GOAL = 20, WINDOW_MIN = 180;        // give up on a reminder 3 hours after its time
+const GOAL = 20, WINDOW_MIN = 24 * 60;    // a late run still sends, any time before local midnight
 const DRY = process.env.DRY_RUN === "1";
 
 webpush.setVapidDetails("https://olimuc02.github.io/language-learning/",
