@@ -229,4 +229,6 @@ Sender: `.github/workflows/reminders.yml` runs `reminders/send.mjs` every 15 min
 VAPID_PUBLIC / VAPID_PRIVATE repo secrets (public key is also in `reminders.js`).
 Records live in the tasks-oj `french_progress` collection named like sync codes:
 `RMND-INDX` (device list), `R…`/`A…`/`S…` per device (settings / minutes / already-sent).
-GitHub pauses scheduled workflows after 60 days with no commits — re-enable from the Actions tab if reminders stop.
+GitHub's own schedule ran only every 4–6 h, so a Cloudflare Worker (`reminder-timer/`, cron */5, secret GH_TOKEN = gh token for olimuc02)
+starts the job every 5 minutes. If reminders stop: check the Worker in the Cloudflare dashboard, or re-run
+`gh auth token -u olimuc02 | npx wrangler secret put GH_TOKEN` in reminder-timer/ if the GitHub login changed.
